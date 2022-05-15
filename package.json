@@ -1,33 +1,37 @@
 {
-    "name": "n-c-component-library",
+    "name": "npm-package",
     "repository": {
         "type": "git",
         "url": "https://github.com/joeythelantern/Component-Library.git"
     },
-    "version": "0.0.2",
-    "description": "A component library for getting people started with easy to re-use components for everyday projects.",
+    "version": "0.0.1",
+    "description": "",
     "main": "dist/cjs/index.js",
-    "module": "dist/esm/index.js",
+    "module": "dist/index.js",
+    "typings": "dist/index.d.ts",
     "files": [
         "dist"
     ],
     "scripts": {
-        "build": "rm -rf dist/ && prettier --write src/ && npm run build:esm && npm run build:cjs",
-        "build:esm": "tsc",
-        "build:cjs": "tsc --module CommonJS --outDir dist/cjs"
+        "dev": "parcel example/index.html --dist-dir ./node_modules/.percel-server --cache-dir ./node_modules/.percel-server/cache",
+        "watch": "rm -rf dist/ && tsc --watch",
+        "build": "rm -rf dist/ && prettier --write src/ && tsc",
+        "build:cjs": "npm run build && tsc --module CommonJS --outDir dist/cjs",
+        "prepare": "npm run build"
     },
-    "author": "The Nerdy Canuck",
+    "author": "Naxrul Ahmed",
     "license": "MIT",
     "devDependencies": {
-        "@types/node": "^17.0.21",
-        "@types/react": "^17.0.37",
-        "@types/react-dom": "^17.0.11",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "typescript": "^4.5.2"
+        "@types/node": "^17.0.33",
+        "@types/react": "^18.0.9",
+        "@types/react-dom": "^18.0.4",
+        "prettier": "2.6.2",
+        "typescript": "^4.6.4",
+        "parcel": "^2.5.0"
     },
-    "peerDependencies": {
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2"
+    "dependencies": {
+        "@mui/material": "^5.7.0",
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0"
     }
 }

@@ -1,8 +1,23 @@
 import React, { useEffect } from 'react';
-import { Box } from "../src";
+import { Alert } from "../src";
+import { LayerView } from '../src/Layer'
+import Notify, { NotifyView } from '../src/Notify'
 const App = () => {
 	return <div>
-		<Box />
+		<button
+			onClick={() => {
+				Alert.open("test", {
+					title: "Alert",
+					content: "This is the alert box"
+				})
+				Notify.show({
+					title: "Hey there!",
+					type: "error"
+				})
+			}}
+		>Open</button>
+		<LayerView />
+		<NotifyView />
 	</div>
 }
 

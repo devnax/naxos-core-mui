@@ -1,10 +1,23 @@
 import Alert from './Alert'
-export * from './Dropdown'
-export * from './Finder'
-export * from './Layer'
-export * from './Modal'
-export * from './Notification'
-export * from './Notify'
-export * from './Setting'
+import Dropdown, { DropdownView } from './Dropdown'
+import Finder, { FinderView } from './Finder'
+import Layer, { LayerView } from './Layer'
+import Modal from './Modal'
+import Notification from './Notification'
+import Notify, { NotifyView } from './Notify'
+import Setting from './Setting'
 
-export { Alert }
+export {
+   Alert,
+   Dropdown,
+   DropdownView,
+   Finder,
+   FinderView,
+   Layer,
+   LayerView,
+   Modal,
+   Notification,
+   Notify,
+   NotifyView,
+   Setting
+}

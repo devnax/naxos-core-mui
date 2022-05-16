@@ -21,6 +21,7 @@ Layer.isOpened(id: string | number)
 > Options will be an object
 ```js
 {
+   stable: false, // if this true, then next layears will be always show
    closeButton: true, // Show the default close button
    animation: 'zoomOver', // fmotion-variants type
    opacity: 1, // bacground opacity

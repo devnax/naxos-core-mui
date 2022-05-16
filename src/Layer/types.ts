@@ -1,9 +1,9 @@
-import {ReactElement, MouseEvent} from 'react'
+import { ReactElement, MouseEvent } from 'react'
 import { BoxProps } from '@mui/material/Box'
-import {AnimationType} from 'fmotion-variants'
+import { AnimationType } from 'fmotion-variants'
 
 
-export interface RowType{
+export interface RowType {
    _id?: string;
    observe?: string;
    content?: ReactElement;
@@ -11,6 +11,7 @@ export interface RowType{
 
 
 export type LayerOptionProps = {
+   stable?: boolean;
    closeButton?: boolean,
    animation?: AnimationType | 'none',
    opacity?: number,
@@ -24,7 +25,7 @@ export type LayerOptionProps = {
 }
 
 
-export interface PublicLayerType{
+export interface PublicLayerType {
    open: (id: string | number, content: ReactElement, options?: LayerOptionProps) => void;
    close: (id?: string) => void;
    closeAll: Function;
@@ -32,6 +33,7 @@ export interface PublicLayerType{
 }
 
 
-export interface LayerItemProps{
+export interface LayerItemProps {
    layer: LayerOptionProps & RowType;
+   index: number;
 }

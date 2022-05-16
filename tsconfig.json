@@ -14,7 +14,7 @@
         "types": [
             "node"
         ],
-        // "module": "es2015",
+        "module": "es2015",
         "moduleResolution": "node",
         "noImplicitAny": true,
         "noUnusedLocals": true,
@@ -22,20 +22,9 @@
         "sourceMap": true,
         "strict": true,
         "target": "es6",
-        "module": "esnext",
-        // "lib": [
-        //     "dom",
-        //     "esnext"
-        // ],
-        "importHelpers": true,
-        "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true,
-        "noUnusedParameters": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
     },
     "include": [
         "src/**/*.ts",
         "src/**/*.tsx"
-    ],
+    ]
 }

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { withStore } from 'state-range'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
@@ -18,10 +18,10 @@ const NotificationView = () => {
    const settings = Handler.settings()
 
    useEffect(() => {
-      if(settings.onLoad){
+      if (settings.onLoad) {
          settings.onLoad()
       }
-   },[])
+   }, [])
 
    return (
       <Stack
@@ -43,10 +43,10 @@ const NotificationView = () => {
                </Box>
                {
                   settings.optionMenu && <Box>
-                     <IconButton 
-                        size="small" 
+                     <IconButton
+                        size="small"
                         onClick={(e: any) => {
-                           if(settings.optionMenu){
+                           if (settings.optionMenu) {
                               Dropdown.show(e.currentTarget, settings.optionMenu)
                            }
                         }}
@@ -56,11 +56,11 @@ const NotificationView = () => {
                   </Box>
                }
             </Stack>
-            <Scrollbar 
-               style={{ flex: 1 }} 
+            <Scrollbar
+               style={{ flex: 1 }}
                darkMode={isDarkMode()}
                onScrollEnd={() => {
-                  if(settings.onLoadMore){
+                  if (settings.onLoadMore) {
                      settings.onLoadMore()
                   }
                }}
@@ -68,7 +68,7 @@ const NotificationView = () => {
                <Box p={1} >
                   <List />
                   {
-                     Handler.isLoading() && <Skeleton length={3}/>
+                     Handler.isLoading() && <Skeleton length={3} />
                   }
                </Box>
             </Scrollbar>
@@ -77,4 +77,4 @@ const NotificationView = () => {
    )
 }
 
-export default withStore(NotificationView, () => [Handler.observe()])
+export default withStore(NotificationView, () => [Handler.observeStoreData()])

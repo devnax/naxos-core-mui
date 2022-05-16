@@ -6,20 +6,20 @@ import Scrollbar from 'react-browser-scrollbar'
 import { isDarkMode } from 'mui-themex'
 import Handler, { PublicNotifyHandler } from './Handler'
 import NotifyItem from './views/NotifyItem'
-import {NotifyRowProps} from './types'
-import {AnimationType} from 'fmotion-variants'
+import { NotifyRowProps } from './types'
+import { AnimationType } from 'fmotion-variants'
 
 export * from './types'
 export default PublicNotifyHandler
 
 
 
-interface RenderProps{
+interface RenderProps {
    items: NotifyRowProps[];
    animation: AnimationType;
 }
 
-const NotifyRender = ({items, animation}: RenderProps) => {
+const NotifyRender = ({ items, animation }: RenderProps) => {
    return (
       <Scrollbar thumbSize={.1} darkMode={isDarkMode()} style={{ overflowX: "hidden" }}>
          <Stack spacing={1.5} p={1}>
@@ -50,30 +50,30 @@ const _NotifyView = () => {
    return (
       <>
          <Stack top={0} left={0} sx={props}>
-            <NotifyRender items={topLeft} animation="fadeInLeft"/>
+            <NotifyRender items={topLeft} animation="fadeInLeft" />
          </Stack>
 
-         <Stack top={0} left={'50%'} sx={{transform: 'translateX(-50%)', ...props}}>
-            <NotifyRender items={topCenter} animation="fadeInUp"/>
+         <Stack top={0} left={'50%'} sx={{ transform: 'translateX(-50%)', ...props }}>
+            <NotifyRender items={topCenter} animation="fadeInUp" />
          </Stack>
 
          <Stack top={0} right={0} sx={props}>
-            <NotifyRender items={topRight} animation="fadeInRight"/>
+            <NotifyRender items={topRight} animation="fadeInRight" />
          </Stack>
 
          <Stack bottom={0} left={0} sx={props}>
-            <NotifyRender items={bottomLeft} animation="fadeInLeft"/>
+            <NotifyRender items={bottomLeft} animation="fadeInLeft" />
          </Stack>
 
-         <Stack bottom={0} left={'50%'} sx={{transform: 'translateX(-50%)', ...props}}>
-            <NotifyRender items={bottomCenter} animation="fadeInDown"/>
+         <Stack bottom={0} left={'50%'} sx={{ transform: 'translateX(-50%)', ...props }}>
+            <NotifyRender items={bottomCenter} animation="fadeInDown" />
          </Stack>
 
          <Stack bottom={0} right={0} sx={props}>
-            <NotifyRender items={bottomRight} animation="fadeInRight"/>
+            <NotifyRender items={bottomRight} animation="fadeInRight" />
          </Stack>
       </>
    )
 }
 
-export const NotifyView = withStore(_NotifyView, () => [Handler.observe()])
+export const NotifyView = withStore(_NotifyView, () => [Handler.observeStoreData()])

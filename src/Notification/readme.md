@@ -1,22 +1,20 @@
 ### Api Useg
 
 ```js
-import Notification from 'nxos/notification'
-
+import Notification from 'nxos/notification';
 ```
 
-
 ### Required
+
 > call it on you application root
 
 ```jsx
-import {LayerView} from 'nxos/Layer'
-<LayerView />
-
+import { LayerView } from 'nxos/Layer';
+<LayerView />;
 ```
 
-
 ## Methods
+
 ```tsx
 
 // create a notification
@@ -62,7 +60,7 @@ Notification.unread(id: string | number)
 // Read Mode for all
 Notification.readAll()
 
-// Set the loading 
+// Set the loading
 Notification.loading(is: boolean)
 
 // check the loading is true or false
@@ -70,11 +68,8 @@ Notification.isLoading()
 
 ```
 
-
-
 ### TS
 
 ```js
-import {NotificationProps, NotificationSettingProps, NotificationPropsRow} from 'nxos/notification'
-
+import { NotificationProps, NotificationSettingProps, NotificationPropsRow } from 'nxos/notification';
 ```

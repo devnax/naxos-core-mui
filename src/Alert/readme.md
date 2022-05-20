@@ -1,22 +1,20 @@
 ### Api Useg
 
 ```js
-import Alert from 'nxos/Alert'
-
+import Alert from 'nxos/Alert';
 ```
 
-
 ### Required
+
 > call it on you application root
 
 ```jsx
-import {LayerView} from 'nxos/Layer'
-<LayerView />
-
+import { LayerView } from 'nxos/Layer';
+<LayerView />;
 ```
 
-
 ## Methods
+
 ```tsx
 Alert.open(id: string | number, {
    type?: "success" | "error" | "warning" | "info" | "primary";
@@ -30,8 +28,8 @@ Alert.open(id: string | number, {
 Alert.close()
 ```
 
+## TS
 
-## TS 
 ```js
-import {AlertProps} from 'Alert'
+import { AlertProps } from 'Alert';
 ```

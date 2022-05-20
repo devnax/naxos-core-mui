@@ -17,11 +17,12 @@ Layer.isOpened(id: string | number)
 
 ### Open Methods Props Type
 
-> Content will be ReactElement or ReactChild
-> Options will be an object
+> Content will be ReactElement or ReactChild Options will be an object
+
 ```js
 {
    stable: false, // if this true, then next layears will be always show
+   zIndex: number, // if this true, then next layears will be always show
    closeButton: true, // Show the default close button
    animation: 'zoomOver', // fmotion-variants type
    opacity: 1, // bacground opacity
@@ -36,8 +37,8 @@ Layer.isOpened(id: string | number)
 
 ```
 
-
 ## TS
+
 ```js
-import { LayerOptionProps } from 'naxos/Layer'
+import { LayerOptionProps } from 'naxos/Layer';
 ```

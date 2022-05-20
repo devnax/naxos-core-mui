@@ -1,22 +1,20 @@
 ### Api Useg
 
 ```js
-import Finder from 'nxos/Finder'
-
+import Finder from 'nxos/Finder';
 ```
 
-
 ### Required
+
 > call it on you application root
 
 ```jsx
-import {LayerView} from 'nxos/Layer'
-<LayerView />
-
+import { LayerView } from 'nxos/Layer';
+<LayerView />;
 ```
 
-
 ## Methods
+
 ```tsx
 
 import Finder, {FinderView} from 'nxos/Finder'
@@ -64,14 +62,11 @@ Finder.subcribe({
 })
 
 Finder.unsubcribe('users')
- 
-```
 
+```
 
 ### TS Types
 
 ```js
-
-import {SubcribeCallbackType, SubcriberProps, FinderSettingProps, FoundedData} from 'nxos/Finder'
-
+import { SubcribeCallbackType, SubcriberProps, FinderSettingProps, FoundedData } from 'nxos/Finder';
 ```

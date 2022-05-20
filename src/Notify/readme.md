@@ -1,14 +1,12 @@
-
-
 ### Required
+
 > Call it on you application root
+
 ```jsx
-import {NotifyView} from 'nxos/Notity'
+import { NotifyView } from 'nxos/Notity';
 
-<NotifyView />
-
+<NotifyView />;
 ```
-
 
 ```ts
 import Notify, {NotifyRowProps, NotifyProps, NotifyTypes} from 'nxos/Notify'
@@ -31,6 +29,7 @@ Notify.hideAll()
 ```
 
 ### TS
+
 ```js
-import {NotifyProps} from 'Notify'
+import { NotifyProps } from 'Notify';
 ```

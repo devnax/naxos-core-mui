@@ -30,7 +30,12 @@ const App = ({ theme }: any) => {
 							})
 						}}
 					>OPen Stable</button>
-				</div>, { blur: 20, blurGradient: ['red', 'green'], closeButton: true })
+				</div>, {
+					blur: 20,
+					closeButton: true,
+					blurImage: 'https://www.teahub.io/photos/full/4-42869_hills-4k.jpg',
+					onClickLayer: () => Layer.close('Nice')
+				})
 			}}
 		>Open</button>
 		<LayerView />

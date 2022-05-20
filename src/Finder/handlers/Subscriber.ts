@@ -1,23 +1,23 @@
-import {Store} from 'state-range'
-import { SubcriberProps} from '../types'
+import { Store } from 'state-range';
+import { SubcriberProps } from '../types';
 
-class FinderSubscriber extends Store{
-   add(options: SubcriberProps){
-      if(!this.getByID(options.id)){
-         this.insert({
-            ...options,
-            checked: true
-         })
-      }
-   }
+class FinderSubscriber extends Store {
+    add(options: SubcriberProps) {
+        if (!this.getByID(options.id)) {
+            this.insert({
+                ...options,
+                checked: true
+            });
+        }
+    }
 
-   remove(id: string){
-      this.delete({id})
-   }
+    remove(id: string) {
+        this.delete({ id });
+    }
 
-   getByID(id: string){
-      return this.findFirst({id})
-   }
+    getByID(id: string) {
+        return this.findFirst({ id });
+    }
 }
 
-export default new FinderSubscriber()
+export default new FinderSubscriber();

@@ -1,22 +1,20 @@
 ### Api Useg
 
 ```js
-import Setting from 'nxos/Setting'
-
+import Setting from 'nxos/Setting';
 ```
 
-
 ### Required
+
 > call it on you application root
 
 ```jsx
-import {LayerView} from 'nxos/Layer'
-<LayerView />
-
+import { LayerView } from 'nxos/Layer';
+<LayerView />;
 ```
 
-
 ## Methods
+
 ```tsx
 
 import Setting from 'nxos/Setting'
@@ -29,13 +27,13 @@ Setting.setConfig({
    blurGradient?: [string, string]
 })
 
-Setting.getConfig() 
+Setting.getConfig()
 
 
 // Add setting
 Setting.create({
    id: string, // required unique settings
-   title: string, 
+   title: string,
    render: ReactElement,
    category: string,
    categoryIcon?: ReactElement, // set the category Icon
@@ -58,14 +56,11 @@ Setting.get(id: string)
 
 // remove existing setting if you want
 Setting.remove(id: string)
- 
-```
 
+```
 
 ### TS Types
 
 ```js
-
-import {SettingProps, ConfigProps} from 'nxos/Setting'
-
+import { SettingProps, ConfigProps } from 'nxos/Setting';
 ```

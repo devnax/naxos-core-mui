@@ -1,20 +1,19 @@
-
 ### Required
-> Call it on your application root
-```jsx
-import {DropdownView} from 'nxos/Dropdown'
-<DropdownView />
 
+> Call it on your application root
+
+```jsx
+import { DropdownView } from 'nxos/Dropdown';
+<DropdownView />;
 ```
 
 ### Use
 
 ```jsx
-import Dropdown from 'nxos/Dropdown'
+import Dropdown from 'nxos/Dropdown';
 
-Dropdown.show(HTMLElement, ReactElement | ArrayItems, MuiPopperProps)
-Dropdown.hide()
-
+Dropdown.show(HTMLElement, ReactElement | ArrayItems, MuiPopperProps);
+Dropdown.hide();
 ```
 
 ### ArrayItems
@@ -32,8 +31,8 @@ Dropdown.hide()
 
 ```
 
-
 ### TS Types
+
 ```js
-import {DropdownArrayType, DropdownProps, DropdownRowProps} from 'nxos/Dropdown'
+import { DropdownArrayType, DropdownProps, DropdownRowProps } from 'nxos/Dropdown';
 ```

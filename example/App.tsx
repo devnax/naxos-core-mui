@@ -4,11 +4,17 @@ import { LayerView } from '../src/Layer'
 import Notify, { NotifyView } from '../src/Notify'
 import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box'
+import ListView from '../src/ListView'
 
 const App = () => {
 	const theme = useTheme();
 
 	return <div>
+
+		<Box p={2}>
+			<ListView />
+		</Box>
+
 		<button
 			onClick={() => {
 
@@ -51,16 +57,7 @@ const App = () => {
 				})
 			}}
 		>Open the main modal box</button>
-		<Box
 
-			p={3}
-			bgcolor="warning.main"
-			borderRadius={2}
-			m={2}
-			width="500px"
-		>
-
-		</Box>
 		<LayerView />
 		<NotifyView />
 	</div>

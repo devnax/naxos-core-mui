@@ -1,7 +1,7 @@
 import { Store } from 'state-range';
 import { NotifyProps } from './types';
 
-class NotifyHandler extends Store {
+class NaxOSCoreNotify extends Store {
     show(options: NotifyProps) {
         if (options.title) {
             const { _id }: any = this.insert({
@@ -45,7 +45,7 @@ class NotifyHandler extends Store {
     }
 }
 
-const Handler = new NotifyHandler();
+const Handler = new NaxOSCoreNotify();
 
 export default Handler;
 

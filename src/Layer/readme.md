@@ -31,8 +31,8 @@ Layer.isOpened(id: string | number)
    onClose: () => {}, // whene close the layer
    onClickLayer?: (e: MouseEvent<HTMLDivElement>) => void;
    blur?: number;
-   blurImage?: string;
-   blurGradient?: [string, string]
+   bgImage?: string;
+   gradient?: [string, string]
 }
 
 ```

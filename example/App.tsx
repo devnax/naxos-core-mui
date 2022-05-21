@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react';
-import { Alert, Layer } from "../src";
+import { Alert, Layer, Notification } from "../src";
 import { LayerView } from '../src/Layer'
 import Notify, { NotifyView } from '../src/Notify'
-import { withThemex } from 'mui-themex';
-import { ThemeProvider } from '@mui/material/styles'
-import CssBaseline from "@mui/material/CssBaseline"
+import { alpha, useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box'
 
+const App = () => {
+	const theme = useTheme();
 
-const App = ({ theme }: any) => {
-	return <ThemeProvider theme={theme}>
-		<CssBaseline />
+	return <div>
 		<button
 			onClick={() => {
+
+				Notification.open()
+
+
+
 				// Alert.open("test", {
 				// 	title: "Alert",
 				// 	content: "This is the alert box"
@@ -21,7 +25,15 @@ const App = ({ theme }: any) => {
 				// 	type: "error"
 				// })
 
-				Layer.open("Nice", <div>
+				return;
+
+				Layer.open("Nice", <Box
+					width={900}
+					m="20px auto"
+					borderRadius={3}
+					p={3}
+					bgcolor="primary.main"
+				>
 					<button
 						onClick={() => {
 							Alert.open("test", {
@@ -30,17 +42,28 @@ const App = ({ theme }: any) => {
 							})
 						}}
 					>OPen Stable</button>
-				</div>, {
+				</Box>, {
 					blur: 20,
 					closeButton: true,
-					blurImage: 'https://www.teahub.io/photos/full/4-42869_hills-4k.jpg',
-					onClickLayer: () => Layer.close('Nice')
+					bgImage: 'https://www.teahub.io/photos/full/4-42869_hills-4k.jpg',
+					// gradient: [alpha(theme.palette.primary.main, .3), alpha(theme.palette.primary.dark, .8)],
+					opacity: .3
 				})
 			}}
-		>Open</button>
+		>Open the main modal box</button>
+		<Box
+
+			p={3}
+			bgcolor="warning.main"
+			borderRadius={2}
+			m={2}
+			width="500px"
+		>
+
+		</Box>
 		<LayerView />
 		<NotifyView />
-	</ThemeProvider>
+	</div>
 }
 
-export default withThemex(App, 'dark');
+export default App

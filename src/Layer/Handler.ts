@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { Store } from 'state-range';
 import { LayerOptionProps } from './types';
 
-class LayerHandler extends Store {
+class NaxOSCoreLayer extends Store {
     open(id: string | number, content: ReactElement, options?: LayerOptionProps) {
         if (content && !this.findFirst({ id })) {
             const isStable = this.findFirst({ stable: true });
@@ -56,4 +56,4 @@ class LayerHandler extends Store {
     }
 }
 
-export default new LayerHandler();
+export default new NaxOSCoreLayer();

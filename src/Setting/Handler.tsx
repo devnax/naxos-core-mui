@@ -5,7 +5,7 @@ import SettingCategoryView from './views/CategoryList';
 import SingleView from './views/CategoryView';
 import { SettingProps, PublicHandlerInterface, ConfigProps } from './types';
 
-class Setting extends Store {
+class NaxOSCoreSetting extends Store {
     setConfig(conf: ConfigProps) {
         noDispatch(() => {
             this.setMeta('setting_configs', conf);
@@ -23,14 +23,14 @@ class Setting extends Store {
             return;
         }
 
-        const { blur, blurImage, blurGradient, opacity } = this.getConfig();
+        const { blur, bgImage, gradient, opacity } = this.getConfig();
 
         Layer.open('__SETTING_CATEGORY__', <SettingCategoryView />, {
             closeButton: true,
             opacity,
             blur,
-            blurGradient,
-            blurImage,
+            gradient,
+            bgImage,
             onOpen: () => {
                 const isOpen = this.getMeta('setting_opened', false);
                 if (!isOpen) {
@@ -127,7 +127,7 @@ class Setting extends Store {
     }
 }
 
-const handler = new Setting();
+const handler = new NaxOSCoreSetting();
 export default handler;
 
 export const publicHandler: PublicHandlerInterface = {

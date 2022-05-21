@@ -11,6 +11,9 @@ import Dropdown, { DropdownArrayType } from '../../Dropdown';
 import Handler from '../Handler';
 import { NotificationPropsRow } from '../types';
 
+import InboxRoundedIcon from '@mui/icons-material/InboxRounded'
+
+
 const Item = ({ id, read, title, icon, content, created, buttonText, onButtonClick, onClick }: NotificationPropsRow) => {
     const settings = Handler.settings();
 
@@ -108,7 +111,15 @@ const List = () => {
     const notifications = Handler.findAll();
 
     return (
-        <Stack px={0.5} spacing={0.5}>
+        <Stack px={0.5} spacing={0.5} height="100%">
+            {
+                !notifications.length ? <Stack sx={{ userSelect: 'none', height: '100%' }} justifyContent="center" alignItems="center">
+                    <Box textAlign='center'>
+                        <InboxRoundedIcon sx={{ fontSize: 30, opacity: .5 }} />
+                        <Typography variant="h6" sx={{ opacity: .5 }}>No Items</Typography>
+                    </Box>
+                </Stack> : ''
+            }
             {notifications.map((notif: any) => (
                 <ItemRender key={notif.id} {...notif} />
             ))}

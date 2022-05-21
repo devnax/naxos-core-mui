@@ -19,8 +19,8 @@ export type LayerOptionProps = {
     onClose?: Function;
     onClickLayer?: (e: MouseEvent<HTMLDivElement>) => void;
     blur?: number;
-    blurImage?: string;
-    blurGradient?: [string, string];
+    bgImage?: string;
+    gradient?: [string, string];
 };
 
 export interface PublicLayerType {

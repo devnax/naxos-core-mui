@@ -3,8 +3,8 @@ import { ReactElement } from 'react';
 export interface ConfigProps {
     opacity?: number;
     blur?: number;
-    blurImage?: string;
-    blurGradient?: [string, string];
+    bgImage?: string;
+    gradient?: [string, string];
 }
 
 export interface SettingProps {

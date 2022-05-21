@@ -3,7 +3,7 @@ import { DataProps } from '../types';
 import FinderHandler from './FinderHandler';
 import Subscriber from './Subscriber';
 
-class FinderCallbackStock extends Store {
+class NaxOSCoreFinderCallbackStock extends Store {
     add(text: string, subscriberID: string) {
         this.insert({
             text,
@@ -39,4 +39,4 @@ class FinderCallbackStock extends Store {
     }
 }
 
-export default new FinderCallbackStock();
+export default new NaxOSCoreFinderCallbackStock();

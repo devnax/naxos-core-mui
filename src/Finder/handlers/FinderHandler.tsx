@@ -6,7 +6,7 @@ import { FoundedData, FinderSettingProps } from '../types';
 import Subscriber from '../handlers/Subscriber';
 import CallbackStock from '../handlers/CallbackStock';
 
-class FinderHandler extends Store {
+class NaxOSCoreFinderHandler extends Store {
     open(options?: FinderSettingProps) {
         if (options) {
             this.customSettings(options);
@@ -106,4 +106,4 @@ class FinderHandler extends Store {
     }
 }
 
-export default new FinderHandler();
+export default new NaxOSCoreFinderHandler();

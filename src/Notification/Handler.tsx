@@ -7,7 +7,7 @@ import { isFunction } from 'tiny-utils';
 import Notify from '../Notify';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
-class Handler extends Store {
+class NaxOSCoreNotification extends Store {
     create(options: NotificationProps) {
         if (!options.id) {
             throw new Error('property (id) required for the notification');
@@ -104,4 +104,4 @@ class Handler extends Store {
     }
 }
 
-export default new Handler();
+export default new NaxOSCoreNotification();

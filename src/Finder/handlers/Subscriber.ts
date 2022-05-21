@@ -1,7 +1,7 @@
 import { Store } from 'state-range';
 import { SubcriberProps } from '../types';
 
-class FinderSubscriber extends Store {
+class NaxOSCoreFinderSubscriber extends Store {
     add(options: SubcriberProps) {
         if (!this.getByID(options.id)) {
             this.insert({
@@ -20,4 +20,4 @@ class FinderSubscriber extends Store {
     }
 }
 
-export default new FinderSubscriber();
+export default new NaxOSCoreFinderSubscriber();

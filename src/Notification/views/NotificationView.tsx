@@ -51,7 +51,7 @@ const NotificationView = () => {
                     )}
                 </Stack>
                 <Scrollbar
-                    style={{ flex: 1 }}
+                    style={{ flex: 1, height: '100%' }}
                     darkMode={isDarkMode()}
                     onScrollEnd={() => {
                         if (settings.onLoadMore) {
@@ -59,7 +59,7 @@ const NotificationView = () => {
                         }
                     }}
                 >
-                    <Box p={1}>
+                    <Box p={1} height="100%">
                         <List />
                         {Handler.isLoading() && <Skeleton length={3} />}
                     </Box>

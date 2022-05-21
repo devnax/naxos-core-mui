@@ -1,16 +1,14 @@
 import { ReactElement } from 'react';
 import { Store } from 'state-range';
 import { DropdownArrayType } from './types';
-import { PopperProps } from '@mui/material/Popper';
+import { PopperProps } from './types'
 
-type BoxProps = Partial<PopperProps> & {
-    open?: any;
-};
 
-class DropdownHandler extends Store {
+
+class NaxOSCoreDropdown extends Store {
     anchorAttrName = 'data-dropdown-opened';
 
-    show(anchor: HTMLElement, content: ReactElement | DropdownArrayType[], props?: BoxProps) {
+    show(anchor: HTMLElement, content: ReactElement | DropdownArrayType[], props?: PopperProps) {
         this.delete({ active: false });
         const has: any = anchor.hasAttribute(this.anchorAttrName);
         if (has) {
@@ -49,7 +47,7 @@ class DropdownHandler extends Store {
     }
 }
 
-const handler = new DropdownHandler();
+const handler = new NaxOSCoreDropdown();
 
 export default handler;
 

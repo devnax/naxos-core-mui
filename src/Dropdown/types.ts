@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { PopperProps } from '@mui/material/Popper';
+import { PopperProps as PProps } from '@mui/material/Popper';
 import { ListItemButtonProps } from '@mui/material/ListItemButton';
 
 export interface DropdownRowProps {
@@ -7,11 +7,15 @@ export interface DropdownRowProps {
     observe: number;
 }
 
+
+export type PopperProps = Omit<PProps, 'open'>
+
+
 export interface DropdownProps {
     active: boolean;
     anchor: HTMLElement;
     content: ReactElement | DropdownArrayType[];
-    props: Partial<PopperProps>;
+    props: PopperProps;
 }
 
 export type DropdownArrayType = ListItemButtonProps & {

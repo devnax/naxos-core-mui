@@ -23,8 +23,8 @@ import Setting from 'nxos/Setting'
 Setting.setConfig({
    opacity?: number;
    blur?: number;
-   blurImage?: string;
-   blurGradient?: [string, string]
+   bgImage?: string;
+   gradient?: [string, string]
 })
 
 Setting.getConfig()

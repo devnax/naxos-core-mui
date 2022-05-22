@@ -72,6 +72,7 @@ const MainView = () => {
 
     return (
         <>
+            <Box id="ctx-menu" position="fixed" zIndex={9999999999999}></Box>
             {dropdowns.map((dropdown: any, idx: number) => (
                 <DropdownItemView key={idx} dropdown={dropdown} />
             ))}

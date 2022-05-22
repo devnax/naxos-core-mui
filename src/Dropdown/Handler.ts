@@ -28,6 +28,23 @@ class NaxOSCoreDropdown extends Store {
         anchor.setAttribute(this.anchorAttrName, inserted._id);
     }
 
+    showContextMenu(event: MouseEvent, content: ReactElement | DropdownArrayType[], props?: PopperProps) {
+        const ctxmenu = document.getElementById('ctx-menu')
+        event.preventDefault()
+        if (ctxmenu) {
+            ctxmenu.style.left = `${event.pageX}px`
+            ctxmenu.style.top = `${event.pageY}px`
+            this.show(ctxmenu, content, {
+                placement: "right-start",
+                ...props
+            })
+        }
+    }
+
+    isShow(): boolean {
+        return this.findFirst({ active: true }) ? true : false
+    }
+
     hide() {
         this.update({ active: false }, { active: true });
         const Dropdowns = this.findAll();
@@ -53,10 +70,14 @@ export default handler;
 
 interface DropdownPublicHandlerTypes {
     show: (anchor: HTMLElement, content: ReactElement | DropdownArrayType[], props?: PopperProps) => void;
+    showContextMenu: (event: MouseEvent, content: ReactElement | DropdownArrayType[], props?: PopperProps) => void;
+    isShow: () => boolean;
     hide: () => void;
 }
 
 export const DropdownPublicHandler: DropdownPublicHandlerTypes = {
+    showContextMenu: handler.showContextMenu.bind(handler),
     show: handler.show.bind(handler),
+    isShow: handler.isShow.bind(handler),
     hide: handler.hide.bind(handler)
 };

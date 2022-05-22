@@ -4,15 +4,46 @@ import { LayerView } from '../src/Layer'
 import Notify, { NotifyView } from '../src/Notify'
 import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box'
-import ListView from '../src/ListView'
+import ListViewHandler, { ListViewTemplate } from '../src/ListView'
+
+
 
 const App = () => {
 	const theme = useTheme();
 
+	useEffect(() => {
+		const items = [
+			{
+				sectionTitle: "PROPERTY",
+				title: "General",
+				subtitle: "Pert Of settings",
+				render: <Box bgcolor="primary.main" p={2} borderRadius={2}>Nice</Box>
+			},
+			{
+				title: "Appearance",
+				render: <Box bgcolor="warning.main" p={2} borderRadius={2}>Nice</Box>
+			},
+			{
+				title: "Settings",
+				render: <Box bgcolor="info.main" p={2} borderRadius={2}>Nice</Box>
+			},
+			{
+				sectionTitle: "INFORMATION",
+				title: "Billing",
+				render: <Box bgcolor="error.main" p={2} borderRadius={2}>Nice</Box>
+			}
+		]
+		ListViewHandler.setList('profile-list', [...items])
+		// ListViewHandler.setList('profile-list1', [...items])
+	}, [])
+
 	return <div>
 
 		<Box p={2}>
-			<ListView />
+			<ListViewTemplate
+				id="profile-list"
+				sidebarTitle='User Profile'
+			/>
 		</Box>
 
 		<button

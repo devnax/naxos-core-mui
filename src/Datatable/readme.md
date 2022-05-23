@@ -7,7 +7,7 @@ import Datatable from 'naxos-core/Datatable'
 const App = () => {
 
    return (
-      <Datatable 
+      <Datatable
          id="tableid"
          checkbox
          onSearch={(text) => {
@@ -57,7 +57,7 @@ const App = () => {
             Datatable.clearSearchText('tableid')
             Datatable.updateRow('tableid', rowId, {...row})
 
-            Datatable.loading('tableid', boolean) // loading the table 
+            Datatable.loading('tableid', boolean) // loading the table
          }}
 
       />

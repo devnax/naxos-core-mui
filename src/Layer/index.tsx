@@ -75,6 +75,17 @@ const Item: FC<LayerItemProps> = ({ layer, index }) => {
                 zIndex={(zIndex || 1501) + index}
                 overflow="hidden"
                 bgcolor={!(bgImage || blur || gradient) ? alpha(theme.palette.background.default, opacity === undefined ? 1 : opacity) : 'transparent'}
+
+            >
+            </BlurBox>
+            <Box
+                position="fixed"
+                top={0}
+                left={0}
+                bottom={0}
+                right={0}
+                zIndex={(zIndex || 1501) + index}
+                overflow="hidden"
                 onClick={(e: MouseEvent<HTMLDivElement>) => {
                     onClickLayer && onClickLayer(e);
                     props?.onClick && props.onClick(e);
@@ -84,7 +95,8 @@ const Item: FC<LayerItemProps> = ({ layer, index }) => {
                 <AnimateBox type={animation || 'zoomOver'} style={{ height: '100%' }}>
                     {content}
                 </AnimateBox>
-            </BlurBox>
+            </Box>
+
         </>
     );
 };

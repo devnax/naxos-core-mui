@@ -75,13 +75,13 @@ const SearchBox = () => {
                                                                 } else {
                                                                     FinderHandler.checkedAll(true);
                                                                 }
-                                                                Dropdown.show(target, formate(), { placement: 'bottom-end', open: true });
+                                                                Dropdown.show(target, formate(), { placement: 'bottom-end' });
                                                             }
                                                         };
                                                     })
                                                 ];
                                             };
-                                            Dropdown.show(e.currentTarget, formate(), { placement: 'bottom-end', open: true });
+                                            Dropdown.show(e.currentTarget, formate(), { placement: 'bottom-end' });
                                         }}
                                     >
                                         <FilterListRoundedIcon />

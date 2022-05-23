@@ -7,9 +7,7 @@ export interface DropdownRowProps {
     observe: number;
 }
 
-
-export type PopperProps = Omit<PProps, 'open'>
-
+export type PopperProps = Omit<PProps, 'open'>;
 
 export interface DropdownProps {
     active: boolean;

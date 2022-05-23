@@ -1,9 +1,7 @@
 import { ReactElement } from 'react';
 import { Store } from 'state-range';
 import { DropdownArrayType } from './types';
-import { PopperProps } from './types'
-
-
+import { PopperProps } from './types';
 
 class NaxOSCoreDropdown extends Store {
     anchorAttrName = 'data-dropdown-opened';
@@ -29,20 +27,20 @@ class NaxOSCoreDropdown extends Store {
     }
 
     showContextMenu(event: MouseEvent, content: ReactElement | DropdownArrayType[], props?: PopperProps) {
-        const ctxmenu = document.getElementById('ctx-menu')
-        event.preventDefault()
+        const ctxmenu = document.getElementById('ctx-menu');
+        event.preventDefault();
         if (ctxmenu) {
-            ctxmenu.style.left = `${event.pageX}px`
-            ctxmenu.style.top = `${event.pageY}px`
+            ctxmenu.style.left = `${event.pageX}px`;
+            ctxmenu.style.top = `${event.pageY}px`;
             this.show(ctxmenu, content, {
-                placement: "right-start",
+                placement: 'right-start',
                 ...props
-            })
+            });
         }
     }
 
     isShow(): boolean {
-        return this.findFirst({ active: true }) ? true : false
+        return this.findFirst({ active: true }) ? true : false;
     }
 
     hide() {

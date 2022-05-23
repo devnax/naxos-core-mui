@@ -4,7 +4,7 @@ import ListViewHandler, {ListViewTemplate, ListItemsView, ContentView} from 'nax
 
 
 // Full Template
-<ListViewTemplate 
+<ListViewTemplate
    id={string}
    sidebarTitle={string}
 />
@@ -25,7 +25,7 @@ ListViewHandler.setList(id, [
       icon?: ReactElement<SVGProps<SVGElement>>;
    }
 ])
- 
+
 
 
 ```

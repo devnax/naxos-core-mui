@@ -7,9 +7,11 @@ export * from './types';
 class ModalHandler {
     open(id: string | number, content: ReactElement, options?: ModalOptionsProps) {
         Layer.open(`__MODAL_${id}__`, <ModalView content={content} {...options} />, {
+            ...options,
             animation: options?.animation || 'zoom',
             opacity: options?.opacity || 0.5,
-            stable: true
+            stable: true,
+            closeButton: false
         });
     }
 

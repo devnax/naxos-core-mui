@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Alert, Layer, Notification } from "../src";
+import { Alert, Layer, Notification, Setting } from "../src";
 import { LayerView } from '../src/Layer'
 import Notify, { NotifyView } from '../src/Notify'
 import { alpha, useTheme } from '@mui/material/styles';
@@ -38,6 +38,20 @@ const App = () => {
 		]
 		ListViewHandler.setList('profile-list', [...items])
 		// ListViewHandler.setList('profile-list1', [...items])
+
+		Setting.create({
+			id: "test",
+			title: "Test",
+			render: <div>Nice</div>,
+			category: "General"
+		})
+
+		Setting.create({
+			id: "test1",
+			title: "Test1",
+			render: <div>Nice1</div>,
+			category: "Security"
+		})
 	}, [])
 
 	return <>
@@ -58,6 +72,7 @@ const App = () => {
 				</IconButton>
 			</Box>
 			<Box flex={1}>
+				{/* <ListViewTemplate id="profile-list" /> */}
 				<button
 					onClick={() => {
 
@@ -76,29 +91,31 @@ const App = () => {
 
 						// return;
 
-						Layer.open("Nice", <Box
-							width={900}
-							m="20px auto"
-							borderRadius={3}
-							p={3}
-							bgcolor="primary.main"
-						>
-							<button
-								onClick={() => {
-									Alert.open("test", {
-										title: "Alert",
-										content: "This is the alert box"
-									})
-								}}
-							>OPen Stable</button>
-						</Box>, {
-							blur: 20,
-							// closeButton: true,
-							bgImage: 'https://www.teahub.io/photos/full/4-42869_hills-4k.jpg',
-							gradient: [alpha(theme.palette.primary.main, .3), alpha(theme.palette.primary.dark, .8)],
-							opacity: .3,
-							onClickLayer: () => Layer.close()
-						})
+						// Layer.open("Nice", <Box
+						// 	width={900}
+						// 	m="20px auto"
+						// 	borderRadius={3}
+						// 	p={3}
+						// 	bgcolor="primary.main"
+						// >
+						// 	<button
+						// 		onClick={() => {
+						// 			Alert.open("test", {
+						// 				title: "Alert",
+						// 				content: "This is the alert box"
+						// 			})
+						// 		}}
+						// 	>OPen Stable</button>
+						// </Box>, {
+						// 	blur: 20,
+						// 	// closeButton: true,
+						// 	bgImage: 'https://www.teahub.io/photos/full/4-42869_hills-4k.jpg',
+						// 	gradient: [alpha(theme.palette.primary.main, .3), alpha(theme.palette.primary.dark, .8)],
+						// 	opacity: .3,
+						// 	onClickLayer: () => Layer.close()
+						// })
+
+						Setting.open()
 					}}
 				>Open the main modal box</button>
 			</Box>

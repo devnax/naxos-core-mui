@@ -20,12 +20,12 @@ import { LayerView } from 'nxos/Layer';
 import Setting from 'nxos/Setting'
 
 
-Setting.setConfig({
-   opacity?: number;
-   blur?: number;
-   bgImage?: string;
-   gradient?: [string, string]
-})
+const configs = {
+   ...LayerOptionProps,
+   closeOnLayer: true
+}
+
+Setting.setConfig(configs)
 
 Setting.getConfig()
 
@@ -45,7 +45,7 @@ Setting.create({
 })
 
 // open the setting view
-Setting.open()
+Setting.open(configs?)
 
 // close the setting
 Setting.close()

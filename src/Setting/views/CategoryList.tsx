@@ -19,7 +19,7 @@ const CategoryView = () => {
                 <Grid container spacing={2} p={1}>
                     {categories.map(({ category, categoryIcon }: any, idx: number) => {
                         return (
-                            <Grid key={idx} item xs={4} sm={3} md={3} lg={2.4}>
+                            <Grid data-category key={idx} item xs={4} sm={3} md={3} lg={2.4}>
                                 <Stack
                                     sx={{
                                         alignItems: 'center',
@@ -38,8 +38,8 @@ const CategoryView = () => {
                                         sx={{
                                             '& img': {
                                                 width: {
-                                                    xs: 50,
-                                                    sm: 60
+                                                    xs: 55,
+                                                    sm: 65
                                                 }
                                             }
                                         }}

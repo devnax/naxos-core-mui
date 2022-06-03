@@ -16,21 +16,48 @@ class NaxOSCoreSetting extends Store {
         return this.getMeta('setting_configs', {});
     }
 
-    open() {
+    open(configs?: ConfigProps) {
         const catList = this.getCategoryList();
+
+        if (configs) {
+            noDispatch(() => {
+                this.setConfig(configs)
+            })
+        }
+
+
         if (catList.length <= 1) {
             this.viewCategory(catList[0].category);
             return;
         }
 
-        const { blur, bgImage, gradient, opacity } = this.getConfig();
+        const { closeOnLayer, ...rest } = this.getConfig();
 
         Layer.open('__SETTING_CATEGORY__', <SettingCategoryView />, {
-            closeButton: true,
-            opacity,
-            blur,
-            gradient,
-            bgImage,
+            closeButton: false,
+            blur: 30,
+            ...rest,
+            onClickLayer: (e: any) => {
+                if (closeOnLayer === undefined || closeOnLayer) {
+                    const cats = Array.from(document.querySelectorAll("[data-category]"))
+                    let isContain = false
+                    if (cats.length) {
+                        for (let cat of cats) {
+                            if (cat.contains(e.target)) {
+                                isContain = true
+                                break;
+                            }
+                        }
+                    }
+                    if (!isContain) {
+                        this.close()
+                    }
+                }
+
+                if (rest.onClickLayer) {
+                    rest.onClickLayer(e)
+                }
+            },
             onOpen: () => {
                 const isOpen = this.getMeta('setting_opened', false);
                 if (!isOpen) {

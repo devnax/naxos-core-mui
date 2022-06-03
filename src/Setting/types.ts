@@ -1,10 +1,8 @@
 import { ReactElement } from 'react';
+import { LayerOptionProps } from '../Layer/types'
 
-export interface ConfigProps {
-    opacity?: number;
-    blur?: number;
-    bgImage?: string;
-    gradient?: [string, string];
+export interface ConfigProps extends LayerOptionProps {
+    closeOnLayer?: boolean
 }
 
 export interface SettingProps {
@@ -24,7 +22,7 @@ export interface PublicHandlerInterface {
     setConfig: (conf: ConfigProps) => void;
     getConfig: () => ConfigProps;
     create: (options: SettingProps) => void;
-    open: () => void;
+    open: (config?: ConfigProps) => void;
     close: () => void;
     get: (id: string) => SettingProps | void;
     remove: (id: string) => void;

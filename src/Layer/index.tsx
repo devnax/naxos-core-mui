@@ -75,9 +75,7 @@ const Item: FC<LayerItemProps> = ({ layer, index }) => {
                 zIndex={(zIndex || 1501) + index}
                 overflow="hidden"
                 bgcolor={!(bgImage || blur || gradient) ? alpha(theme.palette.background.default, opacity === undefined ? 1 : opacity) : 'transparent'}
-
-            >
-            </BlurBox>
+            ></BlurBox>
             <Box
                 position="fixed"
                 top={0}
@@ -96,7 +94,6 @@ const Item: FC<LayerItemProps> = ({ layer, index }) => {
                     {content}
                 </AnimateBox>
             </Box>
-
         </>
     );
 };

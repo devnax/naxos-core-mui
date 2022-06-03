@@ -24,7 +24,7 @@ const CloseButtonView = () => {
     );
 };
 
-const ModalView: FC<Props> = ({ content, props, closeButton, clickToClose }) => {
+const ModalView: FC<Props> = ({ content, props, closeButton }) => {
     const ref: any = useRef();
     return (
         <Box
@@ -33,11 +33,6 @@ const ModalView: FC<Props> = ({ content, props, closeButton, clickToClose }) => 
             alignItems="center"
             height="100%"
             width="100%"
-            onClick={(e: any) => {
-                if (!ref.current?.contains(e.target) && clickToClose) {
-                    Layer.close();
-                }
-            }}
         >
             <Box ref={ref} minWidth={400} {...props} position="relative">
                 {(closeButton === undefined || closeButton) && <CloseButtonView />}

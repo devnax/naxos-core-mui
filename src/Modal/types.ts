@@ -3,5 +3,5 @@ import { LayerOptionProps } from '../Layer';
 
 export interface ModalOptionsProps extends LayerOptionProps {
     closeButton?: boolean;
-    props?: BoxProps
+    props?: BoxProps;
 }

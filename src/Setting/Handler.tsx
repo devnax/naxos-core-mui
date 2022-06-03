@@ -21,10 +21,9 @@ class NaxOSCoreSetting extends Store {
 
         if (configs) {
             noDispatch(() => {
-                this.setConfig(configs)
-            })
+                this.setConfig(configs);
+            });
         }
-
 
         if (catList.length <= 1) {
             this.viewCategory(catList[0].category);
@@ -39,23 +38,23 @@ class NaxOSCoreSetting extends Store {
             ...rest,
             onClickLayer: (e: any) => {
                 if (closeOnLayer === undefined || closeOnLayer) {
-                    const cats = Array.from(document.querySelectorAll("[data-category]"))
-                    let isContain = false
+                    const cats = Array.from(document.querySelectorAll('[data-category]'));
+                    let isContain = false;
                     if (cats.length) {
                         for (let cat of cats) {
                             if (cat.contains(e.target)) {
-                                isContain = true
+                                isContain = true;
                                 break;
                             }
                         }
                     }
                     if (!isContain) {
-                        this.close()
+                        this.close();
                     }
                 }
 
                 if (rest.onClickLayer) {
-                    rest.onClickLayer(e)
+                    rest.onClickLayer(e);
                 }
             },
             onOpen: () => {

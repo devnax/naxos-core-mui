@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
-import { LayerOptionProps } from '../Layer/types'
+import { LayerOptionProps } from '../Layer/types';
 
 export interface ConfigProps extends LayerOptionProps {
-    closeOnLayer?: boolean
+    closeOnLayer?: boolean;
 }
 
 export interface SettingProps {

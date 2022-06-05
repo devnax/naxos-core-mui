@@ -3,11 +3,10 @@ import { Store } from 'state-range';
 import Layer from '../Layer';
 import NotificationView from './views/NotificationView';
 import { NotificationProps, NotificationSettingProps } from './types';
-import { isFunction } from 'tiny-utils';
 import Notify from '../Notify';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
-class NaxOSCoreNotification extends Store {
+class NaxOSCoreNotification extends Store<NotificationProps> {
     create(options: NotificationProps) {
         if (!options.id) {
             throw new Error('property (id) required for the notification');
@@ -35,9 +34,6 @@ class NaxOSCoreNotification extends Store {
     remove(id: string | number) {
         const data = this.findFirst({ id });
         if (data) {
-            if (isFunction(data.onDelete)) {
-                data.onDelete(data);
-            }
             this.delete({ id });
         }
     }
@@ -49,9 +45,6 @@ class NaxOSCoreNotification extends Store {
     read(id: string | number) {
         const data = this.findFirst({ id });
         if (data) {
-            if (isFunction(data.onRead)) {
-                data.onRead(data);
-            }
             this.update({ read: true }, { id });
         }
     }
@@ -59,9 +52,6 @@ class NaxOSCoreNotification extends Store {
     unread(id: string | number) {
         const data = this.findFirst({ id });
         if (data) {
-            if (isFunction(data.onUnRead)) {
-                data.onUnRead(data);
-            }
             this.update({ read: false }, { id });
         }
     }

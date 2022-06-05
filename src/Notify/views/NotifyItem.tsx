@@ -10,6 +10,7 @@ import { NotifyRowProps } from '../types';
 import { AnimationType } from 'fmotion-variants';
 
 interface Props extends NotifyRowProps {
+    _id: string;
     animation: AnimationType;
 }
 

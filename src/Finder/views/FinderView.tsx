@@ -35,7 +35,7 @@ const FinderView = () => {
                             {foundedItems.map((foundedData: FoundedData) => {
                                 const { dataList, subscriberID }: FoundedData = foundedData;
                                 const subscriber = Subscriber.getByID(subscriberID);
-                                if (!subscriber.checked) {
+                                if (!subscriber?.checked) {
                                     return '';
                                 }
                                 return dataList.map((data: DataProps, idx: number) => <FoundItem key={idx} subscirberID={subscriberID} data={data} index={idx} />);

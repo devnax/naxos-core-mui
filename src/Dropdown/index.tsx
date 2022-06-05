@@ -7,7 +7,6 @@ import Handler, { DropdownPublicHandler } from './Handler';
 import ListRender from './ListRender';
 import { DropdownProps, DropdownRowProps } from './types';
 
-export * from './types';
 export default DropdownPublicHandler;
 
 interface DropdownItemViewProps {
@@ -50,8 +49,10 @@ const MainView = () => {
             if (item.contains(e.target)) {
                 const id = item.getAttribute('data-dropdown');
                 const menu = Handler.findById(id);
-                Handler.hideChild(menu._id);
-                isContained = true;
+                if (menu) {
+                    Handler.hideChild(menu._id);
+                    isContained = true;
+                }
             }
         });
 

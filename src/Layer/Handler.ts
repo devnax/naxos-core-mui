@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import { Store } from 'state-range';
-import { LayerOptionProps } from './types';
+import { LayerOptionProps, StoreProps } from './types';
 
-class NaxOSCoreLayer extends Store {
+class NaxOSCoreLayer extends Store<StoreProps> {
     open(id: string | number, content: ReactElement, options?: LayerOptionProps) {
         if (content && !this.findFirst({ id })) {
             const isStable = this.findFirst({ stable: true });

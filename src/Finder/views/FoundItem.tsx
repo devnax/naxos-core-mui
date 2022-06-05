@@ -17,12 +17,16 @@ interface Props {
 
 const FoundItem: FC<Props> = ({ data, subscirberID }) => {
     const { title, icon, description } = data;
-    const { onItemClick } = Subscriber.getByID(subscirberID);
+    const subscriber = Subscriber.getByID(subscirberID);
     const props: any = {};
     const isDark = isDarkMode();
 
-    if (onItemClick) {
-        props.onClick = () => onItemClick(data);
+    if (subscriber?.onItemClick) {
+        props.onClick = () => {
+            if (typeof subscriber?.onItemClick === 'function') {
+                subscriber?.onItemClick(data);
+            }
+        };
     }
 
     return (

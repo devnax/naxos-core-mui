@@ -3,9 +3,9 @@ import { noDispatch, Store } from 'state-range';
 import Layer from '../Layer';
 import SettingCategoryView from './views/CategoryList';
 import SingleView from './views/CategoryView';
-import { SettingProps, PublicHandlerInterface, ConfigProps } from './types';
+import { SettingProps, SettingRowProps, PublicHandlerInterface, ConfigProps } from './types';
 
-class NaxOSCoreSetting extends Store {
+class NaxOSCoreSetting extends Store<SettingRowProps> {
     setConfig(conf: ConfigProps) {
         noDispatch(() => {
             this.setMeta('setting_configs', conf);
@@ -61,7 +61,7 @@ class NaxOSCoreSetting extends Store {
                 const isOpen = this.getMeta('setting_opened', false);
                 if (!isOpen) {
                     noDispatch(() => this.setMeta('setting_opened', true));
-                    const settings = this.find();
+                    const settings = this.findAll();
                     for (let setting of settings) {
                         if (typeof setting?.onSettingOpen === 'function') {
                             setting.onSettingOpen();
@@ -71,7 +71,7 @@ class NaxOSCoreSetting extends Store {
             },
             onClose: () => {
                 if (!Layer.isOpened('__SETTING_VIEW__')) {
-                    const settings = this.find();
+                    const settings = this.findAll();
                     for (let setting of settings) {
                         if (typeof setting?.onSettingClose === 'function') {
                             setting.onSettingClose();
@@ -94,20 +94,15 @@ class NaxOSCoreSetting extends Store {
     create(options: SettingProps) {
         const exists = this.get(options.id);
         if (!exists) {
-            const existsCategory = this.findFirst({ category: options.category });
             if (this.isSettingOpen()) {
                 this.insert({
                     ...options,
-                    // private props
-                    uniqueCatName: existsCategory ? false : true,
                     preview: false
                 });
             } else {
                 noDispatch(() => {
                     this.insert({
                         ...options,
-                        // private props
-                        uniqueCatName: existsCategory ? false : true,
                         preview: false
                     });
                 });
@@ -117,28 +112,38 @@ class NaxOSCoreSetting extends Store {
 
     viewCategory(category: string) {
         const first = this.findFirst({ category });
-        noDispatch(() => {
-            this.update({ active: false }, { active: true });
-            this.update({ preview: false }, { preview: true });
-        });
-
-        this.update({ active: true, preview: true }, first._id);
-        Layer.open('__SETTING_VIEW__', <SingleView />, {
-            closeButton: false
-        });
+        if (first) {
+            this.preview(first.id)
+        }
     }
 
-    preview() {
+    preview(id: string) {
+        const item = this.get(id);
+        noDispatch(() => {
+            this.update({ preview: false }, { preview: true });
+        });
+        if (item) {
+            this.update({ preview: true }, item._id);
+            Layer.open('__SETTING_VIEW__', <SingleView />, {
+                closeButton: false
+            });
+        }
+    }
+
+    getPreview() {
         return this.findFirst({ preview: true }) || {};
     }
 
     getCategorySettings() {
-        const { category } = this.findFirst({ active: true });
-        return this.find({ category });
+        const setting = this.findFirst({ preview: true });
+        if (setting) {
+            return this.find({ category: setting.category });
+        }
+        return [];
     }
 
     getCategoryList() {
-        return this.find({ uniqueCatName: true });
+        return this.find("@unique category");
     }
 
     get(id: string) {
@@ -163,5 +168,6 @@ export const publicHandler: PublicHandlerInterface = {
     open: handler.open.bind(handler),
     close: handler.close.bind(handler),
     get: handler.get.bind(handler),
+    preview: handler.preview.bind(handler),
     remove: handler.remove.bind(handler)
 };

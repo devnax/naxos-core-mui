@@ -14,7 +14,7 @@ import { isDarkMode } from 'mui-themex';
 
 const SettingSidebar = () => {
     const settings = Setting.getCategorySettings();
-    const preview = Setting.preview();
+    const preview: any = Setting.getPreview();
     const isDark = isDarkMode();
 
     return (
@@ -40,7 +40,7 @@ const SettingSidebar = () => {
                             <BackIcon />
                         </IconButton>
                         <Typography variant="h5" pl={1}>
-                            {preview.category}
+                            {preview && preview?.category}
                         </Typography>
                     </Box>
                 </Stack>
@@ -51,7 +51,7 @@ const SettingSidebar = () => {
                                 <ListItem
                                     key={setting._id}
                                     button
-                                    selected={preview._id === setting._id}
+                                    selected={preview?._id === setting._id}
                                     onClick={() => {
                                         Setting.update({ preview: false }, { preview: true });
                                         Setting.update({ preview: true }, setting._id);

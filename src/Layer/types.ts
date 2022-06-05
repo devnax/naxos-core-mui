@@ -31,6 +31,12 @@ export interface PublicLayerType {
 }
 
 export interface LayerItemProps {
-    layer: LayerOptionProps & RowType;
+    layer: StoreProps;
     index: number;
+}
+
+export interface StoreProps extends LayerOptionProps {
+    id: string | number;
+    content: ReactElement;
+    active: boolean;
 }

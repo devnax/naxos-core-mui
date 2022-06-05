@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { TabProps } from '@mui/material/Tab';
 import { TableCellProps } from '@mui/material/TableCell';
 import { Row } from 'state-range/src/types';
-import { DropdownArrayType } from '../Dropdown';
+import { DropdownArrayType } from '../Dropdown/types';
 
 export interface StoreRowProps extends RowProps {
     tableId?: string;

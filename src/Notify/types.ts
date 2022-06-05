@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { RowType } from 'state-range/dist/types';
 
 export type NotifyTypes = 'success' | 'error' | 'warning' | 'info';
 export type NotifyLocation = 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
@@ -13,11 +14,10 @@ export interface NotifyProps {
     small?: boolean;
     autoHide?: boolean;
     pauseOnHover?: boolean;
-    onHide?: (options: NotifyRowProps) => void;
-    onClick?: (options: NotifyRowProps) => void;
+    onHide?: (options: NotifyRowProps & RowType) => void;
+    onClick?: (options: NotifyRowProps & RowType) => void;
 }
 
 export interface NotifyRowProps extends NotifyProps {
-    _id: string;
-    observe: number;
+    timer?: boolean;
 }

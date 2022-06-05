@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, ReactNode } from 'react';
 import { motion, MotionProps } from 'framer-motion';
 import { variants, AnimationType } from 'fmotion-variants';
-export * from 'fmotion-variants';
+
 interface Props extends MotionProps {
     children: ReactElement | ReactNode;
     type?: AnimationType | 'none';

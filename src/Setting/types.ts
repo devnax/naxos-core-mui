@@ -18,6 +18,10 @@ export interface SettingProps {
     onExit?: Function;
 }
 
+export interface SettingRowProps extends SettingProps {
+    preview?: boolean;
+}
+
 export interface PublicHandlerInterface {
     setConfig: (conf: ConfigProps) => void;
     getConfig: () => ConfigProps;
@@ -25,5 +29,6 @@ export interface PublicHandlerInterface {
     open: (config?: ConfigProps) => void;
     close: () => void;
     get: (id: string) => SettingProps | void;
+    preview: (id: string) => void;
     remove: (id: string) => void;
 }

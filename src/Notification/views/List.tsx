@@ -7,13 +7,14 @@ import Badge from '@mui/material/Badge';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Dropdown, { DropdownArrayType } from '../../Dropdown';
+import Dropdown from '../../Dropdown';
+import { DropdownArrayType } from '../../Dropdown/types';
 import Handler from '../Handler';
-import { NotificationPropsRow } from '../types';
+import { NotificationProps } from '../types';
 
 import InboxRoundedIcon from '@mui/icons-material/InboxRounded';
 
-const Item = ({ id, read, title, icon, content, created, buttonText, onButtonClick, onClick }: NotificationPropsRow) => {
+const Item = ({ id, read, title, icon, content, created, buttonText, onButtonClick, onClick }: NotificationProps) => {
     const settings = Handler.settings();
 
     return (

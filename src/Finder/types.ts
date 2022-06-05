@@ -13,6 +13,7 @@ export interface SubcriberProps {
     id: string;
     callback: SubcribeCallbackType;
     onItemClick?: (item: DataProps) => void;
+    checked?: boolean;
 }
 
 export interface SubcriberPropsPrivate {

@@ -1,7 +1,7 @@
 import { Store } from 'state-range';
 import { SubcriberProps } from '../types';
 
-class NaxOSCoreFinderSubscriber extends Store {
+class NaxOSCoreFinderSubscriber extends Store<SubcriberProps> {
     add(options: SubcriberProps) {
         if (!this.getByID(options.id)) {
             this.insert({

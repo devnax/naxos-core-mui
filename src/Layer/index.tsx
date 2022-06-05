@@ -8,7 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 import AnimateBox from '../components/AnimateBox';
 import BlurBox from '../BlurBox';
 import Handler from './Handler';
-import { LayerOptionProps, PublicLayerType, LayerItemProps, RowType } from './types';
+import { LayerOptionProps, PublicLayerType, LayerItemProps } from './types';
 
 export { LayerOptionProps };
 
@@ -99,7 +99,7 @@ const Item: FC<LayerItemProps> = ({ layer, index }) => {
 };
 
 const View = () => {
-    const layers: (LayerOptionProps & RowType)[] = Handler.find({ active: true });
+    const layers = Handler.find({ active: true });
 
     return (
         <AnimatePresence>

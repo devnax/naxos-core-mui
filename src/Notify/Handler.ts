@@ -1,7 +1,7 @@
 import { Store } from 'state-range';
-import { NotifyProps } from './types';
+import { NotifyProps, NotifyRowProps } from './types';
 
-class NaxOSCoreNotify extends Store {
+class NaxOSCoreNotify extends Store<NotifyRowProps> {
     show(options: NotifyProps) {
         if (options.title) {
             const { _id }: any = this.insert({
@@ -15,7 +15,7 @@ class NaxOSCoreNotify extends Store {
 
     pauseTime(_id: string) {
         const item = this.findById(_id);
-        if (item.autoHide === undefined || item.autoHide) {
+        if (item?.autoHide === undefined || item.autoHide) {
             if (typeof item?.timer === 'number') {
                 return clearInterval(item.timer);
             }
@@ -26,7 +26,7 @@ class NaxOSCoreNotify extends Store {
     startTime(_id: string) {
         const item = this.findById(_id);
         let timer: any = false;
-        if (item.autoHide === undefined || item.autoHide === true) {
+        if (item?.autoHide === undefined || item?.autoHide === true) {
             this.pauseTime(_id);
             timer = setTimeout(() => {
                 this.delete(_id);

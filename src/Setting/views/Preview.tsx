@@ -4,7 +4,7 @@ import { withStore } from 'state-range';
 import Setting from '../Handler';
 
 const Preview = () => {
-    let preview = Setting.preview();
+    let preview: any = Setting.getPreview();
 
     return (
         <Box

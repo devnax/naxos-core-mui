@@ -1,11 +1,11 @@
 import { ReactElement } from 'react';
-import { DropdownArrayType } from '../Dropdown';
+import { DropdownArrayType } from '../Dropdown/types';
 
-export interface NotificationPropsRow extends NotificationProps {
-    _id: string;
-    observe: number;
-    read?: boolean;
-}
+// export interface _NotificationPropsRow extends NotificationProps {
+//     _id: string;
+//     observe: number;
+//     read?: boolean;
+// }
 
 export interface NotificationProps {
     id: string | number;
@@ -17,6 +17,7 @@ export interface NotificationProps {
     onButtonClick?: Function;
     created?: string;
     notify?: boolean;
+    read?: boolean;
 }
 
 export interface NotificationSettingProps {

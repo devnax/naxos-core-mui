@@ -5,7 +5,8 @@
     "module": "libs/index.js",
     "typings": "libs/index.d.ts",
     "files": [
-        "libs"
+        "libs",
+        "modules"
     ],
     "scripts": {
         "start": "parcel example/index.html --dist-dir ./node_modules/.percel-server --cache-dir ./node_modules/.percel-server/cache",

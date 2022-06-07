@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
 import App from './App'
-import './style.css'
 import { withThemex } from 'mui-themex';
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from "@mui/material/CssBaseline"

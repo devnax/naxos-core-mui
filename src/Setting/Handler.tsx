@@ -113,7 +113,7 @@ class NaxOSCoreSetting extends Store<SettingRowProps> {
     viewCategory(category: string) {
         const first = this.findFirst({ category });
         if (first) {
-            this.preview(first.id)
+            this.preview(first.id);
         }
     }
 
@@ -143,7 +143,7 @@ class NaxOSCoreSetting extends Store<SettingRowProps> {
     }
 
     getCategoryList() {
-        return this.find("@unique category");
+        return this.find('@unique category');
     }
 
     get(id: string) {

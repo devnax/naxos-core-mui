@@ -26,7 +26,7 @@ const ListRender: FC<Props> = ({ items }) => {
                         <ListItem button sx={{ minWidth: 180 }} onClick={(e: any) => onClick && onClick(e)} {...rest}>
                             {icon && <ListItemIcon>{icon}</ListItemIcon>}
                             <ListItemText>
-                                <Box display="flex" justifyContent="space-between" alignItems="center" fontSize={14.5} fontWeight={600}>
+                                <Box display="flex" justifyContent="space-between" alignItems="center" fontSize={14} fontWeight={500}>
                                     <Box>{title}</Box>
                                     {label && <Box>{label}</Box>}
                                 </Box>

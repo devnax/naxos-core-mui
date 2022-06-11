@@ -9,6 +9,8 @@ import ListViewHandler, { ListViewTemplate } from '../src/ListView'
 import IconButton from '@mui/material/IconButton'
 import HomeIcon from '@mui/icons-material/Home';
 
+import { DockView } from '../src/Dock'
+
 
 
 const App = () => {
@@ -73,11 +75,7 @@ const App = () => {
          bottom={0}
          height="100vh"
       >
-         <Box width={60} bgcolor="background.paper">
-            <IconButton >
-               <HomeIcon />
-            </IconButton>
-         </Box>
+         <DockView />
          <Box flex={1}>
             {/* <ListViewTemplate id="profile-list" /> */}
             <button

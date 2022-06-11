@@ -3,6 +3,8 @@ import Dropdown, { DropdownView } from './Dropdown';
 import Layer, { LayerView } from './Layer';
 import Modal from './Modal';
 import Notify, { NotifyView } from './Notify';
+import Setting from './Setting';
+import Notification from './Notification';
 
 export {
    Alert,
@@ -12,5 +14,7 @@ export {
    LayerView,
    Modal,
    Notify,
-   NotifyView
+   NotifyView,
+   Setting,
+   Notification
 };

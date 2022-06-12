@@ -10,6 +10,7 @@ type RenderType = <P>({ id }: { id: string } & P) => ReactNode
 
 export interface AppProps {
    id: string;
+   type?: "os" | string;
    name: string;
    icon: ReactElement<SVGProps<SVGElement>>;
    render: RenderType; //string url
@@ -29,10 +30,10 @@ export interface AppPropsStore extends AppProps {
 
 export interface AppHandlerPublic {
    create: (options: AppProps) => void;
-   run: (id: string) => string;
+   // run: (id: string) => string;
    remove: (id: string) => void;
-   setCloseAlert: (id: string, msg: boolean | Pick<AlertProps, "title" | "content">) => void;
-   getRunnedApp: () => AppPropsStore;
+   // setCloseAlert: (id: string, msg: boolean | Pick<AlertProps, "title" | "content">) => void;
+   // getRunnedApp: () => AppPropsStore;
    getById: (id: string) => AppPropsStore | null;
    getApps: () => AppPropsStore[];
    searchApp: (query: string) => AppPropsStore[];

@@ -1,9 +1,5 @@
 import { ReactElement, SVGProps } from "react";
 import { DropdownArrayType } from "../Dropdown/types";
-import { AppProps } from "../Apps/types";
-
-type AppId = string
-
 
 export interface DockMenuProps {
    width?: number;
@@ -12,16 +8,22 @@ export interface DockMenuProps {
    bgcolor?: string;
 }
 
-export interface DockProps {
-   apps?: AppId[];
-   active?: AppId;
-   optionMenu?: DropdownArrayType[];
-   autoHide?: boolean;
-   location?: "left" | "right" | "top" | "bottom";
-   style?: "full" | "middle" | "separate";
+type IconId = string
 
-   // line=left line, filled=full bg, contained=icon bg, bar=right line
-   // activeIconStyle?: "line" | "filled" | "contained" | "bar";
+
+export interface IconProps {
+   id: string;
+   name: string;
+   icon: ReactElement<SVGProps<SVGElement>>;
+}
+
+
+export interface DockProps {
+   icons?: IconProps[];
+   active?: IconId;
+   contextMenu?: DropdownArrayType[];
+   autoHide?: boolean;
+   placement?: "left" | "right" | "top" | "bottom";
    blur?: number;
    bgimage?: string;
    bgcolor?: string;
@@ -31,13 +33,14 @@ export interface DockProps {
    menuItems?: DropdownArrayType[];
    notificationButton?: Boolean;
 
-   onAppClick?: (appId: AppId) => void;
+   onAppClick?: (iconId: IconId) => void;
    onMenuShow?: () => void;
 }
 
 
 
-export interface DockIconProps extends AppProps {
+export interface DockIconProps extends IconProps {
    active?: boolean;
-   onClick?: (appId: AppId) => void;
+   onClick?: (iconId: IconId) => void;
+   placement?: DockProps['placement']
 }

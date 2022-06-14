@@ -13,27 +13,22 @@ import { DockView } from '../src/Dock'
 import AppHandler from '../src/Apps'
 import WidgetsRoundedIcon from '@mui/icons-material/WidgetsRounded';
 import { DropdownView } from '../src/Dropdown'
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 demoApps()
 
 const Root = () => {
    const apps = AppHandler.getApps()
-   const appsIds = apps.map((app) => app.id)
 
    return <>
-      <Stack
-         direction="row"
-         position="fixed"
-         top={0}
-         left={0}
-         right={0}
-         bottom={0}
+      <Box
          height="100vh"
+         width="100%"
       >
          <DockView
-            apps={appsIds}
+            icons={apps}
             active="Snapchat"
-            notificationButton={true}
-            menuIcon={"https://mui.com/static/images/avatar/2.jpg"}
+            notificationButton={false}
+            menuIcon={<SettingsOutlinedIcon />}
             menuItems={[
                {
                   title: "Apps",
@@ -42,7 +37,7 @@ const Root = () => {
             ]}
          />
 
-      </Stack>
+      </Box>
       <LayerView />
       <DropdownView />
    </>

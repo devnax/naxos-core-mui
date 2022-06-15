@@ -1,5 +1,8 @@
 import { ReactElement, SVGProps } from "react";
 import { DropdownArrayType } from "../Dropdown/types";
+import { AppProps } from "../Apps/types";
+import { ButtonProps } from "@mui/material/Button";
+import { StackProps } from "@mui/material/Stack";
 
 export interface DockMenuProps {
    width?: number;
@@ -8,21 +11,12 @@ export interface DockMenuProps {
    bgcolor?: string;
 }
 
-type IconId = string
-
-
-export interface IconProps {
-   id: string;
-   name: string;
-   icon: ReactElement<SVGProps<SVGElement>>;
-}
+type appId = AppProps['id']
 
 
 export interface DockProps {
-   icons?: IconProps[];
-   active?: IconId;
-   contextMenu?: DropdownArrayType[];
-   autoHide?: boolean;
+   apps?: appId[];
+   active?: appId;
    placement?: "left" | "right" | "top" | "bottom";
    blur?: number;
    bgimage?: string;
@@ -33,14 +27,16 @@ export interface DockProps {
    menuItems?: DropdownArrayType[];
    notificationButton?: Boolean;
 
-   onAppClick?: (iconId: IconId) => void;
+   onAppClick?: (appId: appId) => void;
    onMenuShow?: () => void;
+   onAppContextMenu?: (appId: appId) => false | DropdownArrayType[]
 }
 
 
 
-export interface DockIconProps extends IconProps {
+export interface DockIconProps extends AppProps {
    active?: boolean;
-   onClick?: (iconId: IconId) => void;
-   placement?: DockProps['placement']
+   placement?: DockProps['placement'];
+   buttonProps?: ButtonProps;
+   boxProps?: StackProps;
 }

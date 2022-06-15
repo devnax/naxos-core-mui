@@ -3,8 +3,7 @@ import { DockIconProps } from "../types";
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 
-
-const DockIcon: FC<DockIconProps> = ({ id, active, icon, onClick, placement }) => {
+const DockIcon: FC<DockIconProps> = ({ id, active, icon, placement, buttonProps, boxProps }) => {
 
    let activeStyle: any = {
       top: 16,
@@ -44,7 +43,7 @@ const DockIcon: FC<DockIconProps> = ({ id, active, icon, onClick, placement }) =
 
    return (
       <Stack
-         onClick={() => onClick && onClick(id)}
+         {...boxProps}
          alignItems="center"
          justifyContent="center"
          height={50}
@@ -68,11 +67,9 @@ const DockIcon: FC<DockIconProps> = ({ id, active, icon, onClick, placement }) =
          }}
       >
          <Button
-            // display="inline-flex"
-            // justifyContent="center"
-            // p={.6}
-            // borderRadius={1}
-            // height={40}
+            {...buttonProps}
+
+
             sx={{
                p: 0,
                borderRadius: 0,

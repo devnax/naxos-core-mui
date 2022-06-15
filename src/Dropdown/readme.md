@@ -12,8 +12,14 @@ import { DropdownView } from 'nxos/Dropdown';
 ```jsx
 import Dropdown from 'nxos/Dropdown';
 
-Dropdown.show(HTMLElement, ReactElement | ArrayItems, MuiPopperProps);
+type options = MuiPopperProps & {
+  boxProps: BoxProps
+}
+
+Dropdown.show(HTMLElement, ReactElement | ArrayItems, options);
+Dropdown.showContextMenu(event, content: ReactElement | DropdownArrayType[], props?: PopperProps);
 Dropdown.hide();
+Dropdown.isShow(); // return boolean
 ```
 
 ### ArrayItems

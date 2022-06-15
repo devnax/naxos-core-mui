@@ -17,13 +17,21 @@ const ListRender: FC<Props> = ({ items }) => {
             sx={{
                 borderRadius: 2,
                 boxShadow: 5,
-                bgcolor: 'background.paper'
+                bgcolor: 'background.paper',
+                p: .5
+            }}
+            onContextMenu={(e: any) => {
+                e.preventDefault()
             }}
         >
             {items.map(({ title, label, icon, divider, onClick, onClose, ...rest }: DropdownArrayType, idx: number) => {
                 return (
                     <Box key={idx}>
-                        <ListItem button sx={{ minWidth: 180 }} onClick={(e: any) => onClick && onClick(e)} {...rest}>
+                        <ListItem
+                            button
+                            onClick={(e: any) => onClick && onClick(e)}
+                            {...rest}
+                        >
                             {icon && <ListItemIcon>{icon}</ListItemIcon>}
                             <ListItemText>
                                 <Box display="flex" justifyContent="space-between" alignItems="center" fontSize={14} fontWeight={500}>

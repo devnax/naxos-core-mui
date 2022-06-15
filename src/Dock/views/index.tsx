@@ -11,11 +11,12 @@ import NotificationsIcon from '@mui/icons-material/NotificationsRounded';
 import IconButton from '@mui/material/IconButton'
 import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
+import AppHandler from '../../Apps'
 
 
 const DockPanel: FC<DockProps> = (props) => {
    const {
-      icons,
+      apps,
       placement,
       bgimage,
       bgcolor,
@@ -25,6 +26,7 @@ const DockPanel: FC<DockProps> = (props) => {
       notificationButton,
       active,
       tooltip,
+      onAppContextMenu,
       onAppClick,
       onMenuShow
    } = props
@@ -37,7 +39,7 @@ const DockPanel: FC<DockProps> = (props) => {
          _placement = "left"
          break;
       case 'top':
-         _placement = "bottom"
+         _placement = "top"
          break;
       case 'bottom':
          _placement = "top"
@@ -49,6 +51,9 @@ const DockPanel: FC<DockProps> = (props) => {
          height={isHorigental ? 50 : "100%"}
          width={isHorigental ? "100%" : 50}
          bgcolor={bgcolor || "background.paper"}
+         onContextMenu={(e: any) => {
+            e.preventDefault()
+         }}
       >
          <BlurBox
             bgImage={bgimage}
@@ -73,14 +78,14 @@ const DockPanel: FC<DockProps> = (props) => {
                      borderRadius={isHorigental ? '0 24px 24px 0' : '0 0 24px 24px'}
                   >
                      {
-                        icons?.map(icon => {
-                           if (icon) {
-
+                        apps?.map(appId => {
+                           const app = AppHandler.getById(appId)
+                           if (app) {
                               if (isTooltip) {
                                  return <Tooltip
-                                    key={icon.id}
+                                    key={app.id}
                                     placement={_placement}
-                                    title={icon.name}
+                                    title={app.name}
                                     arrow
                                     PopperProps={{
                                        sx: {
@@ -91,18 +96,64 @@ const DockPanel: FC<DockProps> = (props) => {
                                     <Box>
                                        <DockIcon
                                           placement={placement}
-                                          {...icon}
-                                          active={icon.id === active}
-                                          onClick={onAppClick}
+                                          {...app}
+                                          active={app.id === active}
+                                          buttonProps={{
+                                             onClick: () => {
+                                                onAppClick && onAppClick(app.id)
+                                             },
+                                             onContextMenu: (e: any) => {
+                                                e.preventDefault()
+                                                if (typeof onAppContextMenu === 'function') {
+                                                   const menu = onAppContextMenu(app.id)
+                                                   if (menu) {
+                                                      Dropdown.showContextMenu(e, menu, {
+                                                         boxProps: {
+                                                            sx: {
+                                                               '& .MuiListItem-button': {
+                                                                  p: .4,
+                                                                  px: 1.5,
+                                                                  "&>div": { m: 0 }
+                                                               }
+                                                            }
+                                                         }
+                                                      })
+                                                   }
+                                                }
+                                             }
+                                          }}
                                        />
                                     </Box>
                                  </Tooltip>
                               }
-                              return <Box key={icon.id}>
+                              return <Box key={app.id}>
                                  <DockIcon
-                                    {...icon}
-                                    active={icon.id === active}
-                                    onClick={onAppClick}
+                                    {...app}
+                                    active={app.id === active}
+                                    buttonProps={{
+                                       onClick: () => {
+                                          onAppClick && onAppClick(app.id)
+                                       },
+                                       onContextMenu: (e: any) => {
+                                          e.preventDefault()
+                                          if (typeof onAppContextMenu === 'function') {
+                                             const menu = onAppContextMenu(app.id)
+                                             if (menu) {
+                                                Dropdown.showContextMenu(e, menu, {
+                                                   boxProps: {
+                                                      sx: {
+                                                         '& .MuiListItem-button': {
+                                                            p: .4,
+                                                            px: 1.5,
+                                                            "&>div": { m: 0 }
+                                                         }
+                                                      }
+                                                   }
+                                                })
+                                             }
+                                          }
+                                       }
+                                    }}
                                  />
                               </Box>
                            }
@@ -173,7 +224,6 @@ const DockPanel: FC<DockProps> = (props) => {
                         </IconButton>
                      }
                   </Box>
-
                </Stack>
             </Stack>
          </BlurBox>

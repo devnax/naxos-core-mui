@@ -3,11 +3,11 @@ import Grow from '@mui/material/Grow';
 import Popper from '@mui/material/Popper';
 import Box from '@mui/material/Box';
 import { withMemo, withStore } from 'state-range';
-import Handler, { DropdownPublicHandler } from './Handler';
+import Handler, { DropdownHandler } from './Handler';
 import ListRender from './ListRender';
 import { DropdownProps, DropdownRowProps } from './types';
 
-export default DropdownPublicHandler;
+export default DropdownHandler;
 
 interface DropdownItemViewProps {
     dropdown: DropdownProps & DropdownRowProps;
@@ -15,6 +15,7 @@ interface DropdownItemViewProps {
 
 const _DropdownItemView = ({ dropdown }: DropdownItemViewProps) => {
     const { _id, active, anchor, content, props } = dropdown;
+    const { boxProps, ...popperProps } = props
 
     let render: any = content;
     if (Array.isArray(content)) {
@@ -22,7 +23,7 @@ const _DropdownItemView = ({ dropdown }: DropdownItemViewProps) => {
     }
 
     return (
-        <Popper anchorEl={anchor} placement="right-start" transition disablePortal style={{ zIndex: 2000 }} {...(props || {})} open={active}>
+        <Popper anchorEl={anchor} placement="right-start" transition disablePortal style={{ zIndex: 2000 }} {...(popperProps || {})} open={active}>
             {({ TransitionProps, placement }) => (
                 <Grow
                     {...TransitionProps}
@@ -30,7 +31,7 @@ const _DropdownItemView = ({ dropdown }: DropdownItemViewProps) => {
                         transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom'
                     }}
                 >
-                    <Box data-dropdown={_id}>{render}</Box>
+                    <Box minWidth={170} {...boxProps} data-dropdown={_id}>{render}</Box>
                 </Grow>
             )}
         </Popper>

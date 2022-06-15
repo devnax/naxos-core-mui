@@ -1,15 +1,15 @@
-import AppHandler from './AppHandler'
+import Handler from './AppHandler'
 import { AppHandlerPublic } from './types'
 
-const AppHandlerPublic: AppHandlerPublic = {
-   create: AppHandler.create.bind(AppHandler),
-   // run: AppHandler.run.bind(AppHandler),
-   remove: AppHandler.remove.bind(AppHandler),
-   // setCloseAlert: AppHandler.setCloseAlert.bind(AppHandler),
-   // getRunnedApp: AppHandler.getRunnedApp.bind(AppHandler),
-   getById: AppHandler.getById.bind(AppHandler),
-   getApps: AppHandler.getApps.bind(AppHandler),
-   searchApp: AppHandler.searchApp.bind(AppHandler)
+const AppHandler: AppHandlerPublic = {
+   create: Handler.create.bind(Handler),
+   // run: Handler.run.bind(Handler),
+   remove: Handler.remove.bind(Handler),
+   // setCloseAlert: Handler.setCloseAlert.bind(Handler),
+   // getRunnedApp: Handler.getRunnedApp.bind(Handler),
+   getById: Handler.getById.bind(Handler),
+   getApps: Handler.getApps.bind(Handler),
+   searchApp: Handler.searchApp.bind(Handler)
 }
 
-export default AppHandlerPublic
+export default AppHandler

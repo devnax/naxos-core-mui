@@ -1,12 +1,12 @@
 import { ReactElement } from 'react';
 import { Store } from 'state-range';
 import { DropdownArrayType } from './types';
-import { PopperProps } from './types';
+import { OptionsProps } from './types';
 
 class NaxOSCoreDropdown extends Store {
     anchorAttrName = 'data-dropdown-opened';
 
-    show(anchor: HTMLElement, content: ReactElement | DropdownArrayType[], props?: PopperProps) {
+    show(anchor: HTMLElement, content: ReactElement | DropdownArrayType[], props?: OptionsProps) {
         this.delete({ active: false });
         const has: any = anchor.hasAttribute(this.anchorAttrName);
         if (has) {
@@ -26,7 +26,8 @@ class NaxOSCoreDropdown extends Store {
         anchor.setAttribute(this.anchorAttrName, inserted._id);
     }
 
-    showContextMenu(event: MouseEvent, content: ReactElement | DropdownArrayType[], props?: PopperProps) {
+    showContextMenu(event: MouseEvent, content: ReactElement | DropdownArrayType[], props?: OptionsProps) {
+        this.hide()
         const ctxmenu = document.getElementById('ctx-menu');
         event.preventDefault();
         if (ctxmenu) {
@@ -66,14 +67,14 @@ const handler = new NaxOSCoreDropdown();
 
 export default handler;
 
-interface DropdownPublicHandlerTypes {
-    show: (anchor: HTMLElement, content: ReactElement | DropdownArrayType[], props?: PopperProps) => void;
-    showContextMenu: (event: MouseEvent, content: ReactElement | DropdownArrayType[], props?: PopperProps) => void;
+interface DropdownHandlerTypes {
+    show: (anchor: HTMLElement, content: ReactElement | DropdownArrayType[], props?: OptionsProps) => void;
+    showContextMenu: (event: MouseEvent, content: ReactElement | DropdownArrayType[], props?: OptionsProps) => void;
     isShow: () => boolean;
     hide: () => void;
 }
 
-export const DropdownPublicHandler: DropdownPublicHandlerTypes = {
+export const DropdownHandler: DropdownHandlerTypes = {
     showContextMenu: handler.showContextMenu.bind(handler),
     show: handler.show.bind(handler),
     isShow: handler.isShow.bind(handler),

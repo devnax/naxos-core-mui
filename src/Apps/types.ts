@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, SVGProps } from "react";
+import { ReactElement, SVGProps } from "react";
 import { AlertProps } from "../Alert";
 import { DropdownArrayType } from "../Dropdown/types";
 
@@ -6,7 +6,7 @@ export interface AppPermissionType {
    [key: string]: boolean;
 }
 
-type RenderType = <P>({ id }: { id: string } & P) => ReactNode
+type RenderType = ({ id }: { id: string }) => ReactElement
 
 export interface AppProps {
    id: string;

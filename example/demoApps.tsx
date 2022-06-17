@@ -27,12 +27,25 @@ export default async () => {
 
    List.addItems('list', [
       {
+         id: "deshboard",
+         title: "Deshboard",
+         icon: <ArchiveRoundedIcon />,
+         render: () => <Box p={2} bgcolor="red">Red</Box>
+      },
+      {
+         id: "pages",
+         title: "Pages",
+         icon: <GraphicEqIcon />,
+         render: () => <Box p={2} bgcolor="red">Red</Box>
+      },
+      {
          id: "users",
          title: "Users",
          icon: <SettingsVoiceRoundedIcon />,
          render: () => <Box p={2} bgcolor="red">Red</Box>
       },
       {
+         heading: "General",
          id: "posts",
          title: "Posts",
          icon: <ParkRoundedIcon />,
@@ -79,7 +92,7 @@ export default async () => {
                      <Typography variant="h6">Widget List</Typography>
                   </Box>}
                >
-                  <ListView id="list" active="another" />
+                  <ListView listId="list" active="another" />
                </SidebarView>
                <Box flex={1} height="100%">
                   <ContentView id="list" />

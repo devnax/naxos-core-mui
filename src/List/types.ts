@@ -11,6 +11,7 @@ export interface ListItemProps {
    parentId?: ID | false;
    title: string;
    label?: string;
+   heading?: string | ReactElement;
    icon?: ReactElement<SVGProps<SVGElement>>;
    render?: RenderType; //string url
 }
@@ -34,6 +35,7 @@ export interface PublicHandlerInterface {
 
 
 export interface ListViewProps extends ListProps {
-   id: ID;
+   listId: ID;
    active?: ID;
+   button?: boolean
 }

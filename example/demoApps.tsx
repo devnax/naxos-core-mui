@@ -41,6 +41,7 @@ export default async () => {
       {
          id: "users",
          title: "Users",
+         label: "20+",
          icon: <SettingsVoiceRoundedIcon />,
          render: () => <Box p={2} bgcolor="red">Red</Box>
       },
@@ -61,7 +62,7 @@ export default async () => {
       {
          id: "another",
          title: "Another",
-         parentId: "add_post",
+         parentId: "posts",
          icon: <BluetoothAudioRoundedIcon />,
          render: () => <Box p={2} bgcolor="green">Green</Box>
       },
@@ -92,7 +93,9 @@ export default async () => {
                      <Typography variant="h6">Widget List</Typography>
                   </Box>}
                >
-                  <ListView listId="list" active="another" />
+                  <ListView listId="list" active="another" onItemClick={(id) => {
+                     console.log(id)
+                  }} />
                </SidebarView>
                <Box flex={1} height="100%">
                   <ContentView id="list" />

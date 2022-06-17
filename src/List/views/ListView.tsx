@@ -1,45 +1,72 @@
 import * as React from 'react'
 import Box from "@mui/material/Box";
 import { ListViewProps, ListItemStoreProps, ID } from '../types'
-import { withMemo, withStore } from 'state-range';
+import { withStore } from 'state-range'
 import Handler from '../Handler'
 
+import Chip from '@mui/material/Chip'
 import Typography from '@mui/material/Typography'
 import List, { ListProps } from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemIcon from '@mui/material/ListItemIcon'
 
+import ArrowDownIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import ArrowUpIcon from '@mui/icons-material/KeyboardArrowUpRounded';
+
 
 interface ItemRenderProps extends ListItemStoreProps {
-   active?: ID;
-   button?: boolean
+   active: boolean;
+   button?: boolean;
+   dept: number;
+   collaps: boolean;
+   onClick: Function;
 }
 
-const ItemRender = withMemo((props: ItemRenderProps) => {
-   const { button, active, id, icon, title, label, heading } = props
+const ItemRender = (props: ItemRenderProps) => {
+   const { collaps, dept, button, active, icon, title, label, heading, onClick } = props
    const btn: any = button === undefined || button ? true : false
+   const isChild = dept > 0
 
    return (
       <>
          {
-            typeof heading === 'string' ? <Typography variant="h6" fontWeight={500} sx={{ opacity: .5 }} mt={1} mb={.6}>{heading}</Typography> : heading
+            typeof heading === 'string' ? <Typography variant="h6" fontWeight={500} sx={{ opacity: .5 }} mt={2} mb={1}>{heading}</Typography> : heading
          }
          <ListItem
             button={btn}
-            sx={{ borderRadius: 1, p: .4, px: 1 }}
-            selected={active === id}
+            onClick={() => onClick()}
+            sx={{
+               borderRadius: 2,
+               p: .4,
+               px: 1,
+               bgcolor: isChild ? "transparent!important" : "inherit",
+               color: isChild && active ? "primary.main" : "inherit"
+            }}
+            selected={active}
          >
-            {icon && <ListItemIcon sx={{ minWidth: 35 }}>{icon}</ListItemIcon>}
-            <ListItemText>
-               <Typography variant="body1" fontSize={15} fontWeight={500}>
-                  {title}
+            {icon && <ListItemIcon sx={{
+               minWidth: 35,
+               "& svg": {
+                  fontSize: 23,
+                  color: active ? "primary.main" : "inherit"
+               }
+            }}>{icon}</ListItemIcon>}
+            {title && <ListItemText>
+               <Typography component="div" variant="body1" fontSize={14.5} fontWeight={500}>
+                  {title} {label && <Chip label={label} size="small" sx={{ m: 0, height: 18, "& span": { p: .6, fontSize: 12, } }} />}
                </Typography>
-            </ListItemText>
+            </ListItemText>}
+            {collaps ? <>
+               {
+                  active ? <ArrowUpIcon /> : <ArrowDownIcon />
+               }
+            </> : ""}
+
          </ListItem>
       </>
    )
-}, ({ observe }: any) => [observe])
+}
 
 interface ListPropsTypes extends ListProps {
    listId: ID;
@@ -47,25 +74,39 @@ interface ListPropsTypes extends ListProps {
    dept: number;
    items: ListItemStoreProps[];
    button?: boolean;
+   onItemClick?: Function;
 }
 
-const ListRender = ({ button, active, dept, listId, items, ...listProps }: ListPropsTypes) => {
+const ListRender = ({ onItemClick, button, active, dept, listId, items, ...listProps }: ListPropsTypes) => {
 
-   return <List dense {...listProps} sx={{ ml: dept, ...(listProps?.sx || {}) }}>
+
+
+   return <List dense {...listProps} sx={{ ml: dept, p: 0, ...(listProps?.sx || {}) }}>
       {
          items.map((item) => {
             const childs = Handler.getChilds(listId, item.id)
+            let isActive = active === item.id
 
-            return <Box key={item._id}>
-               <ItemRender active={active} {...item} />
-               {childs.length ? <ListRender button={button} active={active} dept={dept + 1} listId={listId} items={childs} {...listProps} /> : ""}
+            if (!isActive && childs.length) {
+               const child = Handler.findFirst({ id: active }) // maybe child
+               if (child && child.parentId === item.id) {
+                  isActive = true
+               }
+            }
+
+            return <Box key={item?._id}>
+               <ItemRender onClick={() => {
+                  onItemClick && onItemClick(item.id)
+               }} collaps={childs.length ? true : false} dept={dept} active={isActive} {...item} />
+
+               {(childs.length && isActive) ? <ListRender onItemClick={onItemClick} button={button} active={active} dept={dept + 1} listId={listId} items={childs} {...listProps} /> : ""}
             </Box>
          })
       }
    </List>
 }
 
-const ListView = ({ active, listId, ...ListProps }: ListViewProps) => {
+const ListView = ({ onItemClick, active, listId, ...ListProps }: ListViewProps) => {
 
    const listItems = Handler.getItems(listId)
    if (!listItems.length) {
@@ -74,7 +115,13 @@ const ListView = ({ active, listId, ...ListProps }: ListViewProps) => {
 
    return (
       <Box>
-         <ListRender active={active} dept={0} listId={listId} items={listItems} {...ListProps} />
+         <ListRender
+            onItemClick={onItemClick}
+            active={active}
+            dept={0}
+            listId={listId}
+            items={listItems} {...ListProps}
+         />
       </Box>
    )
 }

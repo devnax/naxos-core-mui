@@ -18,8 +18,8 @@ export interface ListItemProps {
 
 
 export interface ListItemStoreProps extends ListItemProps {
-   _id: string;
-   observe: number;
+   _id?: string;
+   observe?: number;
    listId: ID;
 }
 
@@ -37,5 +37,6 @@ export interface PublicHandlerInterface {
 export interface ListViewProps extends ListProps {
    listId: ID;
    active?: ID;
-   button?: boolean
+   button?: boolean;
+   onItemClick?: (itemId: ID) => void;
 }

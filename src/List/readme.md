@@ -1,7 +1,7 @@
 
 ```jsx
 
-import List from 'naxos-core'
+import List, {ListView} from 'naxos-core'
 
 export interface ListItemProps {
    id: ID;
@@ -17,5 +17,19 @@ List.addItems(listId, ListItemProps[])
 List.getItems(listId)
 List.getChilds(listId, parentId)
 List.deleteList(listId)
+
+
+/// 
+
+interface ListViewProps extends ListProps {
+   listId: ID;
+   active?: ID;
+   button?: boolean;
+   onItemClick?: (itemId: ID) => void;
+}
+
+<ListView 
+   {...ListViewProps}
+/>
 
 ```

@@ -5,6 +5,15 @@ class NaxOSListHandler extends Store<ListItemStoreProps> {
    addItems(listId: ID, items: ListItemProps[]) {
       dispatch(() => {
          for (let item of items) {
+            if (item.parentId) {
+               const isParent = this.findFirst({ id: item.parentId })
+               if (isParent && isParent.parentId) {
+                  continue;
+               } else if (!isParent) {
+                  continue;
+               }
+            }
+
             this.insert({ parentId: false, ...item, listId })
          }
       })

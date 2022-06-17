@@ -1,4 +1,4 @@
-import React, { useEffect, FC, MouseEvent } from 'react';
+import * as React from 'react';
 import { withStore } from 'state-range';
 import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -34,11 +34,11 @@ const CloseButtonView = () => {
     );
 };
 
-const Item: FC<LayerItemProps> = ({ layer, index }) => {
+const Item: React.FC<LayerItemProps> = ({ layer, index }) => {
     const theme = useTheme();
     const { content, opacity, zIndex, closeButton, props, animation, onOpen, onClose, onClickLayer, blur, gradient, bgImage } = layer;
 
-    useEffect(() => {
+    React.useEffect(() => {
         onOpen && onOpen();
         return () => {
             onClose && onClose();
@@ -84,7 +84,7 @@ const Item: FC<LayerItemProps> = ({ layer, index }) => {
                 right={0}
                 zIndex={(zIndex || 1501) + index}
                 overflow="hidden"
-                onClick={(e: MouseEvent<HTMLDivElement>) => {
+                onClick={(e: React.MouseEvent<HTMLDivElement>) => {
                     onClickLayer && onClickLayer(e);
                     props?.onClick && props.onClick(e);
                 }}

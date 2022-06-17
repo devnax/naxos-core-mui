@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import { AlertProps } from './types';
@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Handler from './';
 
-const AlertView: FC<AlertProps> = ({ type, title, content, icon, onClick, buttonText, centerContent }) => {
+const AlertView: React.FC<AlertProps> = ({ type, title, content, icon, onClick, buttonText, centerContent }) => {
     const text: [string, string] = buttonText || ['OK', 'CANCEL'];
     return (
         <Stack borderRadius={2} boxShadow={5} bgcolor="background.paper" p={2} pb={1} justifyContent="space-between">

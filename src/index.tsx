@@ -5,6 +5,7 @@ import Modal from './Modal';
 import Notify, { NotifyView } from './Notify';
 import Setting from './Setting';
 import Notification from './Notification';
+import List, { ListView } from './List';
 
 export {
    Alert,
@@ -16,5 +17,7 @@ export {
    Notify,
    NotifyView,
    Setting,
-   Notification
+   Notification,
+   List,
+   ListView
 };

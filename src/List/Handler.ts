@@ -3,10 +3,6 @@ import { ID, ListItemProps, ListItemStoreProps } from './types'
 
 class NaxOSListHandler extends Store<ListItemStoreProps> {
    addItems(listId: ID, items: ListItemProps[]) {
-      const exists = this.count({ listId })
-      if (exists) {
-         throw new Error(`List Id Already Exists ${listId}`)
-      }
       dispatch(() => {
          for (let item of items) {
             this.insert({ parentId: false, ...item, listId })

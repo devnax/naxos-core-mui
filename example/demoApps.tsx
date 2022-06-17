@@ -21,17 +21,45 @@ import { SidebarView } from '../src/Sidebar'
 import { Typography } from "@mui/material"
 import ListViewHandler, { ListViewTemplate, ListItemsView, ContentView } from '../src/ListView'
 
+import List, { ListView } from '../src/List'
+
 export default async () => {
 
-   ListViewHandler.setList('list', [
+   List.addItems('list', [
       {
+         id: "users",
          title: "Users",
-         render: <Box p={2} bgcolor="red">Red</Box>
+         icon: <SettingsVoiceRoundedIcon />,
+         render: () => <Box p={2} bgcolor="red">Red</Box>
       },
       {
+         id: "posts",
          title: "Posts",
-         render: <Box p={2} bgcolor="green">Green</Box>
-      }
+         icon: <ParkRoundedIcon />,
+         render: () => <Box p={2} bgcolor="green">Green</Box>
+      },
+      {
+         id: "add_post",
+         title: "Add New Post",
+         parentId: "posts",
+         icon: <ExtensionRoundedIcon />,
+         render: () => <Box p={2} bgcolor="green">Green</Box>
+      },
+      {
+         id: "another",
+         title: "Another",
+         parentId: "add_post",
+         icon: <BluetoothAudioRoundedIcon />,
+         render: () => <Box p={2} bgcolor="green">Green</Box>
+      },
+      {
+         id: "another",
+         title: "User Another",
+         parentId: "users",
+         icon: <BluetoothAudioRoundedIcon />,
+         render: () => <Box p={2} bgcolor="green">Green</Box>
+      },
+
    ])
 
 
@@ -51,7 +79,7 @@ export default async () => {
                      <Typography variant="h6">Widget List</Typography>
                   </Box>}
                >
-                  <ListItemsView id="list" />
+                  <ListView id="list" active="another" />
                </SidebarView>
                <Box flex={1} height="100%">
                   <ContentView id="list" />

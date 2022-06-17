@@ -1,4 +1,5 @@
 import { ReactElement, SVGProps } from "react";
+import { ListProps } from "@mui/material";
 
 
 export type ID = string
@@ -16,8 +17,9 @@ export interface ListItemProps {
 
 
 export interface ListItemStoreProps extends ListItemProps {
+   _id: string;
+   observe: number;
    listId: ID;
-
 }
 
 
@@ -26,4 +28,12 @@ export interface PublicHandlerInterface {
    getItems: (listId: ID) => ListItemStoreProps[];
    getChilds: (listId: ID, parentId: ID) => ListItemStoreProps[];
    deleteList: (listId: ID) => void;
+}
+
+
+
+
+export interface ListViewProps extends ListProps {
+   id: ID;
+   active?: ID;
 }

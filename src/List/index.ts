@@ -1,5 +1,10 @@
 import ListHandler from './Handler'
 import { PublicHandlerInterface } from './types'
+import ListView from './views/ListView'
+
+export {
+   ListView
+}
 
 const Handler: PublicHandlerInterface = {
    addItems: ListHandler.addItems.bind(ListHandler),

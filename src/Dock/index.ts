@@ -1,5 +1,3 @@
-import DockView from "./views";
+import DockView from './views';
 
-export {
-   DockView
-}
+export { DockView };

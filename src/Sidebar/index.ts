@@ -1,5 +1,3 @@
-import SidebarView from "./views";
+import SidebarView from './views';
 
-export {
-   SidebarView
-}
+export { SidebarView };

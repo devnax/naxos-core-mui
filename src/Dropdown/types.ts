@@ -11,14 +11,14 @@ export interface DropdownRowProps {
 export type PopperProps = Omit<PProps, 'open'>;
 
 export interface OptionsProps extends PopperProps {
-    boxProps?: BoxProps
+    boxProps?: BoxProps;
 }
 
 export interface DropdownProps {
     active: boolean;
     anchor: HTMLElement;
     content: ReactElement | DropdownArrayType[];
-    props: OptionsProps
+    props: OptionsProps;
 }
 
 export type DropdownArrayType = ListItemButtonProps & {

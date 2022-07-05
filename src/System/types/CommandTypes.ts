@@ -1,11 +1,8 @@
-
-
 export interface CommandsType {
-   name: string;
-   options: CommandOptionType;
+    name: string;
+    options: CommandOptionType;
 }
 
-
 export interface CommandOptionType {
-   [key: string]: Function
+    [key: string]: Function;
 }

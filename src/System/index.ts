@@ -1,7 +1,4 @@
-import SystemVars from './handlers/SystemVars'
-import Commands from './handlers/Commands'
+import SystemVars from './handlers/SystemVars';
+import Commands from './handlers/Commands';
 
-export {
-   SystemVars,
-   Commands
-}
+export { SystemVars, Commands };

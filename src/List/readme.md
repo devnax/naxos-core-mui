@@ -1,4 +1,3 @@
-
 ```jsx
 
 import List, {ListView} from 'naxos-core'
@@ -19,7 +18,7 @@ List.getChilds(listId, parentId)
 List.deleteList(listId)
 
 
-/// 
+///
 
 interface ListViewProps extends ListProps {
    listId: ID;
@@ -28,7 +27,7 @@ interface ListViewProps extends ListProps {
    onItemClick?: (itemId: ID) => void;
 }
 
-<ListView 
+<ListView
    {...ListViewProps}
 />
 

@@ -18,20 +18,16 @@ const ListRender: FC<Props> = ({ items }) => {
                 borderRadius: 2,
                 boxShadow: 5,
                 bgcolor: 'background.paper',
-                p: .5
+                p: 0.5
             }}
             onContextMenu={(e: any) => {
-                e.preventDefault()
+                e.preventDefault();
             }}
         >
             {items.map(({ title, label, icon, divider, onClick, onClose, ...rest }: DropdownArrayType, idx: number) => {
                 return (
                     <Box key={idx}>
-                        <ListItem
-                            button
-                            onClick={(e: any) => onClick && onClick(e)}
-                            {...rest}
-                        >
+                        <ListItem button onClick={(e: any) => onClick && onClick(e)} {...rest}>
                             {icon && <ListItemIcon>{icon}</ListItemIcon>}
                             <ListItemText>
                                 <Box display="flex" justifyContent="space-between" alignItems="center" fontSize={14} fontWeight={500}>

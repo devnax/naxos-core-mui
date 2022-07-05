@@ -27,7 +27,7 @@ class NaxOSCoreDropdown extends Store {
     }
 
     showContextMenu(event: MouseEvent, content: ReactElement | DropdownArrayType[], props?: OptionsProps) {
-        this.hide()
+        this.hide();
         const ctxmenu = document.getElementById('ctx-menu');
         event.preventDefault();
         if (ctxmenu) {

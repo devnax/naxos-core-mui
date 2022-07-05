@@ -1,14 +1,5 @@
-
-
 ```tsx
+import ScreenView from 'naxos-core/Screen';
 
-import ScreenView from 'naxos-core/Screen'
-
-<ScreenView
-   appId=""
-   header={ReactElement}
-   footer={ReactElement}
-   {...StackProps}
-/>
-
+<ScreenView appId="" header={ReactElement} footer={ReactElement} {...StackProps} />;
 ```

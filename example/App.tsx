@@ -5,7 +5,6 @@ import Notify, { NotifyView } from '../src/Notify'
 import { alpha, useTheme } from '@mui/material/styles';
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
-import ListViewHandler, { ListViewTemplate } from '../src/ListView'
 import IconButton from '@mui/material/IconButton'
 import HomeIcon from '@mui/icons-material/Home';
 import demoApps from './demoApps';
@@ -41,6 +40,7 @@ const Root = () => {
       >
          <DockView
             apps={apps.map((app) => app.id)}
+            tooltip
             active="Snapchat"
             notificationButton={false}
             menuIcon={<SettingsOutlinedIcon />}

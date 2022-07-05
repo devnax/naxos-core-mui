@@ -19,7 +19,6 @@ import SignalWifi3BarRoundedIcon from '@mui/icons-material/SignalWifi3BarRounded
 
 import { SidebarView } from '../src/Sidebar'
 import { Typography } from "@mui/material"
-import ListViewHandler, { ListViewTemplate, ListItemsView, ContentView } from '../src/ListView'
 
 import List, { ListView } from '../src/List'
 
@@ -76,7 +75,6 @@ export default async () => {
 
    ])
 
-
    AppHandler.create({
       id: "Snapchat",
       name: "Snap Chat",
@@ -98,7 +96,6 @@ export default async () => {
                   }} />
                </SidebarView>
                <Box flex={1} height="100%">
-                  <ContentView id="list" />
                </Box>
             </Stack>
          )

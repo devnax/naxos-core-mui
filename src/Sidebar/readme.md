@@ -1,17 +1,13 @@
 ### Api Useg
 
-
 ## Methods
 
 ```tsx
+import { SidebarView } from 'nxos/Sidebar';
 
-import {SidebarView} from 'nxos/Sidebar'
-
-<SidebarView
-   header={ReactElement}
-   footer={ReactElement}
->...</SidebarView>
-
+<SidebarView header={ReactElement} footer={ReactElement}>
+    ...
+</SidebarView>;
 ```
 
 ### TS Types

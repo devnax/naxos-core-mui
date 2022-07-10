@@ -15,7 +15,7 @@ interface DropdownItemViewProps {
 
 const _DropdownItemView = ({ dropdown }: DropdownItemViewProps) => {
     const { _id, active, anchor, content, props } = dropdown;
-    const { boxProps, ...popperProps } = props;
+    const { boxProps, ...popperProps } = props || {};
 
     let render: any = content;
     if (Array.isArray(content)) {
@@ -31,7 +31,7 @@ const _DropdownItemView = ({ dropdown }: DropdownItemViewProps) => {
                         transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom'
                     }}
                 >
-                    <Box minWidth={170} {...boxProps} data-dropdown={_id}>
+                    <Box minWidth={170} {...(boxProps || {})} data-dropdown={_id}>
                         {render}
                     </Box>
                 </Grow>

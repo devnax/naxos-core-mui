@@ -11,7 +11,7 @@ import demoApps from './demoApps';
 import { DockView } from '../src/Dock'
 import AppHandler from '../src/Apps'
 import WidgetsRoundedIcon from '@mui/icons-material/WidgetsRounded';
-import { DropdownView } from '../src/Dropdown'
+import Dropdown, { DropdownView } from '../src/Dropdown'
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import Screen from '../src/Screen'
 
@@ -25,7 +25,23 @@ import LockIcon from '@mui/icons-material/LockRounded';
 import FinderIcon from '@mui/icons-material/YoutubeSearchedForRounded';
 import AboutOSIcon from '@mui/icons-material/InfoRounded';
 import NotificationIcon from '@mui/icons-material/NotificationsActiveRounded';
+import Widget from '../src/Widget'
 
+Widget.create({
+   id: "google-map",
+   title: "Google Map",
+   render: <div>Nice</div>,
+   icon: <FinderIcon />,
+   optionMenu: [
+      { title: "ok" }
+   ]
+})
+
+Widget.create({
+   id: "1",
+   title: "Facebook",
+   render: <div>Nice</div>
+})
 
 demoApps()
 
@@ -62,6 +78,10 @@ const Root = () => {
                {
                   title: "Widgets",
                   icon: <WidgetsIcon sx={{ fontSize: '24px!important' }} />,
+                  onClick: () => {
+                     Widget.open();
+                     Dropdown.hide()
+                  }
                },
 
                {

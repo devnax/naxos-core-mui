@@ -1,7 +1,7 @@
 import Handler from './AppHandler';
 import { AppHandlerPublic } from './types';
 
-const AppHandler: AppHandlerPublic = {
+const Apps: AppHandlerPublic = {
     create: Handler.create.bind(Handler),
     // run: Handler.run.bind(Handler),
     remove: Handler.remove.bind(Handler),
@@ -12,4 +12,4 @@ const AppHandler: AppHandlerPublic = {
     searchApp: Handler.searchApp.bind(Handler)
 };
 
-export default AppHandler;
+export default Apps;

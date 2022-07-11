@@ -1,12 +1,10 @@
-
-
 ```js
 
 import {OSView, ThemexView, System} from 'system'
 
 
 // OS Layout
-<OSView 
+<OSView
    dockProps={DockProps}
    screenProps={ScreenProps}
    runnedAppID=""

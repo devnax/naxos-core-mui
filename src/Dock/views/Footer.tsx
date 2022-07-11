@@ -39,47 +39,50 @@ const DockFooter: FC<DockProps> = (props) => {
                 </IconButton>
             )}
 
-            <Box
-                onClick={(e: any) => {
-                    if (menuItems) {
-                        Dropdown.show(e.currentTarget, menuItems, {
-                            sx: {
-                                '& svg': {
-                                    fontSize: '21px!important'
+            {
+                menuItems && <Box
+                    onClick={(e: any) => {
+                        if (menuItems) {
+                            Dropdown.show(e.currentTarget, menuItems, {
+                                sx: {
+                                    '& svg': {
+                                        fontSize: '21px!important'
+                                    },
+                                    '& .MuiListItemIcon-root': {
+                                        minWidth: '30px!important'
+                                    }
                                 },
-                                '& .MuiListItemIcon-root': {
-                                    minWidth: '30px!important'
-                                }
-                            },
-                            placement
-                        });
+                                placement
+                            });
 
-                        if (typeof onMenuShow === 'function') {
-                            onMenuShow();
+                            if (typeof onMenuShow === 'function') {
+                                onMenuShow();
+                            }
                         }
-                    }
-                }}
-            >
-                {typeof menuIcon === 'string' ? (
-                    <Avatar
-                        sx={{
-                            width: 26,
-                            height: 26,
-                            cursor: 'pointer',
-                            boxShadow: '0 0 0 2px rgba(255,255,255, .2)'
-                        }}
-                        src={menuIcon}
-                    />
-                ) : (
-                    <IconButton
-                        sx={{
-                            '& svg': {}
-                        }}
-                    >
-                        {menuIcon}
-                    </IconButton>
-                )}
-            </Box>
+                    }}
+                >
+                    {typeof menuIcon === 'string' ? (
+                        <Avatar
+                            sx={{
+                                width: 26,
+                                height: 26,
+                                cursor: 'pointer',
+                                boxShadow: '0 0 0 2px rgba(255,255,255, .2)'
+                            }}
+                            src={menuIcon}
+                        />
+                    ) : (
+                        <IconButton
+                            sx={{
+                                '& svg': {}
+                            }}
+                        >
+                            {menuIcon}
+                        </IconButton>
+                    )}
+                </Box>
+            }
+
         </Stack>
     );
 };

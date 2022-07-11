@@ -8,6 +8,13 @@ export interface AppPermissionType {
 
 type RenderType = ({ id }: { id: string }) => ReactElement;
 
+
+
+export interface ShorcutKeys {
+    key: string;
+    callback: () => void;
+}
+
 export interface AppProps {
     id: string;
     type?: 'os' | string;
@@ -19,8 +26,9 @@ export interface AppProps {
     permissions?: AppPermissionType;
     onOpen?: (id: string) => void;
     onClose?: (id: string) => void;
-
     childApps?: AppProps[]; // Main app has multiple child app. it jus groupping
+
+    shorcutKeys?: ShorcutKeys[] // this shortcut key will work when the app is running
 }
 
 export interface AppPropsStore extends AppProps {

@@ -13,6 +13,10 @@ Apps.create({
    permissions?: {key: val, ...},
    onOpen?: (id) => void,
    onClose?: (id) => void,
+
+   shortcutKeys: [
+      {key: "isHotkey npm", cvallback: () => void}
+   ]
 })
 
 

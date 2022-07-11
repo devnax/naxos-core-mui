@@ -13,7 +13,6 @@ class NaxOSListHandler extends Store<ListItemStoreProps> {
                         continue;
                     }
                 }
-
                 this.insert({ parentId: false, ...item, listId });
             }
         });

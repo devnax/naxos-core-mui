@@ -79,6 +79,10 @@ export default async () => {
       id: "Snapchat",
       name: "Snap Chat",
       icon: <SnapChatIcon />,
+      shorcutKeys: [
+         { key: "alt+2", callback: () => alert("Alt+1") },
+         { key: "ctrl+a", callback: () => alert("ctrl+1") }
+      ],
       render: () => {
          return (
             <Stack height="100%" color="#fff" direction="row">

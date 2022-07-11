@@ -44,10 +44,10 @@ const AppsRender: FC<Props> = (props) => {
                                     onAppClick && onAppClick(app.id);
                                 },
                                 onContextMenu: (e: any) => {
-                                    e.preventDefault();
                                     if (typeof onAppContextMenu === 'function') {
                                         const menu = onAppContextMenu(app.id);
                                         if (menu) {
+                                            e.preventDefault();
                                             Dropdown.showContextMenu(e, menu, {
                                                 boxProps: {
                                                     sx: {

@@ -14,6 +14,7 @@ import WidgetsRoundedIcon from '@mui/icons-material/WidgetsRounded';
 import Dropdown, { DropdownView } from '../src/Dropdown'
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import Screen from '../src/Screen'
+import { OSView } from '../src/System'
 
 
 import AppStoreIcon from '@mui/icons-material/ConstructionRounded';
@@ -45,7 +46,7 @@ Widget.create({
 
 demoApps()
 
-const Root = () => {
+const _Root = () => {
    const apps = AppHandler.getApps()
 
    return <>
@@ -130,6 +131,12 @@ const Root = () => {
       <LayerView />
       <DropdownView />
    </>
+}
+
+const Root = () => {
+   return <OSView
+      runnedAppID='Snapchat'
+   />
 }
 
 export default Root

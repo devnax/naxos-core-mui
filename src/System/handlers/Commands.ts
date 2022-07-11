@@ -55,4 +55,4 @@ class NAXOSCommands extends Store<CommandsType> {
     }
 }
 
-export default new NAXOSCommands();
+export default NAXOSCommands

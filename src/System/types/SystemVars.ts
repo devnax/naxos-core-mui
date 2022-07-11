@@ -1,27 +1,18 @@
 import { ReactElement, SVGProps } from 'react';
 import { ThemeOptions } from '@mui/material/styles';
-
+import { DockProps } from '../../Dock/types'
 type Background = {
     backgroundColor: string;
     backgroundImage: string;
     blur: number;
 };
 
-export interface SystemLibsProps {
-    Dropdown: {
-        background: Background;
-    };
-    Alert: {
-        background: Background;
-    };
-}
-
 export interface SystemProps {
     Desktop: {
-        pinedWidgets: string[];
+        pinnedApps: string[];
+        pinnedWidgets: string[];
         background: Background;
         grids: string[];
-        pinnedApps: string[];
         sortBy: 'name' | 'date' | 'title';
     };
     App: {
@@ -30,18 +21,7 @@ export interface SystemProps {
     Screen: {
         background: Background;
     };
-    Dock: {
-        pinnedApps: string[];
-        autoHide: boolean;
-        location: 'left' | 'right' | 'top' | 'bottom';
-        style: 'full' | 'middle' | 'separate';
-        background: Background;
-        hideTitle: boolean; // hover toast
-        menuIcon: ReactElement<SVGProps<SVGElement>> | string | null; // string=img url
-        menu: {
-            background: Background;
-        };
-    };
+    Dock: DockProps;
     Settings: {
         background: Background;
     };

@@ -8,7 +8,7 @@ const Background = {
 
 const defaultValues: SystemProps = {
     Desktop: {
-        pinedWidgets: [],
+        pinnedWidgets: [],
         background: Background,
         grids: [],
         pinnedApps: [],
@@ -20,18 +20,7 @@ const defaultValues: SystemProps = {
     Screen: {
         background: Background
     },
-    Dock: {
-        pinnedApps: [],
-        autoHide: false,
-        location: 'left',
-        style: 'full',
-        background: Background,
-        hideTitle: false, // hover toast
-        menuIcon: null, // string=img url
-        menu: {
-            background: Background
-        }
-    },
+    Dock: {},
     Settings: {
         background: Background
     },

@@ -39,8 +39,8 @@ const DockFooter: FC<DockProps> = (props) => {
                 </IconButton>
             )}
 
-            {
-                menuItems && <Box
+            {menuItems && (
+                <Box
                     onClick={(e: any) => {
                         if (menuItems) {
                             Dropdown.show(e.currentTarget, menuItems, {
@@ -81,8 +81,7 @@ const DockFooter: FC<DockProps> = (props) => {
                         </IconButton>
                     )}
                 </Box>
-            }
-
+            )}
         </Stack>
     );
 };

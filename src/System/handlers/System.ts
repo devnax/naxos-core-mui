@@ -1,6 +1,6 @@
 import { Store } from 'state-range';
 import { SystemProps } from '../types/SystemVars';
-import defaultValues from '../DefaultVars'
+import defaultValues from '../DefaultVars';
 
 abstract class System<P = {}> extends Store<any, SystemProps & P> {
     abstract defaults: Partial<SystemProps & P>;
@@ -19,14 +19,14 @@ abstract class System<P = {}> extends Store<any, SystemProps & P> {
         if (data) {
             return data;
         }
-        const defaults: any = { ...defaultValues, ...this.defaults }
+        const defaults: any = { ...defaultValues, ...this.defaults };
         if (defaults[key]) {
-            return defaults[key]
+            return defaults[key];
         }
     }
 
-    observe = this.observeMeta
-    getAll = this.getAllMeta
+    observe = this.observeMeta;
+    getAll = this.getAllMeta;
 }
 
-export default System
+export default System;

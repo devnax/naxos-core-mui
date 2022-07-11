@@ -1,5 +1,5 @@
 import * as React from 'react';
-import isHotkey from 'is-hotkey'
+import isHotkey from 'is-hotkey';
 import { withStore } from 'state-range';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -7,24 +7,21 @@ import { ScreenProps } from './types';
 import Scrollbar from '../components/Scrollbar';
 import AppHandler from '../Apps';
 
-
-
 const ScreenView: React.FC<ScreenProps> = ({ appId, header, footer, ...props }) => {
-    const ref = React.useRef()
+    const ref = React.useRef();
     const App = AppHandler.getById(appId);
     if (!App) {
         return <></>;
     }
 
     const Render = App.render;
-    const shortcutKeys = App.shorcutKeys
+    const shortcutKeys = App.shorcutKeys;
 
     React.useEffect(() => {
         if (ref.current) {
-            (ref.current as any).focus()
+            (ref.current as any).focus();
         }
-    }, [App.id])
-
+    }, [App.id]);
 
     return (
         <Stack
@@ -40,7 +37,7 @@ const ScreenView: React.FC<ScreenProps> = ({ appId, header, footer, ...props }) 
                 if (shortcutKeys) {
                     for (let shortcut of shortcutKeys) {
                         if (isHotkey(shortcut.key, e)) {
-                            shortcut.callback()
+                            shortcut.callback();
                             break;
                         }
                     }

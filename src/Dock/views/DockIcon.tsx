@@ -66,6 +66,7 @@ const DockIcon: FC<DockIconProps> = ({ id, active, icon, placement, buttonProps,
         >
             <Button
                 {...buttonProps}
+                color={active ? 'primary' : 'inherit'}
                 sx={{
                     p: 0,
                     borderRadius: 0,

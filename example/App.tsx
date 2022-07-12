@@ -14,7 +14,7 @@ import WidgetsRoundedIcon from '@mui/icons-material/WidgetsRounded';
 import Dropdown, { DropdownView } from '../src/Dropdown'
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import Screen from '../src/Screen'
-import { OSView } from '../libs/System'
+import { OSView } from '../src/System'
 
 
 import AppStoreIcon from '@mui/icons-material/ConstructionRounded';
@@ -135,7 +135,7 @@ const _Root = () => {
 
 const Root = () => {
    return <OSView
-      runnedAppID='Snapchat'
+      runnedAppID='Signal'
    />
 }
 

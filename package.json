@@ -1,6 +1,6 @@
 {
     "name": "naxos-core",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "main": "libs/cjs/index.js",
     "module": "libs/index.js",
     "typings": "libs/index.d.ts",

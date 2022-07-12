@@ -5,12 +5,16 @@ import defaultValues from '../DefaultVars';
 abstract class System<P = {}> extends Store<any, SystemProps & P> {
     abstract defaults: Partial<SystemProps & P>;
 
-    set<T extends keyof (SystemProps & P)>(key: T, data: Partial<(SystemProps & P)[T]>) {
+    set<T extends keyof (SystemProps & P)>(key: T, value: Partial<(SystemProps & P)[T]>) {
         const get = this.get(key);
         if (get) {
-            this.setMeta(key, { ...get, ...data });
+            if (typeof get === 'object') {
+                this.setMeta(key, { ...get, ...value });
+            } else {
+                this.setMeta(key, value as any);
+            }
         } else {
-            this.setMeta(key, data as any);
+            this.setMeta(key, value as any);
         }
     }
 

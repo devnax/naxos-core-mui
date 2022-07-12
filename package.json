@@ -1,19 +1,18 @@
 {
     "name": "naxos-core",
-    "version": "1.1.0",
+    "version": "1.1.2",
     "main": "libs/cjs/index.js",
     "module": "libs/index.js",
     "typings": "libs/index.d.ts",
     "files": [
-        "libs",
-        "modules"
+        "libs"
     ],
     "scripts": {
         "start": "parcel example/index.html --dist-dir ./node_modules/.percel-server --cache-dir ./node_modules/.percel-server/cache",
         "watch": "rm -rf libs/ && tsc --watch",
         "build": "rm -rf libs/ && prettier --write src/ && tsc",
-        "build:cjs": "npm run build && tsc --module CommonJS --outDir libs/cjs",
-        "prepare": "npm run build"
+        "build:cjs": "rm -rf libs/ && prettier --write src/ && tsc --module CommonJS --outDir libs",
+        "prepare": "npm run build:cjs"
     },
     "author": "Naxrul Ahmed",
     "license": "MIT",

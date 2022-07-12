@@ -14,7 +14,7 @@ import WidgetsRoundedIcon from '@mui/icons-material/WidgetsRounded';
 import Dropdown, { DropdownView } from '../src/Dropdown'
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import Screen from '../src/Screen'
-import { OSView } from '../src/System'
+import { OSView } from '../libs/System'
 
 
 import AppStoreIcon from '@mui/icons-material/ConstructionRounded';

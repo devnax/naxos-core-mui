@@ -14,14 +14,14 @@
         "types": [
             "node"
         ],
-        "module": "es2015",
+        "module": "esnext",
         "moduleResolution": "node",
         "noImplicitAny": true,
         "noUnusedLocals": true,
         "outDir": "libs",
         "sourceMap": true,
         "strict": true,
-        "target": "es6",
+        "target": "ESNext",
     },
     "include": [
         "src/**/*.ts",

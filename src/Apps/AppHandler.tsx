@@ -8,8 +8,6 @@ class NaxOSApp extends Store<AppPropsStore> {
                 type: 'os',
                 ...options
             });
-        } else {
-            throw new Error(`${options.id} App ID Already Exists!`);
         }
     }
 

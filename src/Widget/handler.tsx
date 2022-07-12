@@ -9,8 +9,6 @@ class Widget extends Store<WidgetStoreOption, WidgetStoreMeta> {
     create(opt: WidgetOption) {
         if (!this.findFirst(opt.id)) {
             this.insert(opt);
-        } else {
-            console.error(`${opt.id} id already exists`);
         }
     }
 

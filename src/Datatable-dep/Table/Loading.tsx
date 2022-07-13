@@ -10,17 +10,7 @@ const TableLoading = ({ id }: DataTableProps) => {
     return (
         <>
             {isLoading && (
-                <Box
-                    position="absolute"
-                    top={0}
-                    left={0}
-                    right={0}
-                    bottom={0}
-                    zIndex={1}
-                    // bgcolor="rgba(0,0,0,.3)"
-                    display="flex"
-                    justifyContent="center"
-                >
+                <Box position="absolute" top={0} left={0} right={0} bottom={0} zIndex={1} bgcolor="rgba(0,0,0,.3)" display="flex" justifyContent="center">
                     <CircularProgress sx={{ mt: 10 }} />
                 </Box>
             )}

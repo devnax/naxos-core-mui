@@ -20,16 +20,17 @@ import SignalWifi3BarRoundedIcon from '@mui/icons-material/SignalWifi3BarRounded
 import { SidebarView } from '../src/Sidebar'
 import { Typography } from "@mui/material"
 
-import List, { ListView } from '../src/List'
+import List, { ListView, ListPreview } from '../src/List'
 
 export default async () => {
 
-   List.addItems('list', [
+   List.setItems('list', [
       {
          id: "deshboard",
          title: "Deshboard",
          icon: <ArchiveRoundedIcon />,
-         render: () => <Box p={2} bgcolor="red">Red</Box>
+         render: () => <Box p={2} bgcolor="red">Red</Box>,
+         divider: true
       },
       {
          id: "pages",
@@ -100,6 +101,9 @@ export default async () => {
                   }} />
                </SidebarView>
                <Box flex={1} height="100%">
+                  <ListPreview
+                     listId="list" activeId="another"
+                  />
                </Box>
             </Stack>
          )

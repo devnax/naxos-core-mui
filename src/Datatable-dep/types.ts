@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
 import { TabProps } from '@mui/material/Tab';
-import { BoxProps } from '@mui/material/Box';
 import { TableCellProps } from '@mui/material/TableCell';
 import { Row } from 'state-range/src/types';
 import { DropdownArrayType } from '../Dropdown/types';
@@ -41,7 +40,7 @@ export interface DataTableProps {
     selectNavActions?: (props: { selectedItems: RowProps[] }) => ReactElement;
     filterMenu?: (props: any) => ReactElement;
 
-    rowRender?: (row: Row<Partial<RowProps>>) => Row<Partial<RowProps>>;
+    onRenderRow?: (row: Row<Partial<RowProps>>) => Row<Partial<RowProps>>;
 
     hideSearchbar?: boolean;
 
@@ -58,5 +57,4 @@ export interface DataTableProps {
     onPaginationChange?: (info: PaginationProps) => void;
 
     hideFooter?: boolean;
-    sx?: BoxProps;
 }

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
@@ -18,19 +18,18 @@ const Navbar = (props: DataTableProps) => {
     const { id, tabs, hideSearchbar, filterMenu: FilterMenuView } = props;
 
     return (
-        <Box>
-            <Stack justifyContent="space-between" alignItems="center" direction={{ xs: 'column', md: 'row' }} borderRadius={2}>
-                <Box flex={1}>
+        <Box mb={1}>
+            <Stack justifyContent="space-between" alignItems="center" direction={{ xs: 'column', md: 'row' }}>
+                <Box flex={1} p={1}>
                     {tabs && (
                         <Tabs
-                            sx={{ minHeight: 'auto' }}
                             value={Handler.metaState(id, null, 'currentTab') || tabs[0].value}
                             onChange={(_e, currentTab) => {
                                 Handler.metaState(id, { currentTab }, 'currentTab');
                             }}
                         >
                             {tabs.map((tab: TabProps) => (
-                                <Tab sx={{ color: 'grey.500', fontSize: 14, minWidth: 'auto', minHeight: 'auto', px: 2, py: 1 }} key={tab.value} {...tab} />
+                                <Tab key={tab.value} {...tab} />
                             ))}
                         </Tabs>
                     )}
@@ -43,7 +42,6 @@ const Navbar = (props: DataTableProps) => {
                                 placeholder="Search..."
                                 size="small"
                                 InputProps={{
-                                    sx: { bgcolor: 'background.paper', border: 0 },
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <SearchRoundedIcon />
@@ -67,9 +65,7 @@ const Navbar = (props: DataTableProps) => {
                                 onClick={(e: any) => {
                                     if (FilterMenuView) {
                                         Dropdown.show(e.currentTarget, <FilterMenuView />, {
-                                            popperOptions: {
-                                                placement: 'bottom-start'
-                                            }
+                                            placement: 'bottom-start'
                                         });
                                     }
                                 }}

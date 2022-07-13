@@ -1,11 +1,12 @@
 import ListHandler from './Handler';
 import { PublicHandlerInterface } from './types';
 import ListView from './views/ListView';
+import ListPreview from './views/ListPreview';
 
-export { ListView };
+export { ListView, ListPreview };
 
 const Handler: PublicHandlerInterface = {
-    addItems: ListHandler.addItems.bind(ListHandler),
+    setItems: ListHandler.setItems.bind(ListHandler),
     getItems: ListHandler.getItems.bind(ListHandler),
     getChilds: ListHandler.getChilds.bind(ListHandler),
     deleteList: ListHandler.deleteList.bind(ListHandler)

@@ -36,6 +36,7 @@ const DockPanel: FC<DockProps> = (props) => {
             <BlurBox bgImage={bgimage} blur={blur}>
                 <Stack justifyContent="space-between" alignItems="center" height={'100%'} width={'100%'} direction={isHorigental ? 'row' : 'column'} gap={1}>
                     <Scrollbar
+                        thumbSize={2}
                         style={{
                             flex: 1,
                             overflow: isHorigental ? 'auto hidden' : 'hidden auto'

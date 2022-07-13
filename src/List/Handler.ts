@@ -2,7 +2,7 @@ import { dispatch, Store } from 'state-range';
 import { ID, ListItemProps, ListItemStoreProps } from './types';
 
 class NaxOSListHandler extends Store<ListItemStoreProps> {
-    addItems(listId: ID, items: ListItemProps[]) {
+    setItems(listId: ID, items: ListItemProps[]) {
         dispatch(() => {
             for (let item of items) {
                 if (item.parentId) {
@@ -13,7 +13,9 @@ class NaxOSListHandler extends Store<ListItemStoreProps> {
                         continue;
                     }
                 }
-                this.insert({ parentId: false, ...item, listId });
+                if (!this.findFirst({ id: item.id, listId })) {
+                    this.insert({ parentId: false, ...item, listId });
+                }
             }
         });
     }
@@ -24,6 +26,10 @@ class NaxOSListHandler extends Store<ListItemStoreProps> {
 
     getItems(listId: ID) {
         return this.find({ listId, parentId: false });
+    }
+
+    getItem(listId: ID, itemId: ID) {
+        return this.findFirst({ id: itemId, listId });
     }
 
     getChilds(listId: ID, parentId: ID) {

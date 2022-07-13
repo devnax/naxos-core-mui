@@ -1,7 +1,7 @@
 import { dispatch, Store } from 'state-range';
 import { RowProps, ColumnProps, StoreRowProps, TableMetaState } from './types';
 
-class DataTableHandler extends Store<Partial<StoreRowProps>> {
+class NaxOSCoreDataTable extends Store<Partial<StoreRowProps>> {
     columns(tableId: string, columns?: ColumnProps[]): ColumnProps[] {
         const key = `${tableId}_columns`;
         if (columns) {
@@ -67,4 +67,4 @@ class DataTableHandler extends Store<Partial<StoreRowProps>> {
     }
 }
 
-export default new DataTableHandler();
+export default new NaxOSCoreDataTable();

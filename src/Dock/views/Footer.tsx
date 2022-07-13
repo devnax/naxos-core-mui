@@ -21,7 +21,7 @@ const DockFooter: FC<DockProps> = (props) => {
             direction={isHorigental ? 'row' : 'column'}
             height={isHorigental ? '100%' : 'initial'}
             width={isHorigental ? 'initial' : '100%'}
-            gap={2}
+            gap={1}
             bgcolor="background.paper"
             borderRadius={isHorigental ? '24px 0 0 24px' : '24px 24px 0 0'}
         >

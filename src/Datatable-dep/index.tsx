@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Navbar from './Navbar';
 import Table from './Table';
 import Box from '@mui/material/Box';
@@ -6,6 +6,7 @@ import { DataTableProps, RowProps, ColumnProps } from './types';
 import NavbarInfo from './NavbarInfo';
 import { Component } from 'react';
 import Handler from './Handler';
+import { noDispatch } from 'state-range';
 import { Row } from 'state-range/src/types';
 
 class DataTableView extends Component<DataTableProps> {
@@ -62,6 +63,13 @@ class DataTableView extends Component<DataTableProps> {
         Handler.metaState(tableId, { searchText: '' }, 'loading');
     }
 
+    componentWillUnmount() {
+        noDispatch(() => {
+            Handler.delete({ tableId: this.props.id });
+            Handler.deleteMeta(`${this.props.id}_metastate`);
+        });
+    }
+
     componentDidMount() {
         if (this.props.init) {
             this.props.init();
@@ -70,7 +78,7 @@ class DataTableView extends Component<DataTableProps> {
 
     render() {
         return (
-            <Box {...this.props.sx}>
+            <Box bgcolor="background.paper" borderRadius={2} p={1}>
                 <Navbar {...this.props} />
                 <Table {...this.props} />
                 {!this.props.hideFooter && (

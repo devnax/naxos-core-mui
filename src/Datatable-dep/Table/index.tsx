@@ -41,12 +41,12 @@ const RowColMap = withMemo(_rowColMap, ({ row }: any) => {
     return [row.observe];
 });
 
-const _Row = ({ id, checkbox, row, rowActions, rowRender }: { row: Row<Partial<StoreRowProps>> } & DataTableProps) => {
+const _Row = ({ id, checkbox, row, rowActions, onRenderRow }: { row: Row<Partial<StoreRowProps>> } & DataTableProps) => {
     const columns = Handler.columns(id);
     const theme = useTheme();
 
-    if (rowRender) {
-        row = rowRender({ ...row } as Row);
+    if (onRenderRow) {
+        row = onRenderRow({ ...row });
     }
     let RowActions: any = false;
     if (rowActions) {
@@ -78,7 +78,6 @@ const _Row = ({ id, checkbox, row, rowActions, rowRender }: { row: Row<Partial<S
                         onClick={(e: any) => {
                             Dropdown.show(e.currentTarget, RowActions, { placement: 'bottom-start' });
                         }}
-                        size="small"
                     >
                         <MoreVertIcon />
                     </IconButton>
@@ -96,13 +95,13 @@ const TableView = (props: DataTableProps) => {
     const rows = Handler.rows(props.id);
 
     return (
-        <Box sx={{ borderRadius: 2, position: 'relative' }}>
+        <Box sx={{ border: 1, borderColor: 'grey.800', borderRadius: 2, position: 'relative' }}>
             <TableLoading {...props} />
             {!rows.length ? (
                 <Stack sx={{ userSelect: 'none' }} height={200} justifyContent="center" alignItems="center">
                     <Box textAlign="center">
                         <InboxRoundedIcon sx={{ fontSize: 50, opacity: 0.5 }} />
-                        <Typography variant="h5" sx={{ opacity: 0.5 }}>
+                        <Typography variant="h4" sx={{ opacity: 0.5 }}>
                             No Rows
                         </Typography>
                     </Box>

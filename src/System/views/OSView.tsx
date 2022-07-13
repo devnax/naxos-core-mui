@@ -11,12 +11,13 @@ import { ScreenProps } from '../../Screen/types';
 import Themex from './Themex';
 
 interface Props {
+    runnedAppID: string;
     dockProps?: DockProps;
     screenProps?: ScreenProps;
-    runnedAppID: string;
+    hideDock?: boolean;
 }
 
-const OSView = ({ dockProps, screenProps, runnedAppID }: Props) => {
+const OSView = ({ dockProps, screenProps, runnedAppID, hideDock }: Props) => {
     return (
         <Themex>
             <Stack
@@ -27,7 +28,7 @@ const OSView = ({ dockProps, screenProps, runnedAppID }: Props) => {
                     overflow: 'hidden!important'
                 }}
             >
-                <Dock {...dockProps} active={runnedAppID} />
+                {!hideDock && <Dock {...dockProps} active={runnedAppID} />}
                 <Box flex={1}>
                     <Screen {...screenProps} appId={runnedAppID} />
                 </Box>

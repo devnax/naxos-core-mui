@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import NavAction from './NavbarAction';
@@ -52,6 +52,7 @@ const NavbarInfo = (props: DataTableProps) => {
                     )}
                 </>
             )}
+
             {selectedItems.length ? <NavAction {...props} selectedItems={selectedItems} /> : ''}
         </Stack>
     );

@@ -1,6 +1,6 @@
 ```jsx
 
-import List, {ListView} from 'naxos-core'
+import List, {ListView, ListPreview} from 'naxos-core'
 
 export interface ListItemProps {
    id: ID;
@@ -8,27 +8,36 @@ export interface ListItemProps {
    title: string;
    label?: string;
    icon?: ReactElement<SVGProps<SVGElement>>;
-   render?: RenderType; //string url
+   render?: ComponentType<{ listId: string, id: string }>;
+   divider?: Boolean;
 }
 
 
-List.addItems(listId, ListItemProps[])
+List.setItems(listId, ListItemProps[])
 List.getItems(listId)
+List.getItem(listId, itemId)
 List.getChilds(listId, parentId)
 List.deleteList(listId)
 
-
-///
 
 interface ListViewProps extends ListProps {
    listId: ID;
    active?: ID;
    button?: boolean;
-   onItemClick?: (itemId: ID) => void;
+   onItemClick?: (item) => void;
 }
 
 <ListView
    {...ListViewProps}
+/>
+
+type Props = BoxProps & {
+   listId: string;
+   activeId: string
+}
+
+<ListPreview
+   {...Props}
 />
 
 ```

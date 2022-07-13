@@ -22,7 +22,7 @@ const Columns = withMemo(_cols, ({ id }: any) => {
 });
 
 const TableColumns = ({ id, checkbox, rowActions: RowActions }: DataTableProps) => {
-    const columns = Handler.columns(id);
+    const columns = Handler.getColumns(id);
     const allrowsLength = Handler.count({ tableId: id });
     const checkedRowsLength = Handler.count({ tableId: id, checked: true });
     const isAllChecked = allrowsLength === checkedRowsLength ? true : false;

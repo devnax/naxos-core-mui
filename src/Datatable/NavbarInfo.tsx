@@ -11,7 +11,7 @@ import Handler from './Handler';
 const NavbarInfo = (props: DataTableProps) => {
     const { id, rowCount, perPageOptions, hidePagination, hideRowPerPage, onPaginationChange } = props;
     const selectedItems = Handler.selectedItems(id);
-    const rows = Handler.rows(id);
+    const rows = Handler.getRows(id);
     const pagination = Handler.metaState(id, null, 'pagination');
 
     const perpage = pagination.perPage ? pagination.perPage : perPageOptions ? perPageOptions[0] : 25;
@@ -57,5 +57,5 @@ const NavbarInfo = (props: DataTableProps) => {
     );
 };
 export default withStore(NavbarInfo, ({ id }) => {
-    return [Handler.selectedItems(id), Handler.rows(id).length, Object.values(Handler.metaState(id, null, 'pagination'))];
+    return [Handler.selectedItems(id), Handler.getRows(id).length, Object.values(Handler.metaState(id, null, 'pagination'))];
 });

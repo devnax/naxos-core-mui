@@ -42,11 +42,11 @@ const RowColMap = withMemo(_rowColMap, ({ row }: any) => {
 });
 
 const _Row = ({ id, checkbox, row, rowActions, rowRender }: { row: Row<Partial<StoreRowProps>> } & DataTableProps) => {
-    const columns = Handler.columns(id);
+    const columns = Handler.getColumns(id);
     const theme = useTheme();
 
     if (rowRender) {
-        row = rowRender({ ...row } as Row);
+        row = rowRender({ ...row }) as any
     }
     let RowActions: any = false;
     if (rowActions) {
@@ -93,7 +93,7 @@ const Row = withStore(_Row, ({ row }: RowProps) => {
 });
 
 const TableView = (props: DataTableProps) => {
-    const rows = Handler.rows(props.id);
+    const rows = Handler.getRows(props.id);
 
     return (
         <Box sx={{ borderRadius: 2, position: 'relative' }}>

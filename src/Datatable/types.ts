@@ -2,12 +2,14 @@ import { ReactElement } from 'react';
 import { TabProps } from '@mui/material/Tab';
 import { BoxProps } from '@mui/material/Box';
 import { TableCellProps } from '@mui/material/TableCell';
-import { Row } from 'state-range/src/types';
+import { Row, PartOfRow } from 'state-range/src/types';
 import { DropdownArrayType } from '../Dropdown/types';
 
 export interface StoreRowProps extends RowProps {
     tableId?: string;
     checked?: boolean;
+    _id: string;
+    observe: string;
 }
 
 export interface RowProps {
@@ -59,4 +61,20 @@ export interface DataTableProps {
 
     hideFooter?: boolean;
     sx?: BoxProps;
+}
+
+
+
+export interface PublicHandlerType {
+    setColumns: (tableId: string, columns?: ColumnProps[]) => void;
+    setRows: (tableId: string, rows: RowProps[]) => void;
+    setRow: (tableId: string, rows: RowProps) => void;
+    getRows: (tableId: string) => Row<Partial<StoreRowProps>>[],
+    findRows: (tableId: string, where: PartOfRow<StoreRowProps>) => Row<Partial<StoreRowProps>>[],
+    getRow: (tableId: string, id: string) => Row<Partial<StoreRowProps>> | null;
+    deleteRow: (tableId: string, id: number | string) => void;
+    updateRow: (tableId: string, id: number | string, row: Partial<RowProps>) => void;
+    loading: (tableId: string, is: boolean) => void;
+    clearSelect: (tableId: string) => void;
+    clearSearchText: (tableId: string) => void;
 }

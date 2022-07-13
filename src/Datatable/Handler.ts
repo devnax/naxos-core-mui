@@ -1,32 +1,30 @@
 import { dispatch, Store } from 'state-range';
 import { RowProps, ColumnProps, StoreRowProps, TableMetaState } from './types';
+import { PartOfRow } from 'state-range/src/types';
 
 class DataTableHandler extends Store<Partial<StoreRowProps>> {
-    columns(tableId: string, columns?: ColumnProps[]): ColumnProps[] {
-        const key = `${tableId}_columns`;
-        if (columns) {
-            this.setMeta(key, columns);
-        }
-        return this.getMeta(key, []);
+    setColumns(tableId: string, columns?: ColumnProps[]) {
+        this.setMeta(`${tableId}_columns`, columns);
+    }
+
+    getColumns(tableId: string): ColumnProps[] {
+        return this.getMeta(`${tableId}_columns`, []);
     }
 
     observeColumns(tableId: string) {
         return this.observeMeta(`${tableId}_columns`);
     }
 
-    rows(tableId: string, rows?: RowProps[]) {
-        if (rows) {
-            this.delete({ tableId });
-            dispatch(() => {
-                for (let row of rows) {
-                    this.addRow(tableId, row);
-                }
-            });
-        }
-        return this.find({ tableId });
+    setRows(tableId: string, rows: RowProps[]) {
+        this.delete({ tableId });
+        dispatch(() => {
+            for (let row of rows) {
+                this.setRow(tableId, row);
+            }
+        });
     }
 
-    addRow(tableId: string, row: RowProps) {
+    setRow(tableId: string, row: RowProps) {
         if (!this.findFirst({ tableId, id: row.id })) {
             this.insert({ tableId, checked: false, ...row });
         }
@@ -40,8 +38,32 @@ class DataTableHandler extends Store<Partial<StoreRowProps>> {
         this.delete({ tableId, id });
     }
 
+    getRows(tableId: string) {
+        return this.find({ tableId })
+    }
+
+    getRow(tableId: string, id: string) {
+        return this.findFirst({ tableId, id })
+    }
+
+    findRows(tableId: string, where: PartOfRow<StoreRowProps>) {
+        return this.find({ tableId, ...where })
+    }
+
     selectedItems(tableId: string) {
         return this.find({ tableId, checked: true });
+    }
+
+    loading(tableId: string, is = true) {
+        this.metaState(tableId, { loading: is })
+    }
+
+    clearSelect(tableId: string) {
+        this.update({ checked: false }, { tableId, checked: true })
+    }
+
+    clearSearchText(tableId: string) {
+        this.metaState(tableId, { searchText: '' })
     }
 
     metaState(tableId: string, data?: TableMetaState | null, key?: string) {

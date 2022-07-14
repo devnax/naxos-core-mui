@@ -1,49 +1,43 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { ListViewProps, ListItemStoreProps, ID } from '../types';
+import { ListViewProps, StoreProps } from '../types';
 import { withStore } from 'state-range';
-import Handler from '../Handler';
-import List, { ListProps } from '@mui/material/List';
+import List from '@mui/material/List';
 import ItemRender from './ItemRender';
 
-interface ListPropsTypes extends ListProps {
-    listId: ID;
-    active?: ID;
+interface ListPropsTypes extends ListViewProps {
+    items: StoreProps[];
     dept: number;
-    items: ListItemStoreProps[];
-    button?: boolean;
-    onItemClick?: Function;
 }
 
 const ListRender = (props: ListPropsTypes) => {
-    const { onItemClick, button, active, dept, listId, items, ...listProps } = props;
+    const { handler, onItemClick, button, items, dept, autoChange, ...listProps } = props;
 
     return (
         <List dense {...listProps} sx={{ ml: dept, p: 0, ...(listProps?.sx || {}) }}>
             {items.map((item) => {
-                const childs = Handler.getChilds(listId, item.id);
-                let isActive = active === item.id;
-
-                if (!isActive && childs.length) {
-                    const child = Handler.findFirst({ id: active }); // maybe child
-                    if (child && child.parentId === item.id) {
-                        isActive = true;
-                    }
-                }
+                const childs = handler.getChilds(item.id);
 
                 return (
                     <Box key={item?._id}>
                         <ItemRender
                             onClick={() => {
                                 onItemClick && onItemClick(item);
+                                if (autoChange !== false) {
+                                    handler.activeItem(item.id)
+                                }
                             }}
                             collaps={childs.length ? true : false}
-                            dept={dept}
-                            active={isActive}
+                            isChild={dept > 0}
+                            active={item.active || false}
                             {...item}
                         />
 
-                        {childs.length && isActive ? <ListRender onItemClick={onItemClick} button={button} active={active} dept={dept + 1} listId={listId} items={childs} {...listProps} /> : ''}
+                        {childs.length && item.active ? <ListRender
+                            {...props}
+                            dept={dept + 1}
+                            items={childs}
+                        /> : ''}
                     </Box>
                 );
             })}
@@ -51,15 +45,16 @@ const ListRender = (props: ListPropsTypes) => {
     );
 };
 
-const ListView = ({ onItemClick, active, listId, ...ListProps }: ListViewProps) => {
-    const listItems = Handler.getItems(listId);
-    if (!listItems.length) {
+const ListView = (props: ListViewProps) => {
+    const { handler, onItemClick } = props
+    const parents = handler.getParents()
+    if (!parents.length) {
         return <></>;
     }
 
     return (
         <Box>
-            <ListRender onItemClick={onItemClick} active={active} dept={0} listId={listId} items={listItems} {...ListProps} />
+            <ListRender onItemClick={onItemClick} items={parents} dept={0} {...props} />
         </Box>
     );
 };

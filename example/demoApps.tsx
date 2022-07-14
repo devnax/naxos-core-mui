@@ -7,77 +7,17 @@ import PinterestIcon from "./demo-icons/PinterestIcon"
 import VimeoIcon from "./demo-icons/VimeoIcon"
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
-
-import AppleIcon from '@mui/icons-material/Apple';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import GraphicEqIcon from '@mui/icons-material/GraphicEq';
-import ArchiveRoundedIcon from '@mui/icons-material/ArchiveRounded';
-import BluetoothAudioRoundedIcon from '@mui/icons-material/BluetoothAudioRounded';
-import ExtensionRoundedIcon from '@mui/icons-material/ExtensionRounded';
-import ParkRoundedIcon from '@mui/icons-material/ParkRounded';
-import SettingsVoiceRoundedIcon from '@mui/icons-material/SettingsVoiceRounded';
 import SignalWifi3BarRoundedIcon from '@mui/icons-material/SignalWifi3BarRounded';
 
 import { SidebarView } from '../src/Sidebar'
 import { Typography } from "@mui/material"
 
-import List, { ListView, ListPreview } from '../src/List'
+import { ListView, ListPreview } from '../src/List'
 import DataTable from './DataTable'
-
+import ListHandler from './List'
 
 export default async () => {
 
-   List.setItems('list', [
-      {
-         id: "deshboard",
-         title: "Deshboard",
-         icon: <ArchiveRoundedIcon />,
-         render: () => <Box p={2} bgcolor="red">Red</Box>,
-         divider: true
-      },
-      {
-         id: "pages",
-         title: "Pages",
-         icon: <GraphicEqIcon />,
-         render: () => <Box p={2} bgcolor="red">Red</Box>
-      },
-      {
-         id: "users",
-         title: "Users",
-         label: "20+",
-         icon: <SettingsVoiceRoundedIcon />,
-         render: () => <Box p={2} bgcolor="red">Red</Box>
-      },
-      {
-         heading: "General",
-         id: "posts",
-         title: "Posts",
-         icon: <ParkRoundedIcon />,
-         render: () => <Box p={2} bgcolor="green">Green</Box>
-      },
-      {
-         id: "add_post",
-         title: "Add New Post",
-         parentId: "posts",
-         icon: <ExtensionRoundedIcon />,
-         render: () => <Box p={2} bgcolor="green">Green</Box>
-      },
-      {
-         id: "another",
-         title: "Another",
-         parentId: "posts",
-         icon: <BluetoothAudioRoundedIcon />,
-         render: () => <Box p={2} bgcolor="green">Green</Box>
-      },
-      {
-         id: "another",
-         title: "User Another",
-         parentId: "users",
-         icon: <BluetoothAudioRoundedIcon />,
-         render: () => <Box p={2} bgcolor="green">Green</Box>
-      },
-
-   ])
 
    AppHandler.create({
       id: "Snapchat",
@@ -99,14 +39,16 @@ export default async () => {
                      <Typography variant="h6">Widget List</Typography>
                   </Box>}
                >
-                  <ListView listId="list" active="another" onItemClick={(id) => {
-                     console.log(id)
-                  }} />
+                  <ListView
+                     handler={ListHandler}
+                     onItemClick={(id) => {
+                        console.log(id)
+                     }} />
                </SidebarView>
                <Box flex={1} height="100%">
                   <DataTable />
                   <ListPreview
-                     listId="list" activeId="another"
+                     handler={ListHandler}
                   />
                </Box>
             </Stack>

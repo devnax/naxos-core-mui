@@ -1,5 +1,6 @@
 import { ComponentType, ReactElement, SVGProps } from 'react';
-import { ListProps } from '@mui/material';
+import { BoxProps, ListProps } from '@mui/material';
+import Handler from './Handler'
 
 export type ID = string;
 
@@ -10,26 +11,28 @@ export interface ListItemProps {
     label?: string;
     heading?: string | ReactElement;
     icon?: ReactElement<SVGProps<SVGElement>>;
-    render?: ComponentType<{ listId: string; id: string }>;
+    render?: ComponentType<{ id: string }>;
     divider?: boolean;
+    active?: boolean;
 }
 
-export interface ListItemStoreProps extends ListItemProps {
+export interface StoreProps extends ListItemProps {
     _id?: string;
     observe?: number;
-    listId: ID;
 }
 
-export interface PublicHandlerInterface {
-    setItems: (listId: ID, items: ListItemProps[]) => void;
-    getItems: (listId: ID) => ListItemStoreProps[];
-    getChilds: (listId: ID, parentId: ID) => ListItemStoreProps[];
-    deleteList: (listId: ID) => void;
+export interface StoreMetaProps {
+    active: string
 }
 
 export interface ListViewProps extends ListProps {
-    listId: ID;
-    active?: ID;
+    handler: Handler<StoreProps, StoreMetaProps>
     button?: boolean;
-    onItemClick?: (item: ListItemStoreProps) => void;
+    onItemClick?: (item: StoreProps) => void;
+    autoChange?: false
+}
+
+export interface ListPreviewProps extends BoxProps {
+    handler: Handler<StoreProps, StoreMetaProps>;
+
 }

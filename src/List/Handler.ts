@@ -1,40 +1,62 @@
-import { dispatch, Store } from 'state-range';
-import { ID, ListItemProps, ListItemStoreProps } from './types';
+import { Store } from 'state-range';
+import { ID, ListItemProps, StoreProps, StoreMetaProps } from './types';
 
-class NaxOSListHandler extends Store<ListItemStoreProps> {
-    setItems(listId: ID, items: ListItemProps[]) {
-        dispatch(() => {
-            for (let item of items) {
-                if (item.parentId) {
-                    const isParent = this.findFirst({ id: item.parentId });
-                    if (isParent && isParent.parentId) {
-                        continue;
-                    } else if (!isParent) {
-                        continue;
-                    }
-                }
-                if (!this.findFirst({ id: item.id, listId })) {
-                    this.insert({ parentId: false, ...item, listId });
-                }
+abstract class NaxOSListHandler<R = any, M = any> extends Store<StoreProps & R, StoreMetaProps & M> {
+
+    addItem(item: ListItemProps & R) {
+        this.insert({ active: false, parentId: false, ...item } as any)
+    }
+
+    addItems(items: (ListItemProps & R)[]) {
+        this.insertMany(items, (row) => {
+            return { active: false, parentId: false, ...row }
+        })
+    }
+
+    getParents() {
+        return this.find({ parentId: false } as any);
+    }
+
+    getPrentOfChild(childId: ID) {
+        const item = this.getItem(childId)
+        if (item && item.parentId) {
+            const parent = this.getItem(item.parentId)
+            if (parent) {
+                return parent
             }
-        });
+        }
     }
 
-    deleteList(listId: ID) {
-        this.delete({ listId });
+    getChilds(parentId: ID) {
+        return this.find({ parentId } as any);
     }
 
-    getItems(listId: ID) {
-        return this.find({ listId, parentId: false });
+    getItem(id: ID) {
+        return this.findFirst({ id } as any);
     }
 
-    getItem(listId: ID, itemId: ID) {
-        return this.findFirst({ id: itemId, listId });
+    getActiveItem() {
+        const active = this.getMeta("active")
+        if (active) {
+            return this.getItem(active)
+        }
     }
+    activeItem(id: ID) {
+        let parentId = id;
+        let parent: any;
+        this.update({ active: false } as any, { active: true } as any)
+        this.update({ active: true } as any, { id } as any)
+        this.setMeta("active", id as any)
 
-    getChilds(listId: ID, parentId: ID) {
-        return this.find({ listId, parentId });
+        while (parent = this.getPrentOfChild(parentId)) {
+            this.update({ active: true } as any, { id: parent.id } as any)
+            if (parent.parentId) {
+                parentId = parent.parentId
+            } else {
+                parentId = ''
+            }
+        }
     }
 }
 
-export default new NaxOSListHandler();
+export default NaxOSListHandler

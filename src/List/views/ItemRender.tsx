@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ListItemStoreProps } from '../types';
+import { StoreProps } from '../types';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import ListItem from '@mui/material/ListItem';
@@ -10,19 +10,19 @@ import Divider from '@mui/material/Divider';
 import ArrowDownIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import ArrowUpIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 
-interface ItemRenderProps extends ListItemStoreProps {
+interface ItemRenderProps extends StoreProps {
     active: boolean;
     button?: boolean;
-    dept: number;
+    isChild: boolean;
     collaps: boolean;
     onClick: React.MouseEventHandler<HTMLLIElement>;
 }
 
 export default (props: ItemRenderProps) => {
-    const { collaps, dept, button, active, icon, title, label, heading, onClick, divider } = props;
+    const { collaps, isChild, button, active, icon, title, label, heading, onClick, divider } = props;
 
     const btn: any = button === undefined || button ? true : false;
-    const isChild = dept > 0;
+
 
     return (
         <>

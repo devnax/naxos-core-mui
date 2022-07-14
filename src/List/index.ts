@@ -1,15 +1,8 @@
-import ListHandler from './Handler';
-import { PublicHandlerInterface } from './types';
 import ListView from './views/ListView';
 import ListPreview from './views/ListPreview';
+import List from './Handler'
+
+export default List
 
 export { ListView, ListPreview };
 
-const Handler: PublicHandlerInterface = {
-    setItems: ListHandler.setItems.bind(ListHandler),
-    getItems: ListHandler.getItems.bind(ListHandler),
-    getChilds: ListHandler.getChilds.bind(ListHandler),
-    deleteList: ListHandler.deleteList.bind(ListHandler)
-};
-
-export default Handler;

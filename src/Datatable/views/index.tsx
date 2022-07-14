@@ -4,25 +4,20 @@ import Table from './Table';
 import Box from '@mui/material/Box';
 import { DataTableProps } from '../types';
 import NavbarInfo from './NavbarInfo';
+import { withStore } from 'state-range';
 
-export default class DataTableView extends React.Component<DataTableProps> {
-   componentDidMount() {
-      if (this.props.init) {
-         this.props.init();
-      }
-   }
-
-   render() {
-      return (
-         <Box {...this.props.sx}>
-            <Navbar {...this.props} />
-            <Table {...this.props} />
-            {!this.props.hideFooter && (
-               <Box mt={1}>
-                  <NavbarInfo {...this.props} />
-               </Box>
-            )}
-         </Box>
-      );
-   }
+const DataTableView = (props: DataTableProps) => {
+   return (
+      <Box>
+         <Navbar {...props} />
+         <Table {...props} />
+         {!props.handler.getMeta("hideFooter") && (
+            <Box mt={1}>
+               <NavbarInfo {...props} />
+            </Box>
+         )}
+      </Box>
+   );
 }
+
+export default withStore(DataTableView, (props) => [props.handler.getMeta("hideFooter")])

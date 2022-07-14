@@ -6,56 +6,69 @@ import { DataTableProps } from '../types';
 import TablePagination from '@mui/material/TablePagination';
 import Box from '@mui/material/Box';
 import { withStore } from 'state-range';
-import Handler from '../Handler';
 
 const NavbarInfo = (props: DataTableProps) => {
-    const { id, rowCount, perPageOptions, hidePagination, hideRowPerPage, onPaginationChange } = props;
-    const selectedItems = Handler.selectedItems(id);
-    const rows = Handler.getRows(id);
-    const pagination = Handler.metaState(id, null, 'pagination');
+    const { handler } = props;
+    const selectedRows = handler.selectedRows()
+    const rows = handler.findAll()
+    const pagination = handler.getMeta('pagination');
+    let perpage = 25;
+    let perpageOptions: number[] = []
 
-    const perpage = pagination.perPage ? pagination.perPage : perPageOptions ? perPageOptions[0] : 25;
+    if (pagination) {
+        if (pagination.perpageOptions) {
+            perpage = pagination.perpageOptions[0]
+            perpageOptions = pagination.perpageOptions
+        }
+        if (pagination.perpage) {
+            perpage = pagination.perpage
+        }
+    }
 
     if (!rows.length) {
         return <></>;
     }
+
     return (
         <Stack p={1} direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems="center" position="relative" height={50}>
-            {!selectedItems.length && (
+            {!selectedRows.length && (
                 <>
                     <Typography variant="body2">Showing {rows.length} items</Typography>
-                    {!hidePagination && rowCount && (
+                    {pagination && pagination.rowCount && (
                         <TablePagination
                             component={Box}
-                            count={rowCount}
+                            count={pagination.rowCount}
                             rowsPerPage={perpage}
-                            rowsPerPageOptions={hideRowPerPage ? [] : perPageOptions}
-                            page={pagination.page || 0}
-                            onPageChange={(_e: any, cpage) => {
-                                Handler.metaState(id, {
-                                    pagination: { ...Handler.metaState(id, null, 'pagination'), page: cpage }
-                                });
-                                if (onPaginationChange) {
-                                    onPaginationChange(Handler.metaState(id, null, 'pagination'));
+                            rowsPerPageOptions={perpageOptions}
+                            page={pagination?.page || 0}
+                            onPageChange={(_e: any, page) => {
+                                const meta = handler.getMeta('pagination')
+                                handler.setMeta('pagination', {
+                                    ...(meta || {}),
+                                    page
+                                })
+
+                                if (handler.onChange) {
+                                    handler.onChange()
                                 }
                             }}
                             onRowsPerPageChange={(e: any) => {
-                                Handler.metaState(id, {
-                                    pagination: { ...Handler.metaState(id, null, 'pagination'), perPage: e.target.value }
-                                });
+                                const meta = handler.getMeta('pagination')
+                                handler.setMeta('pagination', {
+                                    ...(meta || {}),
+                                    perpage: e.target.value
+                                })
 
-                                if (onPaginationChange) {
-                                    onPaginationChange(Handler.metaState(id, null, 'pagination'));
+                                if (handler.onChange) {
+                                    handler.onChange()
                                 }
                             }}
                         />
                     )}
                 </>
             )}
-            {selectedItems.length ? <NavAction {...props} selectedItems={selectedItems} /> : ''}
+            {selectedRows.length ? <NavAction {...props} selectedRows={selectedRows} /> : ''}
         </Stack>
     );
 };
-export default withStore(NavbarInfo, ({ id }) => {
-    return [Handler.selectedItems(id), Handler.getRows(id).length, Object.values(Handler.metaState(id, null, 'pagination'))];
-});
+export default withStore(NavbarInfo);

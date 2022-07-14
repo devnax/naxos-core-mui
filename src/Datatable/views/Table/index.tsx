@@ -7,8 +7,7 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import CheckBox from '@mui/material/Checkbox';
 import TableColumns from './Columns';
-import Handler from '../../Handler';
-import { DataTableProps, RowProps, ColumnProps, StoreRowProps } from '../../types';
+import { DataTableProps, ColumnProps, StoreRowProps } from '../../types';
 import { withStore, withMemo } from 'state-range';
 import { Row } from 'state-range/src/types';
 import { alpha, useTheme } from '@mui/material/styles';
@@ -41,32 +40,35 @@ const RowColMap = withMemo(_rowColMap, ({ row }: any) => {
     return [row.observe];
 });
 
-const _Row = ({ id, checkbox, row, rowActions, rowRender }: { row: Row<Partial<StoreRowProps>> } & DataTableProps) => {
-    const columns = Handler.getColumns(id);
+const _Row = ({ handler, row, rowActions }: { row: Row<StoreRowProps> } & DataTableProps) => {
+    const checkbox = handler.getMeta("checkbox")
+    const columns = handler.getMeta("columns")
     const theme = useTheme();
 
-    if (rowRender) {
-        row = rowRender({ ...row }) as any
+    if (handler.renderRow) {
+        row = handler.renderRow({ ...row }) as any
     }
     let RowActions: any = false;
     if (rowActions) {
         RowActions = rowActions({ ...row });
     }
 
+    const checked = row.checked || false
+
     return (
         <TableRow
             sx={{
                 '&:last-child td, &:last-child th': { border: 0 },
-                bgcolor: row.checked ? alpha(theme.palette.primary.main, 0.16) : ''
+                bgcolor: checked ? alpha(theme.palette.primary.main, 0.16) : ''
             }}
         >
             {checkbox && (
                 <TableCell padding="checkbox">
                     <CheckBox
-                        name={id}
-                        checked={row.checked}
+                        name={row.id.toString()}
+                        checked={checked}
                         onChange={(e: any) => {
-                            Handler.update({ checked: e.target.checked }, row._id);
+                            handler.update({ checked: e.target.checked }, row._id);
                         }}
                     />
                 </TableCell>
@@ -88,12 +90,13 @@ const _Row = ({ id, checkbox, row, rowActions, rowRender }: { row: Row<Partial<S
     );
 };
 
-const Row = withStore(_Row, ({ row }: RowProps) => {
+const Row = withStore(_Row, ({ row }: any) => {
     return [row.observe];
 });
 
 const TableView = (props: DataTableProps) => {
-    const rows = Handler.getRows(props.id);
+    const { handler } = props
+    const rows = handler.findAll();
 
     return (
         <Box sx={{ borderRadius: 2, position: 'relative' }}>

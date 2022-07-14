@@ -1,11 +1,10 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Handler from '../../Handler';
 import CircularProgress from '@mui/material/CircularProgress';
 import { withStore } from 'state-range';
 import { DataTableProps } from '../../types';
-const TableLoading = ({ id }: DataTableProps) => {
-    const isLoading = Handler.metaState(id, null, 'loading');
+const TableLoading = ({ handler }: DataTableProps) => {
+    const isLoading = handler.isLoading()
 
     return (
         <>
@@ -28,4 +27,4 @@ const TableLoading = ({ id }: DataTableProps) => {
     );
 };
 
-export default withStore(TableLoading, ({ id }: DataTableProps) => [Handler.metaState(id, null, 'loading')]);
+export default withStore(TableLoading, ({ handler }: DataTableProps) => [handler.isLoading()]);

@@ -4,10 +4,11 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { DataTableProps } from '../types';
 import { alpha, useTheme } from '@mui/material/styles';
-import { withMemo } from 'state-range';
+import { withStore } from 'state-range';
 
-const NavAction = (props: DataTableProps & { selectedItems: any[] }) => {
-    const { selectedItems, selectNavActions: Action } = props;
+
+const NavAction = (props: DataTableProps) => {
+    const { handler, selectActions: Action } = props;
     const theme = useTheme();
     return (
         <Stack
@@ -28,12 +29,12 @@ const NavAction = (props: DataTableProps & { selectedItems: any[] }) => {
         >
             <Box mr={2}>
                 <Typography variant="body2" fontWeight="bold" color="#fff">
-                    Selected {selectedItems.length} Items
+                    Selected {handler.selectedRows().length} Items
                 </Typography>
             </Box>
-            <Box>{Action && <Action selectedItems={selectedItems} />}</Box>
+            <Box>{Action && <Action selected={handler.selectedRows()} />}</Box>
         </Stack>
     );
 };
 
-export default withMemo(NavAction, ({ selectedItems }) => [selectedItems.length]);
+export default withStore(NavAction);

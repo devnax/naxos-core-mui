@@ -12,10 +12,16 @@ import Dropdown from '../../Dropdown';
 import IconButton from '@mui/material/IconButton';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { withStore } from 'state-range';
-import Handler from '../Handler';
 
 const Navbar = (props: DataTableProps) => {
-    const { id, tabs, hideSearchbar, filterMenu: FilterMenuView } = props;
+    let { handler, filterMenu } = props;
+    const tabs = handler.getMeta("tabs")
+    const searchBox = handler.getMeta("searchBox", true)
+
+    if (typeof filterMenu === 'function') {
+        const Menu: any = filterMenu
+        filterMenu = <Menu /> as any
+    }
 
     return (
         <Box>
@@ -24,9 +30,12 @@ const Navbar = (props: DataTableProps) => {
                     {tabs && (
                         <Tabs
                             sx={{ minHeight: 'auto' }}
-                            value={Handler.metaState(id, null, 'currentTab') || tabs[0].value}
+                            value={handler.getMeta("currentTab") || tabs[0].value}
                             onChange={(_e, currentTab) => {
-                                Handler.metaState(id, { currentTab }, 'currentTab');
+                                handler.setMeta('currentTab', currentTab);
+                                if (handler.onChange) {
+                                    handler.onChange()
+                                }
                             }}
                         >
                             {tabs.map((tab: TabProps) => (
@@ -37,9 +46,9 @@ const Navbar = (props: DataTableProps) => {
                 </Box>
                 <Stack p={1} direction="row" justifyContent="space-between" alignItems="center" gap={1}>
                     <Box>
-                        {hideSearchbar !== true && (
+                        {searchBox && (
                             <TextField
-                                value={Handler.metaState(id, null, 'searchText') || ''}
+                                value={handler.getMeta('searchText', '')}
                                 placeholder="Search..."
                                 size="small"
                                 InputProps={{
@@ -51,22 +60,20 @@ const Navbar = (props: DataTableProps) => {
                                     )
                                 }}
                                 onChange={(e: any) => {
-                                    Handler.metaState(id, {
-                                        searchText: e.target.value
-                                    });
-                                    if (props.onSearch) {
-                                        props.onSearch(e.target.value);
+                                    handler.setMeta("searchText", e.target.value);
+                                    if (handler.onChange) {
+                                        handler.onChange()
                                     }
                                 }}
                             />
                         )}
                     </Box>
                     <Box>
-                        {FilterMenuView && (
+                        {filterMenu && (
                             <IconButton
                                 onClick={(e: any) => {
-                                    if (FilterMenuView) {
-                                        Dropdown.show(e.currentTarget, <FilterMenuView />, {
+                                    if (filterMenu) {
+                                        Dropdown.show(e.currentTarget, filterMenu as any, {
                                             popperOptions: {
                                                 placement: 'bottom-start'
                                             }
@@ -85,6 +92,4 @@ const Navbar = (props: DataTableProps) => {
     );
 };
 
-export default withStore(Navbar, ({ id, hideSearchbar }: any) => {
-    return [hideSearchbar, Handler.metaState(id, null, 'searchText'), Handler.metaState(id, null, 'currentTab')];
-});
+export default withStore(Navbar);

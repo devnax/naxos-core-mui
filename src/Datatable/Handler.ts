@@ -1,92 +1,44 @@
 import { dispatch, Store } from 'state-range';
-import { RowProps, ColumnProps, StoreRowProps, TableMetaState } from './types';
-import { PartOfRow } from 'state-range/src/types';
+import { RowProps, ColumnProps, StoreRowProps, StoreMetaProps } from './types';
 
-class DataTableHandler extends Store<Partial<StoreRowProps>> {
-    setColumns(tableId: string, columns?: ColumnProps[]) {
-        this.setMeta(`${tableId}_columns`, columns);
+abstract class DataTable<R = any, M = any> extends Store<StoreRowProps & R, StoreMetaProps & M> {
+
+    columns(cols: ColumnProps[]) {
+        this.setMeta("columns", cols as any)
     }
 
-    getColumns(tableId: string): ColumnProps[] {
-        return this.getMeta(`${tableId}_columns`, []);
-    }
+    renderRow?(row: StoreRowProps & R): StoreRowProps & R
+    onChange?(): void
 
-    observeColumns(tableId: string) {
-        return this.observeMeta(`${tableId}_columns`);
-    }
-
-    setRows(tableId: string, rows: RowProps[]) {
-        this.delete({ tableId });
+    rows(rows: (R & RowProps)[]) {
         dispatch(() => {
             for (let row of rows) {
-                this.setRow(tableId, row);
+                this.insert({ checked: false, ...row });
             }
         });
     }
 
-    setRow(tableId: string, row: RowProps) {
-        if (!this.findFirst({ tableId, id: row.id })) {
-            this.insert({ tableId, checked: false, ...row });
-        }
+    selectedRows() {
+        return this.find({ checked: true } as any);
     }
 
-    updateRow(tableId: string, id: number | string, row: Partial<RowProps>) {
-        this.update({ ...row, id }, { tableId, id });
+    loading(is = true) {
+        this.setMeta('loading', is as any)
     }
 
-    deleteRow(tableId: string, id: number | string) {
-        this.delete({ tableId, id });
+    isLoading() {
+        return this.getMeta('loading', false as any)
     }
 
-    getRows(tableId: string) {
-        return this.find({ tableId })
+    clearSelect() {
+        this.update({ checked: false } as any, { checked: true } as any)
     }
 
-    getRow(tableId: string, id: string) {
-        return this.findFirst({ tableId, id })
+    clearSearchText() {
+        this.setMeta("searchText", '' as any)
     }
 
-    findRows(tableId: string, where: PartOfRow<StoreRowProps>) {
-        return this.find({ tableId, ...where })
-    }
-
-    selectedItems(tableId: string) {
-        return this.find({ tableId, checked: true });
-    }
-
-    loading(tableId: string, is = true) {
-        this.metaState(tableId, { loading: is })
-    }
-
-    clearSelect(tableId: string) {
-        this.update({ checked: false }, { tableId, checked: true })
-    }
-
-    clearSearchText(tableId: string) {
-        this.metaState(tableId, { searchText: '' })
-    }
-
-    metaState(tableId: string, data?: TableMetaState | null, key?: string) {
-        const metakey = `${tableId}_metastate`;
-        const _def = {
-            loading: false,
-            pagination: {
-                page: false,
-                perPage: false
-            },
-            searchText: ''
-        };
-
-        if (data) {
-            this.setMeta(metakey, { ...this.getMeta(metakey, _def), ...data });
-        }
-        const meta = this.getMeta(metakey, _def);
-        if (key !== undefined && key) {
-            return meta[key] ? meta[key] : undefined;
-        }
-
-        return meta;
-    }
 }
 
-export default new DataTableHandler();
+
+export default DataTable

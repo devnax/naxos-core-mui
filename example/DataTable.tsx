@@ -1,10 +1,5 @@
-## Datatable
-
-```js
-import Datatable, {DatatableView} from 'admin/Datatable'
-import {rows, columns} from 'admin/Datatable/demodata'
-
-
+import React from 'react'
+import DataTable, { DataTableView } from '../src/Datatable'
 
 class Handler extends DataTable {
 
@@ -47,32 +42,14 @@ class Handler extends DataTable {
 
 const handler = new Handler
 
-const App = () => {
-
+const Table = () => {
    return (
-      <DatatableView
-         handler={handler}
-         rowActions={(row: Row<Partial<RowProps>>) => DropdownArrayType[]}
-         selectActions={(props: { selected: RowProps[] }) => ReactElement}
-         filterMenu={() => ReactElement | DropdownArrayType[]}
-      />
+      <div>
+         <DataTableView
+            handler={handler}
+         />
+      </div>
    )
 }
 
-```
-
-### Methods
-
-```js
-
-DataTable.columns(cols: ColumnProps[])
-DataTable.renderRow?(row: StoreRowProps & R): StoreRowProps & R;
-DataTable.onChange?(): void;
-DataTable.rows(rows: (R & RowProps)[])
-DataTable.selectedRows()
-DataTable.loading(is = true)
-DataTable.isLoading()
-DataTable.clearSelect()
-DataTable.clearSearchText() 
-
-```
+export default Table

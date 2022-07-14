@@ -1,3 +1,4 @@
+import * as React from 'react'
 import AppHandler from "../src/Apps"
 import SnapChatIcon from "./demo-icons/SnapChat"
 import BoardIcon from "./demo-icons/BoardIcon"
@@ -21,6 +22,8 @@ import { SidebarView } from '../src/Sidebar'
 import { Typography } from "@mui/material"
 
 import List, { ListView, ListPreview } from '../src/List'
+import DataTable from './DataTable'
+
 
 export default async () => {
 
@@ -101,6 +104,7 @@ export default async () => {
                   }} />
                </SidebarView>
                <Box flex={1} height="100%">
+                  <DataTable />
                   <ListPreview
                      listId="list" activeId="another"
                   />

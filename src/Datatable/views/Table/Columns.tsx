@@ -3,30 +3,22 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import CheckBox from '@mui/material/Checkbox';
-import Handler from '../../Handler';
-import { withStore, withMemo } from 'state-range';
+import { withStore } from 'state-range';
 import { DataTableProps, ColumnProps } from '../../types';
 
-const _cols = ({ columns }: any) => {
-    return columns.map(({ title, field, ...rest }: ColumnProps) => {
-        return (
-            <TableCell key={field} {...rest}>
-                {title}
-            </TableCell>
-        );
-    });
-};
+const TableColumns = ({ handler, rowActions: RowActions }: DataTableProps) => {
 
-const Columns = withMemo(_cols, ({ id }: any) => {
-    return [Handler.observeColumns(id)];
-});
+    const columns = handler.getMeta("columns")
 
-const TableColumns = ({ id, checkbox, rowActions: RowActions }: DataTableProps) => {
-    const columns = Handler.getColumns(id);
-    const allrowsLength = Handler.count({ tableId: id });
-    const checkedRowsLength = Handler.count({ tableId: id, checked: true });
-    const isAllChecked = allrowsLength === checkedRowsLength ? true : false;
-    const indeterminate = !isAllChecked && checkedRowsLength ? true : false;
+    if (!columns || !columns.length) {
+        return <></>
+    }
+
+    const checkbox = handler.getMeta("checkbox")
+    const allrowsLength = handler.count()
+    const checkedRowsLength = handler.count({ checked: true })
+    const isAllChecked = allrowsLength === checkedRowsLength ? true : false
+    const indeterminate = !isAllChecked && checkedRowsLength ? true : false
 
     return (
         <TableHead>
@@ -38,23 +30,31 @@ const TableColumns = ({ id, checkbox, rowActions: RowActions }: DataTableProps) 
                             checked={isAllChecked}
                             onChange={() => {
                                 if (indeterminate) {
-                                    Handler.update({ checked: false }, { checked: true, tableId: id });
+                                    handler.update({ checked: false }, { checked: true });
                                 } else if (isAllChecked) {
-                                    Handler.update({ checked: false }, { checked: true, tableId: id });
+                                    handler.update({ checked: false }, { checked: true });
                                 } else {
-                                    Handler.update({ checked: true }, { tableId: id });
+                                    handler.update({ checked: true }, { checked: false });
                                 }
                             }}
                         />
                     </TableCell>
                 )}
-                <Columns columns={columns} id={id} />
+                {
+                    columns?.map(({ title, field, ...rest }: ColumnProps) => {
+                        return (
+                            <TableCell key={field} {...rest}>
+                                {title}
+                            </TableCell>
+                        );
+                    })
+                }
                 {RowActions && <TableCell width={20}></TableCell>}
             </TableRow>
         </TableHead>
     );
 };
 
-export default withStore(TableColumns, (props: DataTableProps) => {
-    return [Handler.observeColumns(props.id), Handler.count({ tableId: props.id, checked: true })];
+export default withStore(TableColumns, ({ handler }: DataTableProps) => {
+    return [handler.observeMeta("columns"), handler.count({ checked: true })];
 });

@@ -7,18 +7,17 @@ import { withStore } from 'state-range';
 import { DataTableProps, ColumnProps } from '../../types';
 
 const TableColumns = ({ handler, rowActions: RowActions }: DataTableProps) => {
-
-    const columns = handler.getMeta("columns")
+    const columns = handler.getMeta('columns');
 
     if (!columns || !columns.length) {
-        return <></>
+        return <></>;
     }
 
-    const checkbox = handler.getMeta("checkbox")
-    const allrowsLength = handler.count()
-    const checkedRowsLength = handler.count({ checked: true })
-    const isAllChecked = allrowsLength === checkedRowsLength ? true : false
-    const indeterminate = !isAllChecked && checkedRowsLength ? true : false
+    const checkbox = handler.getMeta('checkbox');
+    const allrowsLength = handler.count();
+    const checkedRowsLength = handler.count({ checked: true });
+    const isAllChecked = allrowsLength === checkedRowsLength ? true : false;
+    const indeterminate = !isAllChecked && checkedRowsLength ? true : false;
 
     return (
         <TableHead>
@@ -40,15 +39,13 @@ const TableColumns = ({ handler, rowActions: RowActions }: DataTableProps) => {
                         />
                     </TableCell>
                 )}
-                {
-                    columns?.map(({ title, field, ...rest }: ColumnProps) => {
-                        return (
-                            <TableCell key={field} {...rest}>
-                                {title}
-                            </TableCell>
-                        );
-                    })
-                }
+                {columns?.map(({ title, field, ...rest }: ColumnProps) => {
+                    return (
+                        <TableCell key={field} {...rest}>
+                            {title}
+                        </TableCell>
+                    );
+                })}
                 {RowActions && <TableCell width={20}></TableCell>}
             </TableRow>
         </TableHead>
@@ -56,5 +53,5 @@ const TableColumns = ({ handler, rowActions: RowActions }: DataTableProps) => {
 };
 
 export default withStore(TableColumns, ({ handler }: DataTableProps) => {
-    return [handler.observeMeta("columns"), handler.count({ checked: true })];
+    return [handler.observeMeta('columns'), handler.count({ checked: true })];
 });

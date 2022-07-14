@@ -2,13 +2,12 @@ import { dispatch, Store } from 'state-range';
 import { RowProps, ColumnProps, StoreRowProps, StoreMetaProps } from './types';
 
 abstract class DataTable<R = any, M = any> extends Store<StoreRowProps & R, StoreMetaProps & M> {
-
     columns(cols: ColumnProps[]) {
-        this.setMeta("columns", cols as any)
+        this.setMeta('columns', cols as any);
     }
 
-    renderRow?(row: StoreRowProps & R): StoreRowProps & R
-    onChange?(): void
+    renderRow?(row: StoreRowProps & R): StoreRowProps & R;
+    onChange?(): void;
 
     rows(rows: (R & RowProps)[]) {
         dispatch(() => {
@@ -23,22 +22,20 @@ abstract class DataTable<R = any, M = any> extends Store<StoreRowProps & R, Stor
     }
 
     loading(is = true) {
-        this.setMeta('loading', is as any)
+        this.setMeta('loading', is as any);
     }
 
     isLoading() {
-        return this.getMeta('loading', false as any)
+        return this.getMeta('loading', false as any);
     }
 
     clearSelect() {
-        this.update({ checked: false } as any, { checked: true } as any)
+        this.update({ checked: false } as any, { checked: true } as any);
     }
 
     clearSearchText() {
-        this.setMeta("searchText", '' as any)
+        this.setMeta('searchText', '' as any);
     }
-
 }
 
-
-export default DataTable
+export default DataTable;

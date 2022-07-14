@@ -1,6 +1,6 @@
 import { ComponentType, ReactElement, SVGProps } from 'react';
 import { BoxProps, ListProps } from '@mui/material';
-import Handler from './Handler'
+import Handler from './Handler';
 
 export type ID = string;
 
@@ -22,14 +22,14 @@ export interface StoreProps extends ListItemProps {
 }
 
 export interface StoreMetaProps {
-    active: string
+    active: string;
 }
 
 export interface ListViewProps extends ListProps {
-    handler: Handler<StoreProps, StoreMetaProps>
+    handler: Handler<StoreProps, StoreMetaProps>;
     button?: boolean;
     onItemClick?: (item: StoreProps) => void;
-    autoChange?: false
+    autoChange?: false;
 }
 
 export interface ListPreviewProps extends BoxProps {

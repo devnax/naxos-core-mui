@@ -73,6 +73,6 @@ DataTable.selectedRows()
 DataTable.loading(is = true)
 DataTable.isLoading()
 DataTable.clearSelect()
-DataTable.clearSearchText() 
+DataTable.clearSearchText()
 
 ```

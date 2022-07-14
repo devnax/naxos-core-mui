@@ -49,7 +49,6 @@ export interface ListItemProps {
 
 ```
 
-
 ### Methods
 
 ```js

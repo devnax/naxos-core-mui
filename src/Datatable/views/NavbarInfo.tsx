@@ -9,19 +9,19 @@ import { withStore } from 'state-range';
 
 const NavbarInfo = (props: DataTableProps) => {
     const { handler } = props;
-    const selectedRows = handler.selectedRows()
-    const rows = handler.findAll()
+    const selectedRows = handler.selectedRows();
+    const rows = handler.findAll();
     const pagination = handler.getMeta('pagination');
     let perpage = 25;
-    let perpageOptions: number[] = []
+    let perpageOptions: number[] = [];
 
     if (pagination) {
         if (pagination.perpageOptions) {
-            perpage = pagination.perpageOptions[0]
-            perpageOptions = pagination.perpageOptions
+            perpage = pagination.perpageOptions[0];
+            perpageOptions = pagination.perpageOptions;
         }
         if (pagination.perpage) {
-            perpage = pagination.perpage
+            perpage = pagination.perpage;
         }
     }
 
@@ -42,25 +42,25 @@ const NavbarInfo = (props: DataTableProps) => {
                             rowsPerPageOptions={perpageOptions}
                             page={pagination?.page || 0}
                             onPageChange={(_e: any, page) => {
-                                const meta = handler.getMeta('pagination')
+                                const meta = handler.getMeta('pagination');
                                 handler.setMeta('pagination', {
                                     ...(meta || {}),
                                     page
-                                })
+                                });
 
                                 if (handler.onChange) {
-                                    handler.onChange()
+                                    handler.onChange();
                                 }
                             }}
                             onRowsPerPageChange={(e: any) => {
-                                const meta = handler.getMeta('pagination')
+                                const meta = handler.getMeta('pagination');
                                 handler.setMeta('pagination', {
                                     ...(meta || {}),
                                     perpage: e.target.value
-                                })
+                                });
 
                                 if (handler.onChange) {
-                                    handler.onChange()
+                                    handler.onChange();
                                 }
                             }}
                         />

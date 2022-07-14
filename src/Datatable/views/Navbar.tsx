@@ -15,12 +15,12 @@ import { withStore } from 'state-range';
 
 const Navbar = (props: DataTableProps) => {
     let { handler, filterMenu } = props;
-    const tabs = handler.getMeta("tabs")
-    const searchBox = handler.getMeta("searchBox", true)
+    const tabs = handler.getMeta('tabs');
+    const searchBox = handler.getMeta('searchBox', true);
 
     if (typeof filterMenu === 'function') {
-        const Menu: any = filterMenu
-        filterMenu = <Menu /> as any
+        const Menu: any = filterMenu;
+        filterMenu = (<Menu />) as any;
     }
 
     return (
@@ -30,11 +30,11 @@ const Navbar = (props: DataTableProps) => {
                     {tabs && (
                         <Tabs
                             sx={{ minHeight: 'auto' }}
-                            value={handler.getMeta("currentTab") || tabs[0].value}
+                            value={handler.getMeta('currentTab') || tabs[0].value}
                             onChange={(_e, currentTab) => {
                                 handler.setMeta('currentTab', currentTab);
                                 if (handler.onChange) {
-                                    handler.onChange()
+                                    handler.onChange();
                                 }
                             }}
                         >
@@ -60,9 +60,9 @@ const Navbar = (props: DataTableProps) => {
                                     )
                                 }}
                                 onChange={(e: any) => {
-                                    handler.setMeta("searchText", e.target.value);
+                                    handler.setMeta('searchText', e.target.value);
                                     if (handler.onChange) {
-                                        handler.onChange()
+                                        handler.onChange();
                                     }
                                 }}
                             />

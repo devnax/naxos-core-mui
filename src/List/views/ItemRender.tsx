@@ -23,7 +23,6 @@ export default (props: ItemRenderProps) => {
 
     const btn: any = button === undefined || button ? true : false;
 
-
     return (
         <>
             {typeof heading === 'string' ? (

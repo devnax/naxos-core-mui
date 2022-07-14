@@ -6,7 +6,6 @@ import { DataTableProps } from '../types';
 import { alpha, useTheme } from '@mui/material/styles';
 import { withStore } from 'state-range';
 
-
 const NavAction = (props: DataTableProps) => {
     const { handler, selectActions: Action } = props;
     const theme = useTheme();

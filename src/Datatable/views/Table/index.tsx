@@ -41,19 +41,19 @@ const RowColMap = withMemo(_rowColMap, ({ row }: any) => {
 });
 
 const _Row = ({ handler, row, rowActions }: { row: Row<StoreRowProps> } & DataTableProps) => {
-    const checkbox = handler.getMeta("checkbox")
-    const columns = handler.getMeta("columns")
+    const checkbox = handler.getMeta('checkbox');
+    const columns = handler.getMeta('columns');
     const theme = useTheme();
 
     if (handler.renderRow) {
-        row = handler.renderRow({ ...row }) as any
+        row = handler.renderRow({ ...row }) as any;
     }
     let RowActions: any = false;
     if (rowActions) {
         RowActions = rowActions({ ...row });
     }
 
-    const checked = row.checked || false
+    const checked = row.checked || false;
 
     return (
         <TableRow
@@ -95,7 +95,7 @@ const Row = withStore(_Row, ({ row }: any) => {
 });
 
 const TableView = (props: DataTableProps) => {
-    const { handler } = props
+    const { handler } = props;
     const rows = handler.findAll();
 
     return (

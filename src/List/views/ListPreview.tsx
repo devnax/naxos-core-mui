@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { withStore } from 'state-range';
-import { ListPreviewProps } from '../types'
+import { ListPreviewProps } from '../types';
 
 const ListPreview = ({ handler, ...rest }: ListPreviewProps) => {
     const item = handler.getActiveItem();

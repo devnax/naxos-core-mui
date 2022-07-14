@@ -9,7 +9,7 @@ import Handler from './';
 const AlertView: React.FC<AlertProps> = ({ type, title, content, icon, onClick, buttonText, centerContent }) => {
     const text: [string, string] = buttonText || ['OK', 'CANCEL'];
     return (
-        <Stack borderRadius={2} boxShadow={5} bgcolor="background.paper" p={2} pb={1} justifyContent="space-between">
+        <Stack borderRadius={2} boxShadow={15} bgcolor="background.paper" p={2} pb={1} justifyContent="space-between">
             <Stack direction={centerContent ? 'column' : 'row'} textAlign={centerContent ? 'center' : 'left'} gap={centerContent ? 0 : 1}>
                 {icon && <Box>{icon}</Box>}
                 <Box>

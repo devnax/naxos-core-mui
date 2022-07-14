@@ -4,7 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { withStore } from 'state-range';
 import { DataTableProps } from '../../types';
 const TableLoading = ({ handler }: DataTableProps) => {
-    const isLoading = handler.isLoading()
+    const isLoading = handler.isLoading();
 
     return (
         <>

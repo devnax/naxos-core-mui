@@ -33,7 +33,7 @@ const ScreenView: React.FC<ScreenProps> = ({ appId, header, footer, ...props }) 
                 outline: 0
             }}
             {...props}
-            onKeyDown={(e: React.KeyboardEvent) => {
+            onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
                 if (shortcutKeys) {
                     for (let shortcut of shortcutKeys) {
                         if (isHotkey(shortcut.key, e)) {
@@ -41,6 +41,9 @@ const ScreenView: React.FC<ScreenProps> = ({ appId, header, footer, ...props }) 
                             break;
                         }
                     }
+                }
+                if (props.onKeyDown) {
+                    props.onKeyDown(e);
                 }
             }}
         >

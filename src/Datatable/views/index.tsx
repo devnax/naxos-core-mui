@@ -7,17 +7,17 @@ import NavbarInfo from './NavbarInfo';
 import { withStore } from 'state-range';
 
 const DataTableView = (props: DataTableProps) => {
-   return (
-      <Box>
-         <Navbar {...props} />
-         <Table {...props} />
-         {!props.handler.getMeta("hideFooter") && (
-            <Box mt={1}>
-               <NavbarInfo {...props} />
-            </Box>
-         )}
-      </Box>
-   );
-}
+    return (
+        <Box>
+            <Navbar {...props} />
+            <Table {...props} />
+            {!props.handler.getMeta('hideFooter') && (
+                <Box mt={1}>
+                    <NavbarInfo {...props} />
+                </Box>
+            )}
+        </Box>
+    );
+};
 
-export default withStore(DataTableView, (props) => [props.handler.getMeta("hideFooter")])
+export default withStore(DataTableView, (props) => [props.handler.getMeta('hideFooter')]);

@@ -24,10 +24,10 @@ const ListRender = (props: ListPropsTypes) => {
                             onClick={() => {
                                 onItemClick && onItemClick(item);
                                 if (autoChange !== false) {
-                                    handler.activeItem(item.id)
+                                    handler.activeItem(item.id);
                                 }
                                 if (handler.onItemClick) {
-                                    handler.onItemClick(item)
+                                    handler.onItemClick(item);
                                 }
                             }}
                             collaps={childs.length ? true : false}
@@ -36,11 +36,7 @@ const ListRender = (props: ListPropsTypes) => {
                             {...item}
                         />
 
-                        {childs.length && item.active ? <ListRender
-                            {...props}
-                            dept={dept + 1}
-                            items={childs}
-                        /> : ''}
+                        {childs.length && item.active ? <ListRender {...props} dept={dept + 1} items={childs} /> : ''}
                     </Box>
                 );
             })}
@@ -49,8 +45,8 @@ const ListRender = (props: ListPropsTypes) => {
 };
 
 const ListView = (props: ListViewProps) => {
-    const { handler, onItemClick } = props
-    const parents = handler.getParents()
+    const { handler, onItemClick } = props;
+    const parents = handler.getParents();
     if (!parents.length) {
         return <></>;
     }

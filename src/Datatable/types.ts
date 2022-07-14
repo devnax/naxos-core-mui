@@ -3,13 +3,12 @@ import { TabProps } from '@mui/material/Tab';
 import { TableCellProps } from '@mui/material/TableCell';
 import { Row } from 'state-range/src/types';
 import { DropdownArrayType } from '../Dropdown/types';
-import DataTable from './Handler'
+import DataTable from './Handler';
 
 export interface RowProps {
     id: string | number;
     [key: string]: any;
 }
-
 
 export interface StoreRowProps extends RowProps {
     checked?: boolean;
@@ -34,8 +33,8 @@ export interface StoreMetaProps {
         page?: number;
         perpage?: number | false;
         rowCount?: number;
-        perpageOptions?: number[]
-    }
+        perpageOptions?: number[];
+    };
 }
 
 export interface DataTableProps {

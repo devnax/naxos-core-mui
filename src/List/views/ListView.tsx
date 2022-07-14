@@ -26,6 +26,9 @@ const ListRender = (props: ListPropsTypes) => {
                                 if (autoChange !== false) {
                                     handler.activeItem(item.id)
                                 }
+                                if (handler.onItemClick) {
+                                    handler.onItemClick(item)
+                                }
                             }}
                             collaps={childs.length ? true : false}
                             isChild={dept > 0}

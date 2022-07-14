@@ -17,49 +17,49 @@ class Handler extends List {
             id: "deshboard",
             title: "Deshboard",
             icon: <ArchiveRoundedIcon />,
-            render: () => <Box p={2} bgcolor="red">Red</Box>,
+            render: () => <Box p={2} bgcolor="red">deshboard</Box>,
             divider: true
          },
          {
             id: "pages",
             title: "Pages",
             icon: <GraphicEqIcon />,
-            render: () => <Box p={2} bgcolor="red">Red</Box>
+            render: () => <Box p={2} bgcolor="red">Pages</Box>
          },
          {
             id: "users",
             title: "Users",
             label: "20+",
             icon: <SettingsVoiceRoundedIcon />,
-            render: () => <Box p={2} bgcolor="red">Red</Box>
+            render: () => <Box p={2} bgcolor="red">Users</Box>
          },
          {
             heading: "General",
             id: "posts",
             title: "Posts",
             icon: <ParkRoundedIcon />,
-            render: () => <Box p={2} bgcolor="green">Green</Box>
+            render: () => <Box p={2} bgcolor="green">General</Box>
          },
          {
             id: "add_post",
             title: "Add New Post",
             parentId: "posts",
             icon: <ExtensionRoundedIcon />,
-            render: () => <Box p={2} bgcolor="green">Green</Box>
+            render: () => <Box p={2} bgcolor="green">Add Post</Box>
          },
          {
             id: "another",
             title: "Another",
-            parentId: "posts",
+            parentId: "add_post",
             icon: <BluetoothAudioRoundedIcon />,
-            render: () => <Box p={2} bgcolor="green">Green</Box>
+            render: () => <Box p={2} bgcolor="green">Another</Box>
          },
          {
-            id: "another",
+            id: "another1",
             title: "User Another",
-            parentId: "users",
+            parentId: "another",
             icon: <BluetoothAudioRoundedIcon />,
-            render: () => <Box p={2} bgcolor="green">Green</Box>
+            render: () => <Box p={2} bgcolor="green">User Another</Box>
          },
       ])
 

@@ -34,5 +34,4 @@ export interface ListViewProps extends ListProps {
 
 export interface ListPreviewProps extends BoxProps {
     handler: Handler<StoreProps, StoreMetaProps>;
-
 }

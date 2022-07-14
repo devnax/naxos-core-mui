@@ -3,9 +3,9 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import CheckBox from '@mui/material/Checkbox';
-import Handler from '../Handler';
+import Handler from '../../Handler';
 import { withStore, withMemo } from 'state-range';
-import { DataTableProps, ColumnProps } from '../types';
+import { DataTableProps, ColumnProps } from '../../types';
 
 const _cols = ({ columns }: any) => {
     return columns.map(({ title, field, ...rest }: ColumnProps) => {

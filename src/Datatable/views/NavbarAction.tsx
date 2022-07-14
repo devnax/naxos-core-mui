@@ -2,7 +2,7 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { DataTableProps } from './types';
+import { DataTableProps } from '../types';
 import { alpha, useTheme } from '@mui/material/styles';
 import { withMemo } from 'state-range';
 

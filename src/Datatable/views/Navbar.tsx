@@ -6,13 +6,13 @@ import Tab, { TabProps } from '@mui/material/Tab';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import { DataTableProps } from './types';
+import { DataTableProps } from '../types';
 import NavbarInfo from './NavbarInfo';
-import Dropdown from '../Dropdown';
+import Dropdown from '../../Dropdown';
 import IconButton from '@mui/material/IconButton';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { withStore } from 'state-range';
-import Handler from './Handler';
+import Handler from '../Handler';
 
 const Navbar = (props: DataTableProps) => {
     const { id, tabs, hideSearchbar, filterMenu: FilterMenuView } = props;

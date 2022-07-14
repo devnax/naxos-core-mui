@@ -2,11 +2,11 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import NavAction from './NavbarAction';
-import { DataTableProps } from './types';
+import { DataTableProps } from '../types';
 import TablePagination from '@mui/material/TablePagination';
 import Box from '@mui/material/Box';
 import { withStore } from 'state-range';
-import Handler from './Handler';
+import Handler from '../Handler';
 
 const NavbarInfo = (props: DataTableProps) => {
     const { id, rowCount, perPageOptions, hidePagination, hideRowPerPage, onPaginationChange } = props;

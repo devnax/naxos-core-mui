@@ -1,14 +1,14 @@
 ## Datatable
 
 ```js
-import Datatable from 'admin/Datatable'
+import Datatable, {DatatableView} from 'admin/Datatable'
 import {rows, columns} from 'admin/Datatable/demodata'
 
 
 const App = () => {
 
    return (
-      <Datatable
+      <DatatableView
          id="tableid"
          checkbox
          onSearch={(text) => {
@@ -73,15 +73,14 @@ const App = () => {
 
 DataTable.setColumns(tableId: string, columns: ColumnProps[]): ColumnProps[]
 DataTable.setRows(tableId: string, rows: RowProps[])
-DataTable.addRow(tableId: string, row: RowProps)
+DataTable.setRow(tableId: string, row: RowProps)
 DataTable.getRows(tableId: string): RowProps[]
-DataTable.find(tableId: string, where: object): Row<Partial<RowProps>>[]
+DataTable.findRows(tableId: string, where: object): Row<Partial<RowProps>>[]
 DataTable.getRow(tableId: string, id: number | string): RowProps
 DataTable.deleteRow(tableId: string, rowId: number | string)
 DataTable.updateRow(tableId: string, rowId: number | string, row: Partial<RowProps>)
-DataTable.updateRows(tableId: string, row: Partial<RowProps>, where: Partial<RowProps>)
 DataTable.loading(tableId: string, is?: boolean)
-DataTable.unselecRows(tableId: string): RowProps[]
+DataTable.clearSelect(tableId: string): RowProps[]
 DataTable.clearSearchText(tableId: string)
 
 ```

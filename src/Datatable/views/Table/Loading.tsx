@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Handler from '../Handler';
+import Handler from '../../Handler';
 import CircularProgress from '@mui/material/CircularProgress';
 import { withStore } from 'state-range';
-import { DataTableProps } from '../types';
+import { DataTableProps } from '../../types';
 const TableLoading = ({ id }: DataTableProps) => {
     const isLoading = Handler.metaState(id, null, 'loading');
 

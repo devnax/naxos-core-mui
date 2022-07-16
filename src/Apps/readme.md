@@ -16,7 +16,9 @@ Apps.create({
 
    shortcutKeys: [
       {key: "isHotkey npm", cvallback: () => void}
-   ]
+   ];
+
+   commands?: CommandType[]
 })
 
 

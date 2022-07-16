@@ -1,7 +1,7 @@
 import { ReactElement, SVGProps } from 'react';
 import { AlertProps } from '../Alert';
 import { DropdownArrayType } from '../Dropdown/types';
-
+import { CommandType } from '../System/handlers/Command';
 export interface AppPermissionType {
     [key: string]: boolean;
 }
@@ -27,6 +27,8 @@ export interface AppProps {
     childApps?: AppProps[]; // Main app has multiple child app. it jus groupping
 
     shorcutKeys?: ShorcutKeys[]; // this shortcut key will work when the app is running
+
+    commands?: CommandType[];
 }
 
 export interface AppPropsStore extends AppProps {

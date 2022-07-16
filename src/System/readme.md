@@ -1,6 +1,6 @@
 ```js
 
-import {OSView, ThemexView, System} from 'system'
+import {OSView, ThemexView, System, Command} from 'system'
 
 
 // OS Layout
@@ -39,4 +39,15 @@ global.set("dockSetting", {
 
 global.observe("dockSetting")
 global.getAll() // return all system props
+```
+
+### Command
+
+command is just a global scope. if you add a commad with a key and callback then you can excute that command anywhere with the key.
+
+```js
+Command.create(unique_key, calback);
+Command.remove(key);
+Command.excute(key);
+Command.exists(key);
 ```

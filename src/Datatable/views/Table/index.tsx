@@ -101,7 +101,7 @@ const TableView = (props: DataTableProps) => {
     return (
         <Box sx={{ borderRadius: 2, position: 'relative' }}>
             <TableLoading {...props} />
-            {!rows.length ? (
+            {!rows.length && !handler.isLoading() ? (
                 <Stack sx={{ userSelect: 'none' }} height={200} justifyContent="center" alignItems="center">
                     <Box textAlign="center">
                         <InboxRoundedIcon sx={{ fontSize: 50, opacity: 0.5 }} />

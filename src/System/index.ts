@@ -1,5 +1,5 @@
 import System from './handlers/System';
-import Commands from './handlers/Commands';
+import Command from './handlers/Command';
 import OSView from './views/OSView';
 import ThemexView from './views/Themex';
-export { System, Commands, OSView, ThemexView };
+export { System, Command, OSView, ThemexView };

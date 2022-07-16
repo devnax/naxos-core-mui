@@ -43,6 +43,12 @@ class Handler extends DataTable {
          { label: "Active", value: "active" },
       ])
    }
+
+   renderRow(): void;
+   onStateChange(): void;
+   onTabChange(): void;
+   onPaginationChange(): void;
+   onSearch(): void;
 }
 
 const handler = new Handler
@@ -67,8 +73,8 @@ const App = () => {
 
 DataTable.columns(cols: ColumnProps[])
 DataTable.renderRow?(row: StoreRowProps & R): StoreRowProps & R;
-DataTable.onChange?(): void;
 DataTable.rows(rows: (R & RowProps)[])
+DataTable.pagination(set?)
 DataTable.selectedRows()
 DataTable.loading(is = true)
 DataTable.isLoading()

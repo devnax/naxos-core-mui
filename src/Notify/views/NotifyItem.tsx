@@ -34,7 +34,7 @@ const NotifyItem = ({ animation, _id, title, icon, content, small, type, closeBu
                 px={1.5}
                 borderRadius={2}
                 boxShadow={3}
-                height={small ? 50 : 55}
+                minHeight={small ? 50 : 55}
                 spacing={2}
                 bgcolor="background.paper"
                 onMouseEnter={() => Handler.pauseTime(_id)}

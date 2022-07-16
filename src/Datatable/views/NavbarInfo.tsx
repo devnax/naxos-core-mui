@@ -48,8 +48,12 @@ const NavbarInfo = (props: DataTableProps) => {
                                     page
                                 });
 
-                                if (handler.onChange) {
-                                    handler.onChange();
+                                if (handler.onPaginationChange) {
+                                    handler.onPaginationChange();
+                                }
+
+                                if (handler.onStateChange) {
+                                    handler.onStateChange();
                                 }
                             }}
                             onRowsPerPageChange={(e: any) => {
@@ -59,8 +63,12 @@ const NavbarInfo = (props: DataTableProps) => {
                                     perpage: e.target.value
                                 });
 
-                                if (handler.onChange) {
-                                    handler.onChange();
+                                if (handler.onPaginationChange) {
+                                    handler.onPaginationChange();
+                                }
+
+                                if (handler.onStateChange) {
+                                    handler.onStateChange();
                                 }
                             }}
                         />

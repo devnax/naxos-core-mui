@@ -33,8 +33,13 @@ const Navbar = (props: DataTableProps) => {
                             value={handler.getMeta('currentTab') || tabs[0].value}
                             onChange={(_e, currentTab) => {
                                 handler.setMeta('currentTab', currentTab);
-                                if (handler.onChange) {
-                                    handler.onChange();
+
+                                if (handler.onTabChange) {
+                                    handler.onTabChange(currentTab);
+                                }
+
+                                if (handler.onStateChange) {
+                                    handler.onStateChange();
                                 }
                             }}
                         >
@@ -61,8 +66,11 @@ const Navbar = (props: DataTableProps) => {
                                 }}
                                 onChange={(e: any) => {
                                     handler.setMeta('searchText', e.target.value);
-                                    if (handler.onChange) {
-                                        handler.onChange();
+                                    if (handler.onSearch) {
+                                        handler.onSearch(e.target.value);
+                                    }
+                                    if (handler.onStateChange) {
+                                        handler.onStateChange();
                                     }
                                 }}
                             />

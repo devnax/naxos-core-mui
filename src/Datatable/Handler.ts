@@ -1,13 +1,16 @@
 import { dispatch, Store } from 'state-range';
 import { RowProps, ColumnProps, StoreRowProps, StoreMetaProps } from './types';
 
-abstract class DataTable<R = any, M = any> extends Store<StoreRowProps & R, StoreMetaProps & M> {
+abstract class DataTable<R = {}, M = {}> extends Store<StoreRowProps & R, StoreMetaProps & M> {
+    renderRow?(row: StoreRowProps & R): StoreRowProps & R;
+    onStateChange?(): void;
+    onSearch?(text: string): void;
+    onTabChange?(tab: string): void;
+    onPaginationChange?(): void;
+
     columns(cols: ColumnProps[]) {
         this.setMeta('columns', cols as any);
     }
-
-    renderRow?(row: StoreRowProps & R): StoreRowProps & R;
-    onChange?(): void;
 
     rows(rows: (R & RowProps)[]) {
         dispatch(() => {
@@ -35,6 +38,23 @@ abstract class DataTable<R = any, M = any> extends Store<StoreRowProps & R, Stor
 
     clearSearchText() {
         this.setMeta('searchText', '' as any);
+    }
+
+    pagination(set?: (StoreMetaProps & M)['pagination']) {
+        const def = {
+            page: 0,
+            perpage: 30,
+            perpageOptions: [],
+            rowCount: 30
+        };
+        if (set) {
+            this.setMeta('pagination', set);
+        }
+        const p = this.getMeta('pagination', def as any);
+        return {
+            ...def,
+            ...p
+        } as typeof def;
     }
 }
 

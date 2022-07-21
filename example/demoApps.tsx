@@ -15,6 +15,7 @@ import { Typography } from "@mui/material"
 import { ListView, ListPreview } from '../src/List'
 import DataTable from './DataTable'
 import ListHandler from './List'
+import { PostView } from '../src/Post'
 
 export default async () => {
 
@@ -45,11 +46,8 @@ export default async () => {
                         console.log(id)
                      }} />
                </SidebarView>
-               <Box flex={1} height="100%">
-                  <DataTable />
-                  <ListPreview
-                     handler={ListHandler}
-                  />
+               <Box flex={1} height="100%" p={3}>
+                  <PostView />
                </Box>
             </Stack>
          )

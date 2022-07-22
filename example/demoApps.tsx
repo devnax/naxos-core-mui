@@ -47,7 +47,12 @@ export default async () => {
                      }} />
                </SidebarView>
                <Box flex={1} height="100%" p={3}>
-                  <PostView />
+                  <PostView
+                     tabs={[
+                        { title: "Outline", content: <></> },
+                        { title: "Settings", content: <></> },
+                     ]}
+                  />
                </Box>
             </Stack>
          )

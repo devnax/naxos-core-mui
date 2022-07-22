@@ -2,9 +2,15 @@ import React from 'react'
 import Stack from '@mui/material/Stack'
 import AddPhotoIcon from '@mui/icons-material/AddPhotoAlternate';
 import MetaBox from '../../../components/MetaBox'
+import Handler from '../handler'
+import { withStore } from 'state-range';
 
+const Thumbnail = () => {
 
-const General = () => {
+   const state = Handler.getMeta("state")
+   const onThumbnailClick = Handler.getMeta("onThumbnailClick")
+   const thumbnail = state?.thumbnail
+
    return (
       <MetaBox title="Thumbnail">
          <Stack
@@ -16,19 +22,29 @@ const General = () => {
             sx={{
                cursor: "pointer",
                transition: "all .3s",
-               border: "2px dashed rgba(255,255,255, .1)",
+               border: !thumbnail ? "2px dashed rgba(255,255,255, .1)" : "",
+               backgroundImage: `url(${thumbnail})`,
+               backgroundRepeat: "no-repeat",
+               backgroundSize: "cover",
+               backgroundPosition: "center"
 
             }}
+            onClick={() => onThumbnailClick && onThumbnailClick()}
          >
-            <AddPhotoIcon
-               sx={{
-                  opacity: .4,
-                  fontSize: 30
-               }}
-            />
+            {
+               !thumbnail && <AddPhotoIcon
+                  sx={{
+                     opacity: .4,
+                     fontSize: 30
+                  }}
+               />
+            }
          </Stack>
       </MetaBox>
    )
 }
 
-export default General
+export default withStore(Thumbnail, () => {
+   const state = Handler.getMeta("state")
+   return [state?.thumbnail]
+})

@@ -1,7 +1,7 @@
 import React from 'react'
 import Stack from '@mui/material/Stack'
 import AddPhotoIcon from '@mui/icons-material/AddPhotoAlternate';
-import MetaBox from '../../../components/MetaBox'
+import MetaBox from '../../../MetaBox'
 import Handler from '../handler'
 import { withStore } from 'state-range';
 

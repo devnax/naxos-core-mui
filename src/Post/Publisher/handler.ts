@@ -15,10 +15,15 @@ class PostPublisherHandler extends Store<any, PublisherProps> {
    }
 
    setState(state: State) {
-      this.setMeta("state", {
+      const onStateChange = this.getMeta("onStateChange")
+      const newState = {
          ...this.getMeta("state"),
          ...state
-      })
+      }
+      this.setMeta("state", newState)
+      if (onStateChange) {
+         onStateChange(newState)
+      }
    }
 }
 

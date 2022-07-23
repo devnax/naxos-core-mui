@@ -1,21 +1,20 @@
-import React, { FC, useState, useMemo } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import TextField from '@mui/material/TextField'
 import Link from '@mui/material/Link'
-
+import Button from '@mui/material/Button'
 import General from './General'
-import MetaBox from '../../../components/MetaBox'
-import Category from './Category'
-import Tags from './Tags'
+
 import IconButton from '@mui/material/IconButton'
 import EditSlugIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import { PublisherProps } from '../types'
 import Handler from '../handler'
-import { noDispatch, withMemo, withStore } from 'state-range'
+import { withMemo, withStore } from 'state-range'
+import Loader from '../../../Loader'
+import Typography from '@mui/material/Typography'
 
 
 const slugify = (str: string) =>
@@ -28,7 +27,9 @@ const slugify = (str: string) =>
 const _Slug = () => {
    const [edit, setEdit] = useState(false)
    const state = Handler.getMeta("state")
-
+   if (!state?.slug) {
+      return <></>
+   }
    return (
       <Stack direction="row" spacing={1} alignItems="center" mt={.3}>
          {
@@ -75,28 +76,61 @@ const Slug = withMemo(_Slug, () => {
 
 
 const Publisher: FC<PublisherProps> = (props) => {
-
-   useMemo(() => {
-      noDispatch(() => {
-         Handler.loadProps({
-            ...props,
-            tabs: props.tabs ? [{ title: "General", content: <General /> }, ...props.tabs] : undefined
-         })
+   useEffect(() => {
+      Handler.loadProps({
+         ...props,
+         tabs: props.tabs ? [{ title: "General", content: <General /> }, ...props.tabs] : undefined
       })
    }, [])
 
    const activeTab = Handler.getMeta("activeTab", "General")
-   let tabs = Handler.getMeta("tabs")
-   let slugEdited = Handler.getMeta("slugEdited")
-   let hidePublish = Handler.getMeta("hidePublish")
-   let metaBoxes = Handler.getMeta("metaBoxes")
-   let onPublish = Handler.getMeta("onPublish")
-   let onDraft = Handler.getMeta("onDraft")
+   const tabs = Handler.getMeta("tabs")
+   const slugEdited = Handler.getMeta("slugEdited")
+   const onTabChange = Handler.getMeta("onTabChange")
+   const loading = Handler.getMeta("loading", false)
    const state = Handler.getMeta("state")
+   const hidePublish = Handler.getMeta("hidePublish")
+   const onPublish = Handler.getMeta("onPublish")
+   const onDraft = Handler.getMeta("onDraft")
+   const editMode = Handler.getMeta("editMode", false)
+   const title = Handler.getMeta("title")
+   const containerProps = Handler.getMeta("containerProps", {})
 
    return (
-      <Stack direction="row" gap={2}>
-         <Stack flex={1} gap={2}>
+      <Loader loading={loading as any}>
+         {
+            !hidePublish && <Stack
+               spacing={1}
+               direction="row"
+               justifyContent="space-between"
+               mb={2}
+               position="sticky"
+               top={0}
+               zIndex={999}
+               bgcolor="background.paper"
+               p={1}
+            >
+               <Box>
+                  {
+                     title && <Typography variant="h4" >{title}</Typography>
+                  }
+               </Box>
+               <Stack direction="row" gap={2} alignItems="center">
+                  <Button
+                     variant="text"
+                     disableRipple
+                     onClick={() => onDraft && onDraft(state as any)}
+                  >Save To Draft</Button>
+                  <Button
+                     variant="contained"
+                     onClick={() => onPublish && onPublish(state as any)}
+                  >
+                     {editMode ? "UPDATE" : "PUBLISH"}
+                  </Button>
+               </Stack>
+            </Stack>
+         }
+         <Stack flex={1} gap={2} {...containerProps}>
             <Box>
                <TextField
                   value={state?.title || ""}
@@ -121,9 +155,11 @@ const Publisher: FC<PublisherProps> = (props) => {
                <Slug />
                {
                   tabs && <Tabs sx={{ mt: 1 }}
-
+                     variant="scrollable"
+                     scrollButtons="auto"
                      value={activeTab}
                      onChange={(_e, t) => {
+                        onTabChange && onTabChange(t)
                         Handler.setMeta("activeTab", t)
                      }}
                   >
@@ -146,39 +182,7 @@ const Publisher: FC<PublisherProps> = (props) => {
                }
             </Box>
          </Stack>
-         <Stack spacing={2} width={350} px={2}>
-            {
-               !hidePublish && <MetaBox title="Publish" spacing={2}>
-                  <Stack spacing={1}>
-                     <Button
-                        fullWidth
-                        variant="contained"
-                        onClick={() => onPublish && onPublish(state)}
-                     >PUBLISH</Button>
-                     <Button
-                        fullWidth
-                        variant="text"
-                        disableRipple
-                        onClick={() => onDraft && onDraft(state)}
-                     >Save To Draft</Button>
-                  </Stack>
-               </MetaBox>
-            }
-
-            <Category />
-            <Tags />
-
-            {
-               metaBoxes && metaBoxes.map((box) => {
-                  if (box.sidebar) {
-                     return <MetaBox key={"sidebar_metabox" + box.title} title={box.title} spacing={2}>
-                        {box.content}
-                     </MetaBox>
-                  }
-               })
-            }
-         </Stack>
-      </Stack>
+      </Loader>
    )
 }
 

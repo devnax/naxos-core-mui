@@ -1,3 +1,4 @@
+import { StackProps } from "@mui/material";
 import { ReactElement } from "react";
 
 
@@ -8,7 +9,7 @@ export interface State {
    excerpt?: string;
    thumbnail?: string;
    categories?: number[];
-   tags?: number[];
+   tags?: Tag[];
 }
 
 export interface MetaBox {
@@ -24,12 +25,18 @@ export interface Tabs {
 
 export interface CategoriesProps {
    id: number;
-   label: string;
+   title: string;
+}
+
+export interface Tag {
+   id: number;
+   title: string;
 }
 
 export interface PublisherProps {
-   categories?: CategoriesProps;
-   tags?: CategoriesProps;
+   title?: string;
+   categories?: CategoriesProps[];
+   tags?: Tag[];
    state?: State;
    metaBoxes?: MetaBox[];
    tabs?: Tabs[];
@@ -39,18 +46,18 @@ export interface PublisherProps {
    loading?: boolean;
    editor?: ReactElement;
 
-   expandable?: boolean;
-
    hidePublish?: boolean;
    hideThumbnail?: boolean;
    hideExcerpt?: boolean;
-   onStateChange?: Function;
-   onPageChange?: Function;
-   onPublish?: Function;
-   onDraft?: Function;
+
+   onStateChange?: (state: State) => void;
+   onTabChange?: (t: string) => void;
+   onPublish?: (state: State) => void;
+   onDraft?: (state: State) => void;
    onThumbnailClick?: Function;
    onSlugChange?: (slug: string) => void;
 
-
    slugEdited?: boolean;
+
+   containerProps?: StackProps
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
-import MetaBox from '../../../components/MetaBox'
+import MetaBox from '../../../MetaBox'
 import { withStore } from 'state-range'
 import Handler from '../handler'
 const Excerpt = () => {

@@ -10,10 +10,9 @@ type Props = StackProps & {
    children: ReactElement | ReactNode;
    title?: string | ReactElement;
    expandable?: boolean;
-
 }
 
-const General: FC<Props> = ({ children, title, expandable, ...rest }) => {
+const MetaBox: FC<Props> = ({ children, title, expandable, ...rest }) => {
 
    expandable = expandable === undefined || expandable;
 
@@ -24,23 +23,25 @@ const General: FC<Props> = ({ children, title, expandable, ...rest }) => {
 
    return (
       <Stack
-         spacing={.1}
-         bgcolor="background.paper"
-         borderRadius={2}
          {...rest}
       >
          <Accordion
-            sx={{ background: 'transparent', backgroundImage: "none" }}
+            sx={{ background: 'background.paper', backgroundImage: "none" }}
             defaultExpanded
             {...disableExpand}
          >
             <AccordionSummary
                expandIcon={expandable ? <ExpandMoreIcon /> : ''}
-               sx={{ cursor: expandable ? "pointer" : "initial!important" }}
+               sx={{
+                  cursor: expandable ? "pointer" : "initial!important", minHeight: "40px!important",
+                  '& > div': {
+                     m: '0!important'
+                  }
+               }}
             >
                <Typography>{title}</Typography>
             </AccordionSummary>
-            <AccordionDetails sx={{ bgcolor: "transparent" }}>
+            <AccordionDetails >
                {children}
             </AccordionDetails>
          </Accordion>
@@ -49,4 +50,4 @@ const General: FC<Props> = ({ children, title, expandable, ...rest }) => {
 }
 
 
-export default General
+export default MetaBox

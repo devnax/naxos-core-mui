@@ -1,29 +1,51 @@
 import React from 'react'
 import Box from '@mui/material/Box'
-import MetaBox from '../../../components/MetaBox'
+import MetaBox from '../../../MetaBox'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Scrollbar from '../../../components/Scrollbar'
 import TextField from '@mui/material/TextField'
+import { withStore } from 'state-range';
+
+import Handler from '../handler'
 
 const Category = () => {
+
+   const state = Handler.getMeta("state")
+   const categories = Handler.getMeta("categories", [])
+
+   if (!categories?.length) {
+      return <></>
+   }
+
    return (
       <MetaBox title="Category" >
-         <Scrollbar style={{ flex: 1, height: "auto", maxHeight: 200, padding: 8 }}>
+         <Scrollbar style={{ flex: 1, height: "auto", maxHeight: 200, padding: "0 8px" }}>
             <FormGroup>
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="IELTS" />
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="GED" />
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="SAT" />
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="TOEFL" />
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="GRE" />
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="GMAT" />
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="IELTS" />
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="GED" />
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="SAT" />
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="TOEFL" />
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="GRE" />
-               <FormControlLabel control={<Checkbox size="small" sx={{ p: .5 }} />} label="GMAT" />
+               {
+                  categories.map((category) => {
+                     return <FormControlLabel
+                        key={"cat_list" + category.id}
+                        control={<Checkbox
+                           size="small"
+                           sx={{ p: .5 }}
+                           checked={state?.categories?.includes(category.id) || false}
+                           onChange={(e: any) => {
+                              const s = Handler.getMeta("state")
+                              let cats = s?.categories || []
+                              if (cats.includes(category.id)) {
+                                 cats.splice(cats.indexOf(category.id), 1)
+                              } else {
+                                 cats.push(category.id)
+                              }
+                              Handler.setState({ categories: cats })
+                           }}
+                        />}
+                        label={category.title}
+                     />
+                  })
+               }
             </FormGroup>
          </Scrollbar>
          <Box py={1}>
@@ -37,4 +59,8 @@ const Category = () => {
    )
 }
 
-export default Category
+export default withStore(Category, () => {
+   const state = Handler.getMeta("state")
+   const categories = Handler.getMeta("categories") || []
+   return [(state?.categories || []).length, categories.length]
+})

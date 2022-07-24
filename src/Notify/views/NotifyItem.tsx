@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/CloseRounded';
 import Typography from '@mui/material/Typography';
-import AnimateBox from '../../components/AnimateBox';
+import AnimateBox from '../../AnimateBox';
 import Handler from '../Handler';
 import { NotifyRowProps } from '../types';
 import { AnimationType } from 'fmotion-variants';

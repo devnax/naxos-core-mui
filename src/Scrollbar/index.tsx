@@ -3,7 +3,7 @@ import { isDarkMode } from 'mui-themex';
 import React, { ReactElement, ReactNode, UIEvent, HTMLAttributes } from 'react';
 
 type DivProps = HTMLAttributes<HTMLDivElement>;
-interface Props extends DivProps {
+export interface Props extends DivProps {
     children: ReactElement | ReactNode;
     autoHide?: boolean;
     thumbSize?: number;

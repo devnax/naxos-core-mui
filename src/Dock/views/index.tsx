@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Scrollbar from '../../components/Scrollbar';
+import Scrollbar from '../../Scrollbar';
 import BlurBox from '../../BlurBox';
 import { DockProps } from '../types';
 import AppsRender from './RenderApps';

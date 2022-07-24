@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { AnimatePresence } from 'framer-motion';
-import AnimateBox from '../components/AnimateBox';
+import AnimateBox from '../AnimateBox';
 import BlurBox from '../BlurBox';
 import Handler from './Handler';
 import { LayerOptionProps, PublicLayerType, LayerItemProps } from './types';

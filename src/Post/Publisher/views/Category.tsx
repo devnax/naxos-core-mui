@@ -4,7 +4,7 @@ import MetaBox from '../../../MetaBox'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Scrollbar from '../../../components/Scrollbar'
+import Scrollbar from '../../../Scrollbar'
 import TextField from '@mui/material/TextField'
 import { withStore } from 'state-range';
 

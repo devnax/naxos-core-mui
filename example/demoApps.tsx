@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import SignalWifi3BarRoundedIcon from '@mui/icons-material/SignalWifi3BarRounded';
 
-import { SidebarView } from '../src/Sidebar'
+import SidebarView from '../src/Sidebar'
 import { Typography } from "@mui/material"
 
 import { ListView, ListPreview } from '../src/List'
@@ -30,7 +30,7 @@ export default async () => {
       ],
       render: () => {
          return (
-            <Stack height="100%" color="#fff" direction="row">
+            <Stack direction="row" >
                <SidebarView
                   p={1}
                   borderRight={1}
@@ -46,7 +46,7 @@ export default async () => {
                         console.log(id)
                      }} />
                </SidebarView>
-               <Box flex={1} height="100%" >
+               <Box flex={1} >
                   <PostView
                      containerProps={{
                         px: 2

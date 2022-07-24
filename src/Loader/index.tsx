@@ -24,7 +24,7 @@ const Loader: React.FC<Props> = ({ loading, children, ...props }) => {
                left={0}
                bottom={0}
                right={0}
-               zIndex={1}
+               zIndex={999}
                bgcolor="rgba(0,0,0,.2)"
                justifyContent="center"
                alignItems="center"

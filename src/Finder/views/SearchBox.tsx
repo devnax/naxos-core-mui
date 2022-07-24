@@ -7,16 +7,15 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { withStore } from 'state-range';
 import CircularProgress from '@mui/material/CircularProgress';
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
-
-import useTimerAction from '../../components/useTimerAction';
 import FinderHandler from '../handlers/FinderHandler';
 import Dropdown from '../../Dropdown';
 import Checkbox from '@mui/material/Checkbox';
 import CallbackStock from '../handlers/CallbackStock';
 import Subscriber from '../handlers/Subscriber';
+import timerAction from 'timer-action'
+
 
 const SearchBox = () => {
-    const [, callAction] = useTimerAction(500);
     const hasCallback = CallbackStock.hasCallback();
     const searchText = FinderHandler.searchText();
     const settings = FinderHandler.settings();
@@ -36,7 +35,7 @@ const SearchBox = () => {
                     FinderHandler.currentPage(0);
 
                     if (e.target.value.trim()) {
-                        callAction(async () => FinderHandler.startFinding());
+                        timerAction("FINDER_FIND", async () => FinderHandler.startFinding())
                     } else {
                         FinderHandler.setFoundedData([]);
                     }

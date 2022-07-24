@@ -3,15 +3,9 @@
 ## Methods
 
 ```tsx
-import { SidebarView } from 'nxos/Sidebar';
+import Sidebar from 'nxos/Sidebar';
 
-<SidebarView header={ReactElement} footer={ReactElement}>
+<Sidebar fullHeight header={ReactElement} footer={ReactElement}>
     ...
-</SidebarView>;
-```
-
-### TS Types
-
-```js
-import { SettingProps, ConfigProps } from 'nxos/Setting';
+</Sidebar>;
 ```

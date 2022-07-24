@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import Stack, { StackProps } from '@mui/material/Stack';
-import Scrollbar from '../components/Scrollbar';
+import Scrollbar from '../Scrollbar';
 
 export interface ViewBoxProps extends StackProps {
     header?: ReactElement;

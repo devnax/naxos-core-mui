@@ -24,10 +24,10 @@ const slugify = (str: string) =>
       .replace(/[^\w-]+/g, '');
 
 
-const _Slug = () => {
+const Slug = withMemo(() => {
    const [edit, setEdit] = useState(false)
    const state = Handler.getMeta("state")
-   if (!state?.slug) {
+   if (!state?.slug && !edit) {
       return <></>
    }
    return (
@@ -67,12 +67,7 @@ const _Slug = () => {
          }
       </Stack>
    )
-}
-
-const Slug = withMemo(_Slug, () => {
-   const state = Handler.getMeta("state")
-   return [state?.slug]
-})
+}, () => [Handler.getMeta("state")?.slug])
 
 
 const Publisher: FC<PublisherProps> = (props) => {
@@ -106,19 +101,18 @@ const Publisher: FC<PublisherProps> = (props) => {
                mb={2}
                position="sticky"
                top={0}
-               zIndex={999}
+               zIndex={1}
                bgcolor="background.paper"
                p={1}
             >
                <Box>
                   {
-                     title && <Typography variant="h4" >{title}</Typography>
+                     title && <Typography sx={{ userSelect: 'none', opacity: .7 }} variant="h4" >{title}</Typography>
                   }
                </Box>
                <Stack direction="row" gap={2} alignItems="center">
                   <Button
                      variant="text"
-                     disableRipple
                      onClick={() => onDraft && onDraft(state as any)}
                   >Save To Draft</Button>
                   <Button
@@ -186,4 +180,6 @@ const Publisher: FC<PublisherProps> = (props) => {
    )
 }
 
-export default withStore(Publisher)
+export default withStore(Publisher, () => {
+   return [Handler.observeStoreMeta()]
+})

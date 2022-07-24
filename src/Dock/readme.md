@@ -1,5 +1,6 @@
 ```jsx
 interface DockProps {
+    fullHeight?: boolean;
     apps?: appId[];
     appsBottom?: appId[];
     active?: appId;

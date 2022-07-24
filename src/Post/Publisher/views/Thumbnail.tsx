@@ -2,13 +2,13 @@ import React from 'react'
 import Stack from '@mui/material/Stack'
 import AddPhotoIcon from '@mui/icons-material/AddPhotoAlternate';
 import MetaBox from '../../../MetaBox'
-import Handler from '../handler'
 import { withStore } from 'state-range';
+import { CompProps } from '../types';
 
-const Thumbnail = () => {
+const Thumbnail = ({ handler }: CompProps) => {
 
-   const state = Handler.getMeta("state")
-   const onThumbnailClick = Handler.getMeta("onThumbnailClick")
+   const state = handler.getMeta("state")
+   const onThumbnailClick = handler.getMeta("onThumbnailClick")
    const thumbnail = state?.thumbnail
 
    return (
@@ -44,7 +44,7 @@ const Thumbnail = () => {
    )
 }
 
-export default withStore(Thumbnail, () => {
-   const state = Handler.getMeta("state")
+export default withStore(Thumbnail, ({ handler }) => {
+   const state = handler.getMeta("state")
    return [state?.thumbnail]
 })

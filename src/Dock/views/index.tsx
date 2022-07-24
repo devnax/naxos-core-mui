@@ -6,9 +6,10 @@ import BlurBox from '../../BlurBox';
 import { DockProps } from '../types';
 import AppsRender from './RenderApps';
 import DockFooter from './Footer';
+import { isServer } from '../../utils';
 
 const DockPanel: FC<DockProps> = (props) => {
-    const { placement, bgimage, bgcolor, blur } = props;
+    let { placement, bgimage, bgcolor, blur, fullHeight } = props;
     const isHorigental = placement === 'bottom' || placement === 'top';
 
     let _placement: any = 'right';
@@ -24,9 +25,15 @@ const DockPanel: FC<DockProps> = (props) => {
             break;
     }
 
+    fullHeight = fullHeight === undefined || fullHeight === true
+    let height: any = '100%'
+    if (fullHeight) {
+        height = isServer ? "100%" : window.innerHeight
+    }
+
     return (
         <Box
-            height={isHorigental ? 50 : '100%'}
+            height={isHorigental ? 50 : height}
             width={isHorigental ? '100%' : 50}
             bgcolor={bgcolor || 'background.paper'}
             onContextMenu={(e: any) => {

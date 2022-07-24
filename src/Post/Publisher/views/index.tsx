@@ -10,8 +10,7 @@ import General from './General'
 
 import IconButton from '@mui/material/IconButton'
 import EditSlugIcon from '@mui/icons-material/ModeEditOutlineRounded';
-import { PublisherProps } from '../types'
-import Handler from '../handler'
+import { CompProps } from '../types'
 import { withMemo, withStore } from 'state-range'
 import Loader from '../../../Loader'
 import Typography from '@mui/material/Typography'
@@ -24,9 +23,9 @@ const slugify = (str: string) =>
       .replace(/[^\w-]+/g, '');
 
 
-const Slug = withMemo(() => {
+const Slug = withMemo(({ handler }: CompProps) => {
    const [edit, setEdit] = useState(false)
-   const state = Handler.getMeta("state")
+   const state = handler.getMeta("state")
    if (!state?.slug && !edit) {
       return <></>
    }
@@ -36,7 +35,7 @@ const Slug = withMemo(() => {
             edit ? <TextField
                value={state?.slug || ""}
                onChange={(e: any) => {
-                  Handler.setState({ slug: slugify(e.target.value) })
+                  handler.setState({ slug: slugify(e.target.value) })
                }}
                fullWidth
                variant="standard"
@@ -49,12 +48,12 @@ const Slug = withMemo(() => {
                onKeyDown={(e: any) => {
                   if (e.keyCode === 13) {
                      setEdit(false)
-                     Handler.setMeta("slugEdited", true)
+                     handler.setMeta("slugEdited", true)
                   }
                }}
                onBlur={() => {
                   setEdit(false)
-                  Handler.setMeta("slugEdited", true)
+                  handler.setMeta("slugEdited", true)
                }}
             /> : <>
                <Link href="#">{state?.slug}</Link>
@@ -67,32 +66,34 @@ const Slug = withMemo(() => {
          }
       </Stack>
    )
-}, () => [Handler.getMeta("state")?.slug])
+}, ({ handler }) => [handler.getMeta("state")?.slug])
 
 
-const Publisher: FC<PublisherProps> = (props) => {
+const Publisher: FC<CompProps> = ({ handler, containerProps, ...stackPtops }) => {
    useEffect(() => {
-      Handler.loadProps({
-         ...props,
-         tabs: props.tabs ? [{ title: "General", content: <General /> }, ...props.tabs] : undefined
-      })
+      const tabs = handler.getMeta("tabs")
+      if (tabs) {
+         handler.setMeta('tabs', [{ title: "General", content: <General handler={handler} /> }, ...tabs])
+      }
+      return () => {
+         handler.deleteAllMeta()
+      }
    }, [])
 
-   const activeTab = Handler.getMeta("activeTab", "General")
-   const tabs = Handler.getMeta("tabs")
-   const slugEdited = Handler.getMeta("slugEdited")
-   const onTabChange = Handler.getMeta("onTabChange")
-   const loading = Handler.getMeta("loading", false)
-   const state = Handler.getMeta("state")
-   const hidePublish = Handler.getMeta("hidePublish")
-   const onPublish = Handler.getMeta("onPublish")
-   const onDraft = Handler.getMeta("onDraft")
-   const editMode = Handler.getMeta("editMode", false)
-   const title = Handler.getMeta("title")
-   const containerProps = Handler.getMeta("containerProps", {})
+   const activeTab = handler.getMeta("activeTab", "General")
+   const tabs = handler.getMeta("tabs")
+   const slugEdited = handler.getMeta("slugEdited")
+   const onTabChange = handler.getMeta("onTabChange")
+   const loading = handler.getMeta("loading", false)
+   const state = handler.getMeta("state")
+   const hidePublish = handler.getMeta("hidePublish")
+   const onPublish = handler.getMeta("onPublish")
+   const onDraft = handler.getMeta("onDraft")
+   const editMode = handler.getMeta("editMode", false)
+   const title = handler.getMeta("title")
 
    return (
-      <Loader loading={loading as any}>
+      <Loader loading={loading as any} {...stackPtops}>
          {
             !hidePublish && <Stack
                spacing={1}
@@ -102,7 +103,7 @@ const Publisher: FC<PublisherProps> = (props) => {
                position="sticky"
                top={0}
                zIndex={1}
-               bgcolor="background.paper"
+               bgcolor="background.default"
                p={1}
             >
                <Box>
@@ -129,7 +130,7 @@ const Publisher: FC<PublisherProps> = (props) => {
                <TextField
                   value={state?.title || ""}
                   onChange={(e: any) => {
-                     Handler.setState({
+                     handler.setState({
                         title: e.target.value,
                         slug: !slugEdited ? slugify(e.target.value) : state?.slug
                      })
@@ -146,7 +147,7 @@ const Publisher: FC<PublisherProps> = (props) => {
                   placeholder="Enter title"
 
                />
-               <Slug />
+               <Slug handler={handler} />
                {
                   tabs && <Tabs sx={{ mt: 1 }}
                      variant="scrollable"
@@ -154,7 +155,7 @@ const Publisher: FC<PublisherProps> = (props) => {
                      value={activeTab}
                      onChange={(_e, t) => {
                         onTabChange && onTabChange(t)
-                        Handler.setMeta("activeTab", t)
+                        handler.setMeta("activeTab", t)
                      }}
                   >
                      {
@@ -166,7 +167,7 @@ const Publisher: FC<PublisherProps> = (props) => {
                }
             </Box>
             <Box>
-               {!tabs && <General />}
+               {!tabs && <General handler={handler} />}
                {
                   tabs && tabs.map((tab) => {
                      if (tab.title === activeTab) {
@@ -180,6 +181,6 @@ const Publisher: FC<PublisherProps> = (props) => {
    )
 }
 
-export default withStore(Publisher, () => {
-   return [Handler.observeStoreMeta()]
+export default withStore(Publisher, ({ handler }) => {
+   return [handler.observeStoreMeta()]
 })

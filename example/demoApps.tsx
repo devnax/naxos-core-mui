@@ -15,7 +15,7 @@ import { Typography } from "@mui/material"
 import { ListView, ListPreview } from '../src/List'
 import DataTable from './DataTable'
 import ListHandler from './List'
-import { PostView } from '../src/Post'
+import PostPublisher from './Post'
 
 export default async () => {
 
@@ -47,39 +47,7 @@ export default async () => {
                      }} />
                </SidebarView>
                <Box flex={1} >
-                  <PostView
-                     containerProps={{
-                        px: 2
-                     }}
-                     title="Create Post"
-                     tabs={[
-                        { title: "Outline", content: <></> },
-                        { title: "Settings", content: <></> },
-                     ]}
-                     categories={[
-                        { id: 1, title: "IELTS" },
-                        { id: 2, title: "GED" },
-                        { id: 3, title: "SAT" },
-                        { id: 4, title: "GRE" },
-                        { id: 5, title: "TOEFL" },
-                        { id: 6, title: "GMAT" },
-                     ]}
-                     tags={[
-                        { id: 1, title: "IELTS" },
-                        { id: 2, title: "GED" },
-                        { id: 3, title: "SAT" },
-                        { id: 4, title: "GRE" },
-                        { id: 5, title: "TOEFL" },
-                        { id: 6, title: "GMAT" },
-                     ]}
-                     metaBoxes={[
-                        {
-                           sidebar: true,
-                           title: "Custom MetaBox",
-                           content: <div>Nice</div>
-                        }
-                     ]}
-                  />
+                  <PostPublisher />
                </Box>
             </Stack>
          )

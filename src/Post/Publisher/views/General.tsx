@@ -1,75 +1,81 @@
 import React from 'react'
-import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Thumbnail from './Thumbnail'
 import Excerpt from './Excerpt'
-import Handler from '../handler'
 import { withStore } from 'state-range'
 import MetaBox from '../../../MetaBox'
 import Category from './Category'
 import Tags from './Tags'
+import { CompProps } from '../types'
 
-const General = () => {
-   const state = Handler.getMeta("state")
-   const hideThumbnail = Handler.getMeta("hideThumbnail")
-   const hideExcerpt = Handler.getMeta("hideExcerpt")
-   const editor = Handler.getMeta("editor")
-   let metaBoxes = Handler.getMeta("metaBoxes")
+import Grid from '@mui/material/Grid'
+import Stack from '@mui/material/Stack'
+
+
+const General = ({ handler }: CompProps) => {
+   const state = handler.getMeta("state")
+   const hideThumbnail = handler.getMeta("hideThumbnail")
+   const hideExcerpt = handler.getMeta("hideExcerpt")
+   const editor = handler.getMeta("editor")
+   let metaBoxes = handler.getMeta("metaBoxes")
 
    return (
-      <Stack direction="row">
-         <Stack spacing={2} flex={1}>
-            {
-               editor || <TextField
-                  value={state?.content || ""}
-                  onChange={(e: any) => {
-                     Handler.setState({ content: e.target.value })
-                  }}
-                  fullWidth
-                  multiline
-                  minRows={10}
-               />
-            }
+      <Grid container>
+         <Grid item xs={12} md={7} lg={7.5}>
+            <Stack spacing={1.5}>
+               {
+                  editor || <TextField
+                     value={state?.content || ""}
+                     onChange={(e: any) => {
+                        handler.setState({ content: e.target.value })
+                     }}
+                     fullWidth
+                     multiline
+                     minRows={10}
+                  />
+               }
 
-            {
-               !hideExcerpt && <Excerpt />
-            }
-            {
-               metaBoxes && metaBoxes.map((box) => {
-                  if (!box.sidebar) {
-                     return <MetaBox key={"container_metabox" + box.title} title={box.title}>
-                        {box.content}
-                     </MetaBox>
-                  }
-               })
-            }
-         </Stack>
+               {
+                  !hideExcerpt && <Excerpt handler={handler} />
+               }
+               {
+                  metaBoxes && metaBoxes.map((box) => {
+                     if (!box.sidebar) {
+                        return <MetaBox key={"container_metabox" + box.title} title={box.title}>
+                           {box.content}
+                        </MetaBox>
+                     }
+                  })
+               }
+            </Stack>
+         </Grid>
+         <Grid item xs={12} md={5} lg={4.5} px={2}>
+            <Stack spacing={1.5}>
+               <Category handler={handler} />
+               <Tags handler={handler} />
 
-         <Stack spacing={2} width={350} px={2}>
-            <Category />
-            <Tags />
+               {
+                  !hideThumbnail && <Thumbnail handler={handler} />
+               }
 
-            {
-               !hideThumbnail && <Thumbnail />
-            }
-
-            {
-               metaBoxes && metaBoxes.map((box) => {
-                  if (box.sidebar) {
-                     return <MetaBox key={"sidebar_metabox" + box.title} title={box.title} >
-                        {box.content}
-                     </MetaBox>
-                  }
-               })
-            }
-         </Stack>
-      </Stack>
+               {
+                  metaBoxes && metaBoxes.map((box) => {
+                     if (box.sidebar) {
+                        return <MetaBox key={"sidebar_metabox" + box.title} title={box.title} >
+                           {box.content}
+                        </MetaBox>
+                     }
+                  })
+               }
+            </Stack>
+         </Grid>
+      </Grid>
    )
 }
 
-export default withStore(General, () => {
-   const state = Handler.getMeta("state")
-   const hideThumbnail = Handler.getMeta("hideThumbnail")
-   const hideExcerpt = Handler.getMeta("hideExcerpt")
+export default withStore(General, ({ handler }) => {
+   const state = handler.getMeta("state")
+   const hideThumbnail = handler.getMeta("hideThumbnail")
+   const hideExcerpt = handler.getMeta("hideExcerpt")
    return [state?.content, hideThumbnail, hideExcerpt]
 })

@@ -1,6 +1,6 @@
 import { Store } from 'state-range';
 
-abstract class System<P = {}> extends Store<any, P> {
+abstract class Meta<P = {}> extends Store<any, P> {
    abstract defaults: Partial<P>;
 
    set<T extends keyof P>(key: T, value: Partial<P[T]>) {
@@ -30,4 +30,4 @@ abstract class System<P = {}> extends Store<any, P> {
    getAll = this.getAllMeta;
 }
 
-export default System;
+export default Meta;

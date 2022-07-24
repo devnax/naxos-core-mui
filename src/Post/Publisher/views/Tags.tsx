@@ -3,12 +3,12 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import MetaBox from '../../../MetaBox'
 import { withStore } from 'state-range';
-import Handler from '../handler'
+import { CompProps } from '../types';
 
-const Tags = () => {
+const Tags = ({ handler }: CompProps) => {
    const [newTag, setNewTag] = React.useState('')
-   const state = Handler.getMeta("state")
-   const tags = Handler.getMeta("tags", [])
+   const state = handler.getMeta("state")
+   const tags = handler.getMeta("tags", [])
 
    if (!tags?.length) {
       return <></>
@@ -24,7 +24,7 @@ const Tags = () => {
             loading
             value={state?.tags as any || []}
             onChange={(_e: any, items: any) => {
-               Handler.setState({
+               handler.setState({
                   tags: items
                })
             }}
@@ -43,14 +43,14 @@ const Tags = () => {
             }}
             onKeyDown={(e: any) => {
                if (newTag.trim() && e.key === 'Enter') {
-                  const s = Handler.getMeta("state")
+                  const s = handler.getMeta("state")
                   const t = s?.tags || []
                   const item = { id: Math.random(), title: newTag }
-                  Handler.setMeta("tags", [
-                     ...Handler.getMeta("tags") || [],
+                  handler.setMeta("tags", [
+                     ...handler.getMeta("tags") || [],
                      item
                   ])
-                  Handler.setState({
+                  handler.setState({
                      tags: [
                         item,
                         ...t
@@ -64,9 +64,9 @@ const Tags = () => {
    );
 }
 
-export default withStore(Tags, () => {
-   const state = Handler.getMeta("state")
-   const tags = Handler.getMeta("tags") || []
+export default withStore(Tags, ({ handler }) => {
+   const state = handler.getMeta("state")
+   const tags = handler.getMeta("tags") || []
 
    return [(state?.tags || []).length, tags.length]
 })

@@ -7,13 +7,12 @@ import Checkbox from '@mui/material/Checkbox';
 import Scrollbar from '../../../Scrollbar'
 import TextField from '@mui/material/TextField'
 import { withStore } from 'state-range';
+import { CompProps } from '../types'
 
-import Handler from '../handler'
+const Category = ({ handler }: CompProps) => {
 
-const Category = () => {
-
-   const state = Handler.getMeta("state")
-   const categories = Handler.getMeta("categories", [])
+   const state = handler.getMeta("state")
+   const categories = handler.getMeta("categories", [])
 
    if (!categories?.length) {
       return <></>
@@ -32,14 +31,14 @@ const Category = () => {
                            sx={{ p: .5 }}
                            checked={state?.categories?.includes(category.id) || false}
                            onChange={(e: any) => {
-                              const s = Handler.getMeta("state")
+                              const s = handler.getMeta("state")
                               let cats = s?.categories || []
                               if (cats.includes(category.id)) {
                                  cats.splice(cats.indexOf(category.id), 1)
                               } else {
                                  cats.push(category.id)
                               }
-                              Handler.setState({ categories: cats })
+                              handler.setState({ categories: cats })
                            }}
                         />}
                         label={category.title}
@@ -59,8 +58,8 @@ const Category = () => {
    )
 }
 
-export default withStore(Category, () => {
-   const state = Handler.getMeta("state")
-   const categories = Handler.getMeta("categories") || []
+export default withStore(Category, ({ handler }) => {
+   const state = handler.getMeta("state")
+   const categories = handler.getMeta("categories") || []
    return [(state?.categories || []).length, categories.length]
 })

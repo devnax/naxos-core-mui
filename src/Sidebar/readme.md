@@ -5,7 +5,7 @@
 ```tsx
 import Sidebar from 'nxos/Sidebar';
 
-<Sidebar fullHeight header={ReactElement} footer={ReactElement}>
+<Sidebar fullHeight fixed header={ReactElement} footer={ReactElement}>
     ...
 </Sidebar>;
 ```

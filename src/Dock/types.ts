@@ -14,6 +14,7 @@ export interface DockMenuProps {
 type appId = AppProps['id'];
 
 export interface DockProps {
+    fullHeight?: boolean;
     apps?: appId[];
     appsBottom?: appId[];
     active?: appId;

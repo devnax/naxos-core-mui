@@ -1,6 +1,11 @@
 import { StackProps } from "@mui/material";
 import { ReactElement } from "react";
+import Handler from './handler'
 
+export type CompProps = StackProps & {
+   handler: Handler;
+   containerProps?: StackProps;
+}
 
 export interface State {
    title?: string;
@@ -59,5 +64,4 @@ export interface PublisherProps {
 
    slugEdited?: boolean;
 
-   containerProps?: StackProps
 }

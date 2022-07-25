@@ -3,15 +3,21 @@ import { PublisherProps, State } from './types'
 
 abstract class PostPublisherHandler extends Store<any, PublisherProps> {
 
+   onStateChange?(state: State): void;
+   onTabChange?(t: string): void;
+   onPublish?(state: State): void;
+   onDraft?(state: State): void;
+   onThumbnailClick?(): void;
+   onSlugChange?(slug: string): void;
+
    setState(state: State) {
-      const onStateChange = this.getMeta("onStateChange")
       const newState = {
          ...this.getMeta("state"),
          ...state
       }
       this.setMeta("state", newState)
-      if (onStateChange) {
-         onStateChange(newState)
+      if (this.onStateChange) {
+         this.onStateChange(newState)
       }
    }
 }

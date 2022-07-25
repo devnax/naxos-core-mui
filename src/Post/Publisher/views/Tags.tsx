@@ -2,71 +2,57 @@ import * as React from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import MetaBox from '../../../MetaBox'
-import { withStore } from 'state-range';
 import { CompProps } from '../types';
 
-const Tags = ({ handler }: CompProps) => {
+const Tags = ({ state, updateState, props }: CompProps) => {
    const [newTag, setNewTag] = React.useState('')
-   const state = handler.getMeta("state")
-   const tags = handler.getMeta("tags", [])
+   const { tags } = props
 
    if (!tags?.length) {
       return <></>
    }
 
-   return (
-      <MetaBox title="Tags" >
-         <Autocomplete
-            multiple
-            limitTags={3}
-            options={tags}
-            getOptionLabel={(option) => option.title}
-            loading
-            value={state?.tags as any || []}
-            onChange={(_e: any, items: any) => {
-               handler.setState({
-                  tags: items
+   return React.useMemo(() => (<MetaBox title="Tags" >
+      <Autocomplete
+         multiple
+         limitTags={3}
+         options={tags}
+         getOptionLabel={(option) => option.title}
+         loading
+         value={state?.tags as any || []}
+         onChange={(_e: any, items: any) => {
+            updateState({
+               tags: items
+            })
+         }}
+         renderInput={(params) => (
+            <TextField {...params} placeholder="Add tags" size='small' />
+         )}
+         sx={{ width: '100%', mb: 2 }}
+      />
+      <TextField
+         size="small"
+         fullWidth
+         placeholder='Create New'
+         value={newTag}
+         onChange={(e: any) => {
+            setNewTag(e.target.value)
+         }}
+         onKeyDown={(e: any) => {
+            if (newTag.trim() && e.key === 'Enter') {
+               const t = state?.tags || []
+               const item = { id: Math.random(), title: newTag }
+               updateState({
+                  tags: [
+                     item,
+                     ...t
+                  ]
                })
-            }}
-            renderInput={(params) => (
-               <TextField {...params} placeholder="Add tags" size='small' />
-            )}
-            sx={{ width: '100%', mb: 2 }}
-         />
-         <TextField
-            size="small"
-            fullWidth
-            placeholder='Create New'
-            value={newTag}
-            onChange={(e: any) => {
-               setNewTag(e.target.value)
-            }}
-            onKeyDown={(e: any) => {
-               if (newTag.trim() && e.key === 'Enter') {
-                  const s = handler.getMeta("state")
-                  const t = s?.tags || []
-                  const item = { id: Math.random(), title: newTag }
-                  handler.setMeta("tags", [
-                     ...handler.getMeta("tags") || [],
-                     item
-                  ])
-                  handler.setState({
-                     tags: [
-                        item,
-                        ...t
-                     ]
-                  })
-                  setNewTag('')
-               }
-            }}
-         />
-      </MetaBox>
-   );
+               setNewTag('')
+            }
+         }}
+      />
+   </MetaBox>), [state.tags?.length, newTag])
 }
 
-export default withStore(Tags, ({ handler }) => {
-   const state = handler.getMeta("state")
-   const tags = handler.getMeta("tags") || []
-
-   return [(state?.tags || []).length, tags.length]
-})
+export default Tags

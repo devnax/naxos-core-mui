@@ -2,7 +2,6 @@ import React from 'react'
 import TextField from '@mui/material/TextField'
 import Thumbnail from './Thumbnail'
 import Excerpt from './Excerpt'
-import { withStore } from 'state-range'
 import MetaBox from '../../../MetaBox'
 import Category from './Category'
 import Tags from './Tags'
@@ -12,12 +11,8 @@ import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 
 
-const General = ({ handler }: CompProps) => {
-   const state = handler.getMeta("state")
-   const hideThumbnail = handler.getMeta("hideThumbnail")
-   const hideExcerpt = handler.getMeta("hideExcerpt")
-   const editor = handler.getMeta("editor")
-   let metaBoxes = handler.getMeta("metaBoxes")
+const General = ({ state, updateState, props }: CompProps) => {
+   const { hideThumbnail, hideExcerpt, editor, metaBoxes } = props
 
    return (
       <Grid container>
@@ -27,7 +22,7 @@ const General = ({ handler }: CompProps) => {
                   editor || <TextField
                      value={state?.content || ""}
                      onChange={(e: any) => {
-                        handler.setState({ content: e.target.value })
+                        updateState({ content: e.target.value })
                      }}
                      fullWidth
                      multiline
@@ -36,7 +31,11 @@ const General = ({ handler }: CompProps) => {
                }
 
                {
-                  !hideExcerpt && <Excerpt handler={handler} />
+                  !hideExcerpt && <Excerpt
+                     state={state}
+                     updateState={updateState}
+                     props={props}
+                  />
                }
                {
                   metaBoxes && metaBoxes.map((box) => {
@@ -51,11 +50,23 @@ const General = ({ handler }: CompProps) => {
          </Grid>
          <Grid item xs={12} md={5} lg={4.5} px={2}>
             <Stack spacing={1.5}>
-               <Category handler={handler} />
-               <Tags handler={handler} />
+               <Category
+                  state={state}
+                  updateState={updateState}
+                  props={props}
+               />
+               <Tags
+                  state={state}
+                  updateState={updateState}
+                  props={props}
+               />
 
                {
-                  !hideThumbnail && <Thumbnail handler={handler} />
+                  !hideThumbnail && <Thumbnail
+                     state={state}
+                     updateState={updateState}
+                     props={props}
+                  />
                }
 
                {
@@ -73,9 +84,4 @@ const General = ({ handler }: CompProps) => {
    )
 }
 
-export default withStore(General, ({ handler }) => {
-   const state = handler.getMeta("state")
-   const hideThumbnail = handler.getMeta("hideThumbnail")
-   const hideExcerpt = handler.getMeta("hideExcerpt")
-   return [state?.content, hideThumbnail, hideExcerpt]
-})
+export default General

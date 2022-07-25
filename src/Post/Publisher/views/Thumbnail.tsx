@@ -1,50 +1,43 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Stack from '@mui/material/Stack'
 import AddPhotoIcon from '@mui/icons-material/AddPhotoAlternate';
 import MetaBox from '../../../MetaBox'
-import { withStore } from 'state-range';
 import { CompProps } from '../types';
 
-const Thumbnail = ({ handler }: CompProps) => {
+const Thumbnail = ({ state, updateState, props }: CompProps) => {
 
-   const state = handler.getMeta("state")
-   const onThumbnailClick = handler.getMeta("onThumbnailClick")
+   const { onThumbnailClick } = props
    const thumbnail = state?.thumbnail
 
-   return (
-      <MetaBox title="Thumbnail">
-         <Stack
-            height={170}
-            p={2}
-            justifyContent="center"
-            alignItems="center"
-            borderRadius={2}
-            sx={{
-               cursor: "pointer",
-               transition: "all .3s",
-               border: !thumbnail ? "2px dashed rgba(255,255,255, .1)" : "",
-               backgroundImage: `url(${thumbnail})`,
-               backgroundRepeat: "no-repeat",
-               backgroundSize: "cover",
-               backgroundPosition: "center"
+   return useMemo(() => (<MetaBox title="Thumbnail">
+      <Stack
+         height={170}
+         p={2}
+         justifyContent="center"
+         alignItems="center"
+         borderRadius={2}
+         sx={{
+            cursor: "pointer",
+            transition: "all .3s",
+            border: !thumbnail ? "2px dashed rgba(255,255,255, .1)" : "",
+            backgroundImage: `url(${thumbnail})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPosition: "center"
 
-            }}
-            onClick={() => onThumbnailClick && onThumbnailClick()}
-         >
-            {
-               !thumbnail && <AddPhotoIcon
-                  sx={{
-                     opacity: .4,
-                     fontSize: 30
-                  }}
-               />
-            }
-         </Stack>
-      </MetaBox>
-   )
+         }}
+         onClick={() => onThumbnailClick && onThumbnailClick()}
+      >
+         {
+            !thumbnail && <AddPhotoIcon
+               sx={{
+                  opacity: .4,
+                  fontSize: 30
+               }}
+            />
+         }
+      </Stack>
+   </MetaBox>), [thumbnail])
 }
 
-export default withStore(Thumbnail, ({ handler }) => {
-   const state = handler.getMeta("state")
-   return [state?.thumbnail]
-})
+export default Thumbnail

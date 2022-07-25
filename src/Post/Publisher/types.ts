@@ -1,10 +1,10 @@
 import { StackProps } from "@mui/material";
 import { ReactElement } from "react";
-import Handler from './handler'
 
-export type CompProps = StackProps & {
-   handler: Handler;
-   containerProps?: StackProps;
+export type CompProps = {
+   state: State;
+   updateState: (state: State) => void;
+   props: PublisherProps
 }
 
 export interface State {
@@ -15,6 +15,10 @@ export interface State {
    thumbnail?: string;
    categories?: number[];
    tags?: Tag[];
+
+   activeTab?: string;
+
+   slugEdited?: boolean;
 }
 
 export interface MetaBox {
@@ -45,7 +49,6 @@ export interface PublisherProps {
    state?: State;
    metaBoxes?: MetaBox[];
    tabs?: Tabs[];
-   activeTab?: string;
 
    editMode?: boolean;
    loading?: boolean;
@@ -62,6 +65,6 @@ export interface PublisherProps {
    onThumbnailClick?: Function;
    onSlugChange?: (slug: string) => void;
 
-   slugEdited?: boolean;
+   containerProps?: StackProps;
 
 }

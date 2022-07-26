@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 import Thumbnail from './Thumbnail'
 import Excerpt from './Excerpt'
 import MetaBox from '../../../MetaBox'
-import Category from './Category'
+import Category from '../../CategoryBox'
 import Tags from './Tags'
 import { CompProps } from '../types'
 
@@ -51,9 +51,8 @@ const General = ({ state, updateState, props }: CompProps) => {
          <Grid item xs={12} md={5} lg={4.5} px={2}>
             <Stack spacing={1.5}>
                <Category
-                  state={state}
-                  updateState={updateState}
-                  props={props}
+                  title="Category"
+                  categories={props.categories || []}
                />
                <Tags
                   state={state}

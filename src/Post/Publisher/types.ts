@@ -1,6 +1,6 @@
 import { StackProps } from "@mui/material";
 import { ReactElement } from "react";
-
+import { CategoryType } from '../CategoryBox/types'
 export type CompProps = {
    state: State;
    updateState: (state: State) => void;
@@ -32,11 +32,6 @@ export interface Tabs {
    content: ReactElement;
 }
 
-export interface CategoriesProps {
-   id: number;
-   title: string;
-}
-
 export interface Tag {
    id: number;
    title: string;
@@ -44,7 +39,7 @@ export interface Tag {
 
 export interface PublisherProps {
    title?: string;
-   categories?: CategoriesProps[];
+   categories?: CategoryType[];
    tags?: Tag[];
    state?: State;
    metaBoxes?: MetaBox[];

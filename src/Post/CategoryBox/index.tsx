@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useMemo, useState } from 'react'
 import Box from '@mui/material/Box'
 import MetaBox from '../../MetaBox'
 import FormGroup from '@mui/material/FormGroup';
@@ -10,66 +10,118 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
-import { Props } from './types'
+import { Props, CategoryType } from './types'
 import Dropdown from '../../Dropdown';
 
 
-const Category = ({ defaultValue, categories, title, onChange, hideSearch, hideCreate, separate }: Props) => {
+type ChunkItem = CategoryType[]
+
+const chunkArray = (items: CategoryType[], size: number): ChunkItem[] => {
+   let chunked = []
+   for (let i = 0; i < items.length; i += size) {
+      chunked.push(items.slice(i, i + size))
+   }
+   return chunked
+}
+
+
+const Category = ({ defaultValue, categories, title, onChange, hideSearch, onCreate, perpage }: Props) => {
    const [state, setState] = useState<number[]>(defaultValue || [])
    const [searchText, setSearchText] = useState('')
    const [createText, setCreateText] = useState('')
-   const [createParent, setCreateParent] = useState<string>()
+   const [createParent, setCreateParent] = useState<number | null>()
+   const [page, setPage] = useState<number>(1)
+
+   const chunks = useMemo(() => chunkArray(categories.filter((cat) => !cat.parentId), perpage || 20), [categories])
 
    return (
       <MetaBox title={title} >
          <Scrollbar style={{ flex: 1, height: "auto", maxHeight: 200, padding: "0 8px" }}>
             <FormGroup>
                {
-                  categories.map((category) => {
-                     return <FormControlLabel
-                        key={"cat_list" + category.id}
-                        sx={{
-                           pl: category.subcat ? 1.5 : 0
-                        }}
-                        control={<Checkbox
-                           size="small"
-                           sx={{ p: .4 }}
-                           checked={state.includes(category.id) || false}
-                           onChange={() => {
-                              let cats = state || []
-                              if (state.includes(category.id)) {
-                                 cats.splice(cats.indexOf(category.id), 1)
-                              } else {
-                                 cats.push(category.id)
-                              }
-                              setState([...cats])
-                              if (onChange) {
-                                 onChange(cats)
-                              }
-                           }}
-                        />}
-                        label={category.name}
-                     />
+                  chunks[page - 1].map((category) => {
+                     const isChecked = state.includes(category.id) || false
+
+                     return <Fragment key={category.id}>
+                        <FormControlLabel
+                           control={<Checkbox
+                              size="small"
+                              sx={{ p: .4 }}
+                              checked={isChecked}
+                              onChange={() => {
+                                 let cats = state || []
+                                 if (isChecked) {
+                                    const childs = categories.filter((c) => category.id === c.parentId).map((cat) => cat.id)
+                                    cats = cats.filter((id) => !(childs.includes(id) || category.id == id))
+                                 } else {
+                                    cats.push(category.id)
+                                 }
+                                 setState([...cats])
+                                 if (onChange) {
+                                    onChange(cats)
+                                 }
+                              }}
+                           />}
+                           label={category.name}
+                        />
+                        {
+                           isChecked && categories.filter((cat) => category.id === cat.parentId).map((subcat) => {
+                              const isSubcatChecked = state.includes(subcat.id) || false
+                              return (
+                                 <FormControlLabel
+                                    key={subcat.id}
+                                    sx={{
+                                       pl: 1.5
+                                    }}
+                                    control={<Checkbox
+                                       size="small"
+                                       sx={{ p: .4 }}
+                                       checked={isSubcatChecked}
+                                       onChange={() => {
+                                          let cats = state || []
+                                          if (isSubcatChecked) {
+                                             cats.splice(cats.indexOf(subcat.id), 1)
+                                          } else {
+                                             cats.push(subcat.id)
+                                          }
+                                          setState([...cats])
+                                          if (onChange) {
+                                             onChange(cats)
+                                          }
+                                       }}
+                                    />}
+                                    label={subcat.name}
+                                 />
+                              )
+                           })
+                        }
+                     </Fragment>
                   })
                }
             </FormGroup>
          </Scrollbar>
          <Box py={1}>
             <Stack alignItems="flex-end" pb={1}>
-               <Pagination
-                  color="primary"
-                  count={4}
-                  size="small"
-                  hideNextButton
-                  hidePrevButton
-                  sx={{
-                     '& button': {
-                        minWidth: 20,
-                        height: 20,
-                        fontSize: 13
-                     }
-                  }}
-               />
+               {
+                  chunks.length > 1 && <Pagination
+                     color="primary"
+                     count={chunks.length}
+                     size="small"
+                     hideNextButton
+                     hidePrevButton
+                     onChange={(_e: any, cpage: number) => {
+                        setPage(cpage)
+                     }}
+                     sx={{
+                        '& button': {
+                           minWidth: 20,
+                           height: 20,
+                           fontSize: 13
+                        }
+                     }}
+                  />
+               }
+
             </Stack>
             {
                hideSearch !== false && <Autocomplete
@@ -88,7 +140,7 @@ const Category = ({ defaultValue, categories, title, onChange, hideSearch, hideC
                         {...props}
                         style={{
                            padding: 0,
-                           paddingLeft: option.subcat ? 10 : 0,
+                           paddingLeft: option.parentId ? 10 : 0,
                         }}
                      >
                         <Checkbox
@@ -124,7 +176,7 @@ const Category = ({ defaultValue, categories, title, onChange, hideSearch, hideC
             }
 
             {
-               hideCreate !== false && <>
+               onCreate && <>
                   <TextField
                      value={createText}
                      fullWidth
@@ -133,12 +185,14 @@ const Category = ({ defaultValue, categories, title, onChange, hideSearch, hideC
                      onChange={(e: any) => {
                         setCreateText(e.target.value)
                      }}
-                     onKeyDown={(e: any) => {
+                     onKeyDown={async (e: any) => {
                         if (e.keyCode === 13) {
-                           const id = Math.random()
-                           categories.push({ id, name: createText })
+                           const item = await onCreate({ name: createText, parentId: createParent as any })
+                           if (item) {
+                              setState([...state, item.id])
+                           }
                            setCreateText('')
-                           setState([...state, id])
+                           setCreateParent(null)
                         }
                      }}
                   />
@@ -150,11 +204,11 @@ const Category = ({ defaultValue, categories, title, onChange, hideSearch, hideC
                         onClick={(e: any) => {
                            const items = []
                            for (let cat of categories) {
-                              if (!cat.subcat) {
+                              if (!cat.parentId) {
                                  items.push({
                                     title: cat.name,
                                     onClick: () => {
-                                       setCreateParent(cat.name)
+                                       setCreateParent(cat.id)
                                        Dropdown.hide()
                                     }
                                  })
@@ -162,7 +216,7 @@ const Category = ({ defaultValue, categories, title, onChange, hideSearch, hideC
                            }
                            Dropdown.show(e.target, items, { placement: "bottom-end" })
                         }}
-                     >{createParent ? 'PARENT - ' + createParent : 'SELECT PARENT'}</Link>}
+                     >{createParent ? 'PARENT - ' + categories.find((c) => c.id === createParent)?.name : 'SELECT PARENT'}</Link>}
                   </Box>
                </>
             }

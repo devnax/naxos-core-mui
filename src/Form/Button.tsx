@@ -1,6 +1,22 @@
 import { assert } from "console"
 import React from "react"
 
+const password = define('password', ({ value, args }) => {
+   const schema = string().min(10).max(50).noSpecialChar()
+   blast(schema, value)
+   if (value) {
+
+   }
+})
+
+const noSpecalChar = define('no_special_char', ({ value, args }) => {
+
+})
+
+object({
+   password: password()
+})
+
 
 const Input = ({ state, name, ...props }) => {
    return (
@@ -61,7 +77,7 @@ const Form = ({ form }) => {
 
 
 
-export default withState(Form, {
+export default withForm(Form, {
    onChange: (state) => {
 
    },

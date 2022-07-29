@@ -1,19 +1,28 @@
 
-type ID = number
+```js
+
+import CategoryBox from 'naxos-core/libs/Post/CategoryBox'
+
 
 export interface CategoryType {
-   id: ID;
+   id: number;
    name: string;
-   parentId?: ID;
+   parentId?: number;
 }
-
 
 export interface Props {
    categories: CategoryType[];
-   defaultValue?: ID[];
+   defaultValue?: number[];
    title: string;
    perpage?: number;
    hideSearch?: false;
-   onChange?: (value: ID[]) => void;
+   onChange?: (value: number[]) => void;
    onCreate?: (item: Omit<CategoryType, 'id'>) => Promise<CategoryType>
 }
+
+
+<CategoryBox 
+   {...Props}
+/>
+
+```

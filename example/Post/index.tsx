@@ -10,8 +10,8 @@ const Post = () => {
          }}
          categories={[
             { id: 1, name: "IELTS" },
-            { id: 2, name: "GED", subcat: true },
-            { id: 3, name: "SAT", subcat: true },
+            { id: 2, name: "GED", parentId: 1 },
+            { id: 3, name: "SAT", parentId: 1 },
             { id: 4, name: "GRE" },
             { id: 5, name: "TOEFL" },
             { id: 6, name: "GMAT" },

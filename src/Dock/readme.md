@@ -1,5 +1,5 @@
 ```jsx
-interface DockProps {
+type DockProps = BoxProps & {
     fullHeight?: boolean;
     apps?: appId[];
     appsBottom?: appId[];

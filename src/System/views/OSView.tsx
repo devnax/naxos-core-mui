@@ -23,15 +23,15 @@ const OSView = ({ dockProps, screenProps, runnedAppID, hideDock }: Props) => {
             <Stack
                 height="100vh"
                 width="100%"
-                direction="row"
+                direction={dockProps?.placement === 'top' || dockProps?.placement === 'bottom' ? 'column' : 'row'}
                 sx={{
                     overflow: 'hidden!important'
                 }}
             >
-                {!hideDock && <Dock {...dockProps} active={runnedAppID} />}
-                <Box flex={1}>
+                <Box flex={1} order={dockProps?.placement === 'right' || dockProps?.placement === 'bottom' ? 0 : 2}>
                     <Screen {...screenProps} appId={runnedAppID} />
                 </Box>
+                {!hideDock && <Dock {...dockProps} active={runnedAppID} />}
             </Stack>
             <LayerView />
             <DropdownView />

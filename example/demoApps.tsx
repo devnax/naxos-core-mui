@@ -16,6 +16,13 @@ import { ListView, ListPreview } from '../src/List'
 import DataTable from './DataTable'
 import ListHandler from './List'
 import PostPublisher from './Post'
+import Navbar from '../src/Navbar'
+
+
+import { Button, IconButton, Avatar } from '@mui/material'
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import DrawerHandler from '../src/Drawer'
 
 export default async () => {
 
@@ -87,6 +94,28 @@ export default async () => {
       id: "Signal",
       name: "Signal",
       icon: <SignalWifi3BarRoundedIcon />,
-      render: () => <div>Nice </div>
+      render: () => <div>
+         <Navbar
+            logo={<Avatar src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-logo-vector-png-clipart-1.png" />}
+            icons={<>
+               <IconButton>
+                  <NotificationsIcon />
+               </IconButton>
+               <IconButton>
+                  <AccountCircleIcon />
+               </IconButton>
+            </>}
+         >
+            <Button
+               onClick={() => {
+                  DrawerHandler.open()
+               }}
+            >Home</Button>
+            <Button>About</Button>
+            <Button>Service</Button>
+            <Button>Blog</Button>
+            <Button>Contact</Button>
+         </Navbar>
+      </div>
    })
 }

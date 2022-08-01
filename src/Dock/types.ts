@@ -3,6 +3,7 @@ import { DropdownArrayType } from '../Dropdown/types';
 import { AppProps } from '../Apps/types';
 import { ButtonProps } from '@mui/material/Button';
 import { StackProps } from '@mui/material/Stack';
+import { BoxProps } from '@mui/material/Box';
 
 export interface DockMenuProps {
     width?: number;
@@ -13,7 +14,7 @@ export interface DockMenuProps {
 
 type appId = AppProps['id'];
 
-export interface DockProps {
+export type DockProps = BoxProps & {
     fullHeight?: boolean;
     apps?: appId[];
     appsBottom?: appId[];

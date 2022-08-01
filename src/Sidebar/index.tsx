@@ -4,6 +4,7 @@ import Stack from '@mui/material/Stack';
 import Scrollbar from '../Scrollbar';
 import { SidebarProps } from './types';
 import { isServer } from '../utils'
+export { SidebarProps }
 
 const Sidebar: React.FC<SidebarProps> = ({ header, fixed, fullHeight, footer, children, ...props }) => {
     fullHeight = fullHeight === undefined || fullHeight === true
@@ -23,6 +24,7 @@ const Sidebar: React.FC<SidebarProps> = ({ header, fixed, fullHeight, footer, ch
             maxWidth={270}
             bgcolor="background.default"
             height={height}
+            width="100%"
             {...props}
         >
             {header && <Box>{header}</Box>}

@@ -9,7 +9,7 @@ import DockFooter from './Footer';
 import { isServer } from '../../utils';
 
 const DockPanel: FC<DockProps> = (props) => {
-    let { placement, bgimage, bgcolor, blur, fullHeight } = props;
+    let { placement, bgimage, bgcolor, blur, fullHeight, ...boxProps } = props;
     const isHorigental = placement === 'bottom' || placement === 'top';
 
     let _placement: any = 'right';
@@ -39,6 +39,7 @@ const DockPanel: FC<DockProps> = (props) => {
             onContextMenu={(e: any) => {
                 e.preventDefault();
             }}
+            {...boxProps}
         >
             <BlurBox bgImage={bgimage} blur={blur}>
                 <Stack justifyContent="space-between" alignItems="center" height={'100%'} width={'100%'} direction={isHorigental ? 'row' : 'column'} gap={1}>

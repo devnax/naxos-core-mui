@@ -1,9 +1,11 @@
 import { StackProps } from "@mui/material";
 import { ReactElement } from "react";
 import { CategoryType } from '../CategoryBox/types'
+import { SelectItemProps } from "../../Form/Select";
+
+
 export type CompProps = {
-   state: State;
-   updateState: (state: State) => void;
+   form: any;
    props: PublisherProps
 }
 
@@ -14,7 +16,7 @@ export interface State {
    excerpt?: string;
    thumbnail?: string;
    categories?: number[];
-   tags?: Tag[];
+   tags?: SelectItemProps[];
 
    activeTab?: string;
 
@@ -40,7 +42,7 @@ export interface Tag {
 export interface PublisherProps {
    title?: string;
    categories?: CategoryType[];
-   tags?: Tag[];
+   tags?: SelectItemProps[];
    state?: State;
    metaBoxes?: MetaBox[];
    tabs?: Tabs[];

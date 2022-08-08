@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, ReactElement, ReactNode, SyntheticEvent } from 'react'
-import Box, { BoxProps } from '@mui/material/Box'
+import Loader, { LoaderProps } from '../Loader'
 
-export type FormProps = BoxProps & {
+export type FormProps = LoaderProps & {
    children: ReactElement | ReactNode;
    formProps?: HTMLAttributes<HTMLFormElement>;
    includeForm?: false;
@@ -16,7 +16,7 @@ const HTMLForm: FC<FormProps> = ({ children, formProps, onSubmit }) => <form
 
 const Form: FC<FormProps> = ({ children, onSubmit, includeForm, formProps, ...boxProps }) => {
    return (
-      <Box
+      <Loader
          borderRadius={2}
          p={3}
          bgcolor="background.paper"
@@ -25,8 +25,7 @@ const Form: FC<FormProps> = ({ children, onSubmit, includeForm, formProps, ...bo
          {
             includeForm !== false ? <HTMLForm onSubmit={onSubmit} formProps={formProps}>{children}</HTMLForm> : children
          }
-         {children}
-      </Box>
+      </Loader>
    )
 }
 

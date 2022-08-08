@@ -1,22 +1,21 @@
 import React, { useMemo } from 'react'
-import TextField from '@mui/material/TextField'
+import TextField from '../../../Form/TextField'
+
 import MetaBox from '../../../MetaBox'
 import { CompProps } from '../types'
 
-const Excerpt = ({ state, updateState }: CompProps) => {
+const Excerpt = ({ form }: CompProps) => {
    return useMemo(() => ((
       <MetaBox title="Sort Content">
          <TextField
-            value={state?.excerpt}
-            onChange={(e: any) => {
-               updateState({ excerpt: e.target.value })
-            }}
+            name="excerpt"
+            form={form}
             fullWidth
             multiline
             minRows={2}
          />
       </MetaBox>
-   )), [state.excerpt])
+   )), [form.get('excerpt')])
 }
 
 export default Excerpt

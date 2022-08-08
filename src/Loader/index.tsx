@@ -3,13 +3,13 @@ import Stack, { StackProps } from '@mui/material/Stack'
 import CircularProgress from '@mui/material/CircularProgress'
 
 
-type Props = StackProps & {
+export type LoaderProps = StackProps & {
    loading?: boolean;
    children: ReactElement | ReactNode
 }
 
 
-const Loader: React.FC<Props> = ({ loading, children, ...props }) => {
+const Loader: React.FC<LoaderProps> = ({ loading, children, ...props }) => {
    return (
       <Stack
          sx={{

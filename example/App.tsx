@@ -35,7 +35,7 @@ demoApps()
 
 const Root = () => {
    return <OSView
-      runnedAppID='Signal'
+      runnedAppID='Snapchat'
       dockProps={{
          notificationButton: true
       }}

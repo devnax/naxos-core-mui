@@ -1,16 +1,20 @@
-import React, { useState, Component, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
+
+import { useForm } from '../../../Form/useForm'
+import TextField from '../../../Form/TextField'
+
+
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import TextField from '@mui/material/TextField'
 import Link from '@mui/material/Link'
 import Button from '@mui/material/Button'
 import General from './General'
 
 import IconButton from '@mui/material/IconButton'
 import EditSlugIcon from '@mui/icons-material/ModeEditOutlineRounded';
-import { CompProps, PublisherProps, State } from '../types'
+import { CompProps, PublisherProps } from '../types'
 import Loader from '../../../Loader'
 import Typography from '@mui/material/Typography'
 
@@ -22,15 +26,16 @@ const slugify = (str: string) =>
       .replace(/[^\w-]+/g, '');
 
 
-const Slug = ({ state, updateState }: CompProps) => {
+const Slug = ({ form }: CompProps) => {
+   // const formState = form.getState() || {}
+   const formData = form.getData() || {}
+
    const [edit, setEdit] = useState(false)
-   return useMemo(() => ((!state?.slug && !edit) ? <></> : <Stack direction="row" spacing={1} alignItems="center" mt={.3}>
+   return useMemo(() => ((!formData?.slug && !edit) ? <></> : <Stack direction="row" spacing={1} alignItems="center" mt={.3}>
       {
          edit ? <TextField
-            value={state?.slug || ""}
-            onChange={(e: any) => {
-               updateState({ slug: slugify(e.target.value) })
-            }}
+            form={form}
+            name="slug"
             fullWidth
             variant="standard"
             size="small"
@@ -42,15 +47,15 @@ const Slug = ({ state, updateState }: CompProps) => {
             onKeyDown={(e: any) => {
                if (e.keyCode === 13) {
                   setEdit(false)
-                  updateState({ slugEdited: true })
+                  // form.setState({ ...formState, slugEdited: true })
                }
             }}
             onBlur={() => {
                setEdit(false)
-               updateState({ slugEdited: true })
+               // form.setState({ ...formState, slugEdited: true })
             }}
          /> : <>
-            <Link href="#">{state?.slug}</Link>
+            <Link href="#">{slugify(formData?.slug)}</Link>
             <IconButton size="small" onClick={() => {
                setEdit(true)
             }}>
@@ -58,62 +63,42 @@ const Slug = ({ state, updateState }: CompProps) => {
             </IconButton>
          </>
       }
-   </Stack>), [edit, state.slug])
+   </Stack>), [edit, formData.slug])
 }
 
 
 
-class PostPublisher extends Component<PublisherProps>{
-   state: State = {
-      activeTab: "General"
+
+const PostPublisher = (props: PublisherProps) => {
+   const form = useForm()
+
+   const {
+      loading,
+      title,
+      hidePublish,
+      editMode,
+      onDraft,
+      onPublish,
+      onTabChange,
+      containerProps
+   } = props
+
+   let tabs = props.tabs
+   if (tabs && tabs.length) {
+      tabs = [{
+         title: "General",
+         content: <General
+            form={form}
+            props={props}
+         />
+      }, ...tabs]
    }
 
-   constructor(props: PublisherProps) {
-      super(props)
-      this.updateState = this.updateState.bind(this)
-   }
 
-   componentDidMount() {
-      if (this.props.state) {
-         this.setState(this.props.state)
-      }
-   }
+   const formState = form.getState() || {}
 
-   updateState(state: PublisherProps['state']) {
-      this.setState({
-         ...this.state,
-         ...state
-      })
-   }
-
-
-   render() {
-      const {
-         loading,
-         title,
-         hidePublish,
-         editMode,
-         onDraft,
-         onPublish,
-         onTabChange,
-         containerProps
-      } = this.props
-
-      const state = this.state
-
-      let tabs = this.props.tabs
-      if (tabs && tabs.length) {
-         tabs = [{
-            title: "General",
-            content: <General
-               state={this.state}
-               updateState={this.updateState}
-               props={this.props}
-            />
-         }, ...tabs]
-      }
-
-      return (<Loader loading={loading as any} >
+   return (
+      <Loader loading={loading as any} >
          {
             !hidePublish && <Stack
                spacing={1}
@@ -134,11 +119,11 @@ class PostPublisher extends Component<PublisherProps>{
                <Stack direction="row" gap={2} alignItems="center">
                   <Button
                      variant="text"
-                     onClick={() => onDraft && onDraft(this.state as any)}
+                     onClick={() => onDraft && onDraft(form.getState() as any)}
                   >Save To Draft</Button>
                   <Button
                      variant="contained"
-                     onClick={() => onPublish && onPublish(this.state as any)}
+                     onClick={() => onPublish && onPublish(form.getState() as any)}
                   >
                      {editMode ? "UPDATE" : "PUBLISH"}
                   </Button>
@@ -148,14 +133,8 @@ class PostPublisher extends Component<PublisherProps>{
          <Stack flex={1} gap={2} {...containerProps}>
             <Box>
                <TextField
-                  value={state?.title || ""}
-                  onChange={(e: any) => {
-                     this.updateState({
-                        title: e.target.value,
-                        slug: !state.slugEdited ? slugify(e.target.value) : state?.slug
-                     })
-
-                  }}
+                  form={form}
+                  name="title"
                   fullWidth
                   inputProps={{
                      sx: {
@@ -169,19 +148,18 @@ class PostPublisher extends Component<PublisherProps>{
 
                />
                <Slug
-                  state={this.state}
-                  updateState={this.updateState}
-                  props={this.props}
+                  form={form}
+                  props={props}
                />
                {
                   tabs && <Tabs sx={{ mt: 1 }}
                      variant="scrollable"
                      scrollButtons="auto"
-                     value={state.activeTab}
+                     value={formState.activeTab || 'General'}
                      onChange={(_e, t) => {
                         onTabChange && onTabChange(t)
-                        this.setState({
-                           ...this.state,
+                        form.setState({
+                           ...form.getState(),
                            activeTab: t
                         })
                      }}
@@ -196,13 +174,12 @@ class PostPublisher extends Component<PublisherProps>{
             </Box>
             <Box>
                {!tabs && <General
-                  state={this.state}
-                  updateState={this.updateState}
-                  props={this.props}
+                  form={form}
+                  props={props}
                />}
                {
                   tabs && tabs.map((tab) => {
-                     if (tab.title === state.activeTab) {
+                     if (tab.title === (formState.activeTab || "General")) {
                         return <div key={tab.title + "_view"}>{tab.content}</div>
                      }
                   })
@@ -210,8 +187,7 @@ class PostPublisher extends Component<PublisherProps>{
             </Box>
          </Stack>
       </Loader>
-      )
-   }
+   )
 }
 
 

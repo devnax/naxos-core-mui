@@ -1,17 +1,18 @@
 import React from 'react'
-import TextField from '@mui/material/TextField'
-import Thumbnail from './Thumbnail'
+import TextField from '../../../Form/TextField'
+
+import Thumbnail from '../../ThumbnailBox'
 import Excerpt from './Excerpt'
 import MetaBox from '../../../MetaBox'
 import Category from '../../CategoryBox'
-import Tags from './Tags'
+import Tags from '../../TagsBox'
 import { CompProps } from '../types'
 
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 
 
-const General = ({ state, updateState, props }: CompProps) => {
+const General = ({ form, props }: CompProps) => {
    const { hideThumbnail, hideExcerpt, editor, metaBoxes } = props
 
    return (
@@ -20,10 +21,8 @@ const General = ({ state, updateState, props }: CompProps) => {
             <Stack spacing={1.5}>
                {
                   editor || <TextField
-                     value={state?.content || ""}
-                     onChange={(e: any) => {
-                        updateState({ content: e.target.value })
-                     }}
+                     name="content"
+                     form={form}
                      fullWidth
                      multiline
                      minRows={10}
@@ -32,8 +31,7 @@ const General = ({ state, updateState, props }: CompProps) => {
 
                {
                   !hideExcerpt && <Excerpt
-                     state={state}
-                     updateState={updateState}
+                     form={form}
                      props={props}
                   />
                }
@@ -55,19 +53,16 @@ const General = ({ state, updateState, props }: CompProps) => {
                   categories={props.categories || []}
                />
                <Tags
-                  state={state}
-                  updateState={updateState}
-                  props={props}
+                  form={form}
+                  name="tags"
+                  options={props.tags || []}
                />
-
                {
                   !hideThumbnail && <Thumbnail
-                     state={state}
-                     updateState={updateState}
-                     props={props}
+                     form={form}
+                     name="thumbnail"
                   />
                }
-
                {
                   metaBoxes && metaBoxes.map((box) => {
                      if (box.sidebar) {

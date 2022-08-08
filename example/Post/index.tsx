@@ -18,12 +18,12 @@ const Post = () => {
          ]}
 
          tags={[
-            { id: 1, title: "IELTS" },
-            { id: 2, title: "GED" },
-            { id: 3, title: "SAT" },
-            { id: 4, title: "GRE" },
-            { id: 5, title: "TOEFL" },
-            { id: 6, title: "GMAT" },
+            { value: "1", label: "IELTS" },
+            { value: "2", label: "GED" },
+            { value: "3", label: "SAT" },
+            { value: "4", label: "GRE" },
+            { value: "5", label: "TOEFL" },
+            { value: "6", label: "GMAT" },
          ]}
 
          tabs={[

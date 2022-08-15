@@ -7,6 +7,7 @@ import PinterestIcon from "./demo-icons/PinterestIcon"
 import VimeoIcon from "./demo-icons/VimeoIcon"
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 import SignalWifi3BarRoundedIcon from '@mui/icons-material/SignalWifi3BarRounded';
 
 import SidebarView from '../src/Sidebar'
@@ -23,6 +24,8 @@ import { Button, IconButton, Avatar } from '@mui/material'
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DrawerHandler from '../src/Drawer'
+import Card from '../src/Card'
+
 
 export default async () => {
 
@@ -42,7 +45,7 @@ export default async () => {
                   p={1}
                   borderRight={1}
                   borderColor="grey.800"
-                  width={270}
+                  width={250}
                   header={<Box>
                      <Typography variant="h6">Widget List</Typography>
                   </Box>}
@@ -53,8 +56,48 @@ export default async () => {
                         console.log(id)
                      }} />
                </SidebarView>
-               <Box flex={1} >
-                  <PostPublisher />
+               <Box flex={1} p={3}>
+                  <Grid container spacing={2}>
+                     <Grid item md={4}>
+                        <Card
+                           hoverShadow
+                           imageEffect="rotate"
+                           footer={<>
+                              <Button>Read More</Button>
+                           </>}
+                           contentMaxLength={100}
+                           image="https://cdn.10minuteschool.com/md/images/skills/Updated_Thumbnail_v3/Kids-English-Course-Thumbnail.jpg"
+                           title="SSC পদার্থবিজ্ঞান Animated Lessons"
+                           content="পদার্থ বিজ্ঞানের সকল থিওরি এখন থাকবে তোমার হাতের মুঠোয়। অ্যানিমেটেড ভিডিও লেসনে থিওরির খুঁটিনাটি সব বিষয় হয়ে যাবে একদম পরিষ্কার।"
+                        />
+                     </Grid>
+                     <Grid item md={4}>
+                        <Card
+                           hoverShadow
+                           imageEffect="rotate"
+                           footer={<>
+                              <Button>Read More</Button>
+                           </>}
+                           contentMaxLength={100}
+                           image="https://cdn.10minuteschool.com/md/images/skills/Updated_Thumbnail_v3/Programming-for-Kids-Course-Thumbnail.jpg"
+                           title="Programming for kids"
+                           content="অ্যানিমেটেড ভিডিও লেসন, কুইজ, স্মার্ট নোট ও এক্সাম মডিউলে উচ্চতর গণিত ১ম পত্রের পুরো বছরের সিলেবাসের সল্যুশন এখন এক কোর্সে।"
+                        />
+                     </Grid>
+                     <Grid item md={4}>
+                        <Card
+                           hoverShadow
+                           imageEffect="rotate"
+                           footer={<>
+                              <Button>Read More</Button>
+                           </>}
+                           contentMaxLength={100}
+                           image="https://cdn.10minuteschool.com/md/images/skills/Updated_Thumbnail_v3/fb_marketing_update2_thumbnail.jpg"
+                           title="HSC ইংরেজি Animated Lessons"
+                           content="বুঝে পড়লে গ্রামার অথবা বাক্য গঠনে আর কখনও ভুল হবেনা। অ্যানিমেটেড ভিডিও লেসনে খুব সহজেই বুঝে নাও ইংরেজিতে তোমার সমস্যার জায়গাগুলো।"
+                        />
+                     </Grid>
+                  </Grid>
                </Box>
             </Stack>
          )

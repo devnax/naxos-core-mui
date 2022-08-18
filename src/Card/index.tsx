@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
+import Stack from '@mui/material/Stack';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -23,6 +23,7 @@ const CardView: React.FC<CardProps> = (props) => {
         imageProps,
         titleProps,
         contentProps,
+        bordered,
         ...CardProps
     } = props;
 
@@ -34,22 +35,28 @@ const CardView: React.FC<CardProps> = (props) => {
     imageEffect = imageEffect !== undefined ? imageEffect : 'zoom';
     let transform = '';
     if (imageEffect === 'rotate') {
-        transform = 'scale(1.2) rotate(5deg)';
+        transform = 'scale(1.1) rotate(3deg)';
     } else if (imageEffect === 'zoom') {
         transform = 'scale(1.1)';
     }
 
+    if (bordered) {
+        CardProps.border = 1
+        CardProps.borderColor = "divider"
+    }
+
     return (
-        <Card
-            variant="outlined"
+        <Stack
             {...CardProps}
             sx={{
+                bgcolor: "background.paper",
                 borderRadius: '8px',
+                transition: "all .3s",
                 '&:hover img.MuiCardMedia-media': {
                     transform
                 },
                 '&:hover': {
-                    boxShadow: hoverShadow ? 7 : 0
+                    boxShadow: hoverShadow ? '0 7px 30px -10px rgba(0,0,0,.50)' : 0
                 },
                 ...(CardProps?.sx || {})
             }}
@@ -97,7 +104,7 @@ const CardView: React.FC<CardProps> = (props) => {
                 )}
             </CardContent>
             <CardActions sx={{ alignItems: 'center' }}>{footer}</CardActions>
-        </Card>
+        </Stack>
     );
 };
 

@@ -7,6 +7,7 @@ import PinterestIcon from "./demo-icons/PinterestIcon"
 import VimeoIcon from "./demo-icons/VimeoIcon"
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import SignalWifi3BarRoundedIcon from '@mui/icons-material/SignalWifi3BarRounded';
 
@@ -25,7 +26,14 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DrawerHandler from '../src/Drawer'
 import Card from '../src/Card'
+import ListBuilder from '../src/ListBuilder'
+import { useForm } from '../src/Form/useForm'
 
+const BuilderTemplate = () => {
+   return <Box>
+      Nice
+   </Box>
+}
 
 export default async () => {
 
@@ -111,9 +119,20 @@ export default async () => {
       name: "White Board",
       icon: <BoardIcon />,
       render: () => {
+         const form = useForm<any>()
          return (
-            <Box height="100%" bgcolor="primary.main" color="#fff" p={1} >
-               <h1>White Board</h1>
+            <Box height="100%" p={1} >
+               <Container maxWidth="sm">
+                  <ListBuilder
+                     name="course_builder"
+                     form={form}
+                     template={BuilderTemplate}
+                     onAddItem={async () => {
+                        return { title: "New Item", id: "nice" }
+                     }}
+                  />
+               </Container>
+
             </Box>
          )
       }

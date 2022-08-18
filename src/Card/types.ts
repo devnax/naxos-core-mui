@@ -1,9 +1,9 @@
 import { ReactElement } from 'react';
 import { CardMediaProps } from '@mui/material/CardMedia';
 import { TypographyProps } from '@mui/material/Typography';
-import { CardProps as CProps } from '@mui/material/Card';
+import { StackProps } from '@mui/material/Stack';
 
-export type CardProps = CProps & {
+export type CardProps = StackProps & {
     image?: string | ReactElement;
     imageEffect?: 'zoom' | 'rotate' | false;
     imagePadded?: true;
@@ -21,4 +21,5 @@ export type CardProps = CProps & {
 
     footer?: ReactElement;
     hoverShadow?: boolean;
+    bordered?: boolean;
 };

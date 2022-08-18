@@ -1,20 +1,20 @@
-import * as React from 'react'
-import DrawerView, { DrawerProps } from "./DrawerView"
-import Layer from '../Layer'
+import * as React from 'react';
+import DrawerView, { DrawerProps } from './DrawerView';
+import Layer from '../Layer';
 
 class DrawerHandler {
-   open(props?: DrawerProps) {
-      Layer.open("OS_DRAWER", <DrawerView {...props} />, {
-         closeButton: false,
-         opacity: .5,
-         blur: 2,
-         animation: 'fadeInLeft'
-      })
-   }
+    open(props?: DrawerProps) {
+        Layer.open('OS_DRAWER', <DrawerView {...props} />, {
+            closeButton: false,
+            opacity: 0.5,
+            blur: 2,
+            animation: 'fadeInLeft'
+        });
+    }
 
-   close() {
-      Layer.close("OS_DRAWER")
-   }
+    close() {
+        Layer.close('OS_DRAWER');
+    }
 }
 
-export default new DrawerHandler
+export default new DrawerHandler();

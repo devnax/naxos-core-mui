@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import { ScreenProps } from './types';
 import Scrollbar from '../Scrollbar';
 import AppHandler from '../Apps';
-import { isServer } from '../utils'
+import { isServer } from '../utils';
 
 const ScreenView: React.FC<ScreenProps> = ({ appId, fullHeight, header, footer, ...props }) => {
     const ref = React.useRef();
@@ -24,10 +24,10 @@ const ScreenView: React.FC<ScreenProps> = ({ appId, fullHeight, header, footer, 
         }
     }, [App.id]);
 
-    fullHeight = fullHeight === undefined || fullHeight === true
-    let height: any = '100%'
+    fullHeight = fullHeight === undefined || fullHeight === true;
+    let height: any = '100%';
     if (fullHeight) {
-        height = isServer ? "100%" : window.innerHeight
+        height = isServer ? '100%' : window.innerHeight;
     }
 
     return (
@@ -38,7 +38,7 @@ const ScreenView: React.FC<ScreenProps> = ({ appId, fullHeight, header, footer, 
             tabIndex={0}
             sx={{
                 outline: 0,
-                overflow: "hidden"
+                overflow: 'hidden'
             }}
             {...props}
             onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {

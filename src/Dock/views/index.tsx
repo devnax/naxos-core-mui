@@ -25,10 +25,10 @@ const DockPanel: FC<DockProps> = (props) => {
             break;
     }
 
-    fullHeight = fullHeight === undefined || fullHeight === true
-    let height: any = '100%'
+    fullHeight = fullHeight === undefined || fullHeight === true;
+    let height: any = '100%';
     if (fullHeight) {
-        height = isServer ? "100%" : window.innerHeight
+        height = isServer ? '100%' : window.innerHeight;
     }
 
     return (

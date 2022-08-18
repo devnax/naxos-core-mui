@@ -1,12 +1,9 @@
-
 ## Useges
 
 ```js
-
-import Loader from 'naxos/Loader'
+import Loader from 'naxos/Loader';
 
 <Loader loading={true} {...stackProps}>
-...
-</Loader>
-
+    ...
+</Loader>;
 ```

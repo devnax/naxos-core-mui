@@ -32,7 +32,7 @@ export type DockProps = BoxProps & {
     onAppClick?: (appId: appId) => void;
     onMenuShow?: () => void;
     onAppContextMenu?: (appId: appId) => false | DropdownArrayType[];
-}
+};
 
 export interface DockIconProps extends AppProps {
     active?: boolean;

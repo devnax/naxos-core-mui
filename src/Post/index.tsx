@@ -1,3 +1,3 @@
-import PostView from './Publisher/views'
+import PostView from './Publisher/views';
 
-export { PostView }
+export { PostView };

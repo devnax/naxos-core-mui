@@ -12,8 +12,7 @@ import Dropdown from '../../Dropdown';
 import Checkbox from '@mui/material/Checkbox';
 import CallbackStock from '../handlers/CallbackStock';
 import Subscriber from '../handlers/Subscriber';
-import timerAction from 'timer-action'
-
+import timerAction from 'timer-action';
 
 const SearchBox = () => {
     const hasCallback = CallbackStock.hasCallback();
@@ -35,7 +34,7 @@ const SearchBox = () => {
                     FinderHandler.currentPage(0);
 
                     if (e.target.value.trim()) {
-                        timerAction("FINDER_FIND", async () => FinderHandler.startFinding())
+                        timerAction('FINDER_FIND', async () => FinderHandler.startFinding());
                     } else {
                         FinderHandler.setFoundedData([]);
                     }

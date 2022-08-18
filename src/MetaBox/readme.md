@@ -1,5 +1,3 @@
-
-
 ```js
 
 import MetaBox from 'naxos/MetaBox'

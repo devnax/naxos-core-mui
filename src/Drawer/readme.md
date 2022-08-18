@@ -1,5 +1,3 @@
-
-
 ```js
 
 import DrawerHandler from 'naxos-core'

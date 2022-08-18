@@ -1,4 +1,3 @@
-import DrawerHandler from './Handler'
+import DrawerHandler from './Handler';
 
-
-export default DrawerHandler
+export default DrawerHandler;

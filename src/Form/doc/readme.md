@@ -1,28 +1,25 @@
-
 ## Avatar
-```js 
-type Props = StackProps & {
-   name: string;
-   size?: number;
-   icon?: ReactElement;
-   editIcon?: boolean | ReactElement;
-   value?: File;
-   variant?: AvatarProps['variant'];
-   onClick?: (e: SyntheticEvent) => void;
-   form?: FormTypes<any>;
-   schema?: (s: any) => typeof SchemaFactory;
-   disableError?: boolean
-}
 
-<Avatar 
-   {...Props}
-/>
+```js
+type Props = StackProps & {
+    name: string,
+    size?: number,
+    icon?: ReactElement,
+    editIcon?: boolean | ReactElement,
+    value?: File,
+    variant?: AvatarProps['variant'],
+    onClick?: (e: SyntheticEvent) => void,
+    form?: FormTypes<any>,
+    schema?: (s: any) => typeof SchemaFactory,
+    disableError?: boolean
+};
+
+<Avatar {...Props} />;
 ```
 
-
-
 ## Checkbox
-```js 
+
+```js
 type Props = Omit<CheckboxProps, 'form'> & {
    form?: FormTypes<any>;
    schema?: (s: any) => typeof SchemaFactory;
@@ -36,15 +33,14 @@ type Props = Omit<CheckboxProps, 'form'> & {
    vertical?: boolean
 }
 
-<Checkbox 
+<Checkbox
    {...Props}
 />
 ```
 
-
-
 ## Radio
-```js 
+
+```js
 type Props = Omit<RadioProps, 'form'> & {
    form?: FormTypes<any>;
    schema?: (s: any) => typeof SchemaFactory;
@@ -58,84 +54,72 @@ type Props = Omit<RadioProps, 'form'> & {
    vertical?: boolean
 }
 
-<Radio 
+<Radio
    {...Props}
 />
 ```
-
-
 
 ## Select
-```js 
+
+```js
 type Props = AutocompleteProps & {
-   label?: string;
-   require?: true;
-   name: string;
-   options: SelectItemProps[];
-   defaultValue?: SelectItemProps['id'] | (SelectItemProps['id'])[];
-   form?: FormTypes<any>;
-   schema?: (s: any) => typeof SchemaFactory;
-   disableError?: boolean
-}
+    label?: string,
+    require?: true,
+    name: string,
+    options: SelectItemProps[],
+    defaultValue?: SelectItemProps['id'] | SelectItemProps['id'][],
+    form?: FormTypes<any>,
+    schema?: (s: any) => typeof SchemaFactory,
+    disableError?: boolean
+};
 
-<Select 
-   {...Props}
-/>
+<Select {...Props} />;
 ```
-
 
 ## Textbox
-```js 
-type Props = TP & {
-   form?: FormTypes<any>;
-   name: string;
-   defaultValue?: TP['value'];
-   require?: true;
-   schema?: (s: any) => typeof SchemaFactory;
-   disableError?: boolean
-}
 
-<TextBox  
-   {...Props}
-/>
+```js
+type Props = TP & {
+    form?: FormTypes<any>,
+    name: string,
+    defaultValue?: TP['value'],
+    require?: true,
+    schema?: (s: any) => typeof SchemaFactory,
+    disableError?: boolean
+};
+
+<TextBox {...Props} />;
 ```
 
-
 ## DatePicker
-```js 
 
+```js
 export type DatePickerProps = DesktopDatePickerProps & {
-   form?: FormTypes<any>;
-   name: string;
-   defaultValue?: string;
-   require?: true;
-   schema?: (s: any) => typeof SchemaFactory;
-   disableError?: boolean;
-}
+    form?: FormTypes<any>,
+    name: string,
+    defaultValue?: string,
+    require?: true,
+    schema?: (s: any) => typeof SchemaFactory,
+    disableError?: boolean
+};
 
-<DatePicker  
-   {...Props}
-/>
+<DatePicker {...Props} />;
 ```
 
 ## TimePicker
-```js 
 
+```js
 export type TimePickerProps = TimePicker & {
-   form?: FormTypes<any>;
-   name: string;
-   defaultValue?: string;
-   require?: true;
-   schema?: (s: any) => typeof SchemaFactory;
-   disableError?: boolean;
-}
+    form?: FormTypes<any>,
+    name: string,
+    defaultValue?: string,
+    require?: true,
+    schema?: (s: any) => typeof SchemaFactory,
+    disableError?: boolean
+};
 
-<TimePicker  
-   {...Props}
-/>
+<TimePicker {...Props} />;
 ```
-
-
 
 ## useForm
 
@@ -143,7 +127,7 @@ export type TimePickerProps = TimePicker & {
 
 const form = useForm({
    onChange: () => {
-      
+
    },
    onError: () => {
 

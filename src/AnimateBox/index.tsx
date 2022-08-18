@@ -2,8 +2,7 @@ import React, { FC, ReactElement, ReactNode } from 'react';
 import { motion, MotionProps } from 'framer-motion';
 import variants from './variants';
 
-export type AnimationType = "zoom" | "zoomOver" | "fadeIn" | "fadeInUp" | "fadeInDown" | "fadeInLeft" | "fadeInRight"
-
+export type AnimationType = 'zoom' | 'zoomOver' | 'fadeIn' | 'fadeInUp' | 'fadeInDown' | 'fadeInLeft' | 'fadeInRight';
 
 interface Props extends MotionProps {
     children: ReactElement | ReactNode;

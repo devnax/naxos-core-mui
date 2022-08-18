@@ -62,6 +62,7 @@ export default async () => {
                         <Card
                            hoverShadow
                            imageEffect="rotate"
+                           imagePadded
                            footer={<>
                               <Button>Read More</Button>
                            </>}
@@ -75,6 +76,7 @@ export default async () => {
                         <Card
                            hoverShadow
                            imageEffect="rotate"
+                           imagePadded
                            footer={<>
                               <Button>Read More</Button>
                            </>}
@@ -88,6 +90,7 @@ export default async () => {
                         <Card
                            hoverShadow
                            imageEffect="rotate"
+                           imagePadded
                            footer={<>
                               <Button>Read More</Button>
                            </>}

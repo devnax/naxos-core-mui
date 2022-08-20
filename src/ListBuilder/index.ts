@@ -1,3 +1,3 @@
-import ListBuilder from './views'
+import ListBuilder from './views';
 
-export default ListBuilder
+export default ListBuilder;

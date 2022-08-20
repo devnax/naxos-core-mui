@@ -20,7 +20,7 @@ export type DockProps = BoxProps & {
     appsBottomType?: string;
     active?: appId;
     placement?: 'left' | 'right' | 'top' | 'bottom';
-    size?: "medium" | "large"
+    size?: 'medium' | 'large';
     blur?: number;
     bgimage?: string;
     bgcolor?: string;
@@ -29,7 +29,7 @@ export type DockProps = BoxProps & {
     menuProps?: DockMenuProps;
     menuItems?: DropdownArrayType[];
     notification?: Boolean;
-    iconProps?: StackProps,
+    iconProps?: StackProps;
 
     onAppClick?: (appId: appId) => void;
     onMenuShow?: () => void;
@@ -41,5 +41,5 @@ export interface DockIconProps extends AppProps {
     placement?: DockProps['placement'];
     buttonProps?: ButtonProps;
     iconProps?: StackProps;
-    size?: number
+    size?: number;
 }

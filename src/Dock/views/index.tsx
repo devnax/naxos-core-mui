@@ -8,7 +8,27 @@ import AppsRender from './RenderApps';
 import DockFooter from './Footer';
 
 const DockPanel: FC<DockProps> = (props) => {
-    let { appsType, appsBottomType, active, tooltip, menuIcon, menuProps, menuItems, onAppClick, onMenuShow, onAppContextMenu, size, iconProps, placement, bgimage, bgcolor, blur, fullHeight, notification, ...boxProps } = props;
+    let {
+        appsType,
+        appsBottomType,
+        active,
+        tooltip,
+        menuIcon,
+        menuProps,
+        menuItems,
+        onAppClick,
+        onMenuShow,
+        onAppContextMenu,
+        size,
+        iconProps,
+        placement,
+        bgimage,
+        bgcolor,
+        blur,
+        fullHeight,
+        notification,
+        ...boxProps
+    } = props;
 
     const isHorigental = placement === 'bottom' || placement === 'top';
 
@@ -31,11 +51,11 @@ const DockPanel: FC<DockProps> = (props) => {
         height = window.innerHeight;
     }
 
-    let _size = 50
+    let _size = 50;
     if (size === 'medium') {
-        _size = 55
+        _size = 55;
     } else if (size === 'large') {
-        _size = 60
+        _size = 60;
     }
 
     return (

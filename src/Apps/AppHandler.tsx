@@ -3,7 +3,7 @@ import { AppProps, AppPropsStore } from './types';
 import { Command } from '../System';
 
 class NaxOSApp extends Store<AppPropsStore> {
-    default_type = "os"
+    default_type = 'os';
 
     create(options: AppProps) {
         if (!this.getById(options.id)) {

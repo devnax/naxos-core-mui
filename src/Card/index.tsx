@@ -41,27 +41,27 @@ const CardView: React.FC<CardProps> = (props) => {
     }
 
     if (bordered) {
-        CardProps.border = 1
-        CardProps.borderColor = "divider"
+        CardProps.border = 1;
+        CardProps.borderColor = 'divider';
     }
 
-    let size = imageSize || 180
+    let size = imageSize || 180;
 
-    let imgSize: any = {}
+    let imgSize: any = {};
     if (inline) {
-        imgSize = { width: size, borderRadius: "10px 0 0 10px" }
+        imgSize = { width: size, borderRadius: '10px 0 0 10px' };
     } else {
-        imgSize = { height: size }
+        imgSize = { height: size };
     }
     return (
         <Stack
             {...CardProps}
-            direction={inline ? "row" : "column"}
+            direction={inline ? 'row' : 'column'}
             sx={{
                 width: '100%',
-                bgcolor: "background.paper",
+                bgcolor: 'background.paper',
                 borderRadius: '8px',
-                transition: "all .3s",
+                transition: 'all .3s',
                 '&:hover img.MuiCardMedia-media': {
                     transform
                 },
@@ -75,13 +75,7 @@ const CardView: React.FC<CardProps> = (props) => {
                 <Box p={imagePadded ? 1 : 0}>
                     {typeof image === 'string' ? (
                         <Box sx={{ overflow: 'hidden', borderRadius: imagePadded ? '8px' : 0 }}>
-                            <CardMedia
-                                component="img"
-                                image={image}
-                                alt={title || ''}
-                                {...(imageProps as any)}
-                                sx={{ ...imgSize, transition: 'transform .4s', ...(imageProps?.sx || {}) }}
-                            />
+                            <CardMedia component="img" image={image} alt={title || ''} {...(imageProps as any)} sx={{ ...imgSize, transition: 'transform .4s', ...(imageProps?.sx || {}) }} />
                         </Box>
                     ) : (
                         image

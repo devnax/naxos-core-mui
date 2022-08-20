@@ -98,7 +98,6 @@ const Item: React.FC<LayerItemProps> = ({ layer, index }) => {
     );
 };
 
-
 const View = () => {
     const layers = Handler.find({ active: true });
     return (

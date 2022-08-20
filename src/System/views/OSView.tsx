@@ -18,7 +18,7 @@ interface Props {
 }
 
 const OSView = ({ dockProps, screenProps, runnedAppID, hideDock }: Props) => {
-    const isHor = dockProps?.placement === 'top' || dockProps?.placement === 'bottom'
+    const isHor = dockProps?.placement === 'top' || dockProps?.placement === 'bottom';
     return (
         <Themex>
             <Stack

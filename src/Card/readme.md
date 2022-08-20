@@ -1,28 +1,29 @@
 ## Usages
 
 ```tsx
-import Card from 'naxos-core'
+import Card from 'naxos-core';
 
 export type CardProps = StackProps & {
-   image?: string | ReactElement;
-   imageEffect?: 'zoom' | 'rotate' | false;
-   imagePadded?: true;
-   imageHeight?: string | number;
+    image?: string | ReactElement;
+    imageEffect?: 'zoom' | 'rotate' | false;
+    imagePadded?: true;
+    imageSize?: string | number;
 
-   title?: string | ReactElement;
-   content?: string | ReactElement;
+    title?: string | ReactElement;
+    content?: string | ReactElement;
 
-   contentMaxLength?: number;
-   contentHideOnMobile?: boolean;
+    contentMaxLength?: number;
+    contentHideOnMobile?: boolean;
 
-   imageProps?: CardMediaProps;
-   titleProps?: Partial<TypographyProps>;
-   contentProps?: Partial<TypographyProps>;
+    imageProps?: CardMediaProps;
+    titleProps?: Partial<TypographyProps>;
+    contentProps?: Partial<TypographyProps>;
 
-   footer?: ReactElement;
-   hoverShadow?: boolean;
-   bordered?: boolean;
+    inline?: boolean;
+    footer?: ReactElement;
+    hoverShadow?: boolean;
+    bordered?: boolean;
 };
 
-<Card {...CardProps}/>
+<Card {...CardProps} />;
 ```

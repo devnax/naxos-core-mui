@@ -5,7 +5,7 @@ import Dropdown from '../../Dropdown';
 import { DockProps } from '../types';
 import Tooltip from '@mui/material/Tooltip';
 import AppHandler from '../../Apps';
-import { withStore } from 'state-range'
+import { withStore } from 'state-range';
 
 interface Props extends DockProps {
     renderFooter?: boolean;
@@ -14,7 +14,7 @@ interface Props extends DockProps {
 const AppsRender: FC<Props> = (props) => {
     const { appsType, appsBottomType, placement, active, tooltip, onAppContextMenu, onAppClick, renderFooter, size } = props;
 
-    const isTooltip = tooltip !== false
+    const isTooltip = tooltip !== false;
 
     let _placement: any = 'right';
     switch (placement) {
@@ -29,19 +29,19 @@ const AppsRender: FC<Props> = (props) => {
             break;
     }
 
-    let appItems
+    let appItems;
 
     if (renderFooter && appsBottomType) {
         appItems = AppHandler.getApps(appsBottomType);
     } else if (!renderFooter) {
-        appItems = AppHandler.getApps(appsType)
+        appItems = AppHandler.getApps(appsType);
     }
 
-    let _size = 50
+    let _size = 50;
     if (size === 'medium') {
-        _size = 55
+        _size = 55;
     } else if (size === 'large') {
-        _size = 60
+        _size = 60;
     }
 
     return (

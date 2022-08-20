@@ -4,9 +4,8 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 const DockIcon: FC<DockIconProps> = ({ active, icon, placement, buttonProps, iconProps, size }) => {
-
-    size = size || 50
-    let bar_size = (size - 18) / 2
+    size = size || 50;
+    let bar_size = (size - 18) / 2;
 
     let activeStyle: any = {
         top: bar_size,

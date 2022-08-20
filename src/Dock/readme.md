@@ -1,27 +1,24 @@
 ```jsx
 type DockProps = BoxProps & {
-    fullHeight?: boolean,
-    apps?: appId[],
-    appsBottom?: appId[],
-    active?: appId,
-    placement?: 'left' | 'right' | 'top' | 'bottom',
-    blur?: number,
-    bgimage?: string,
-    bgcolor?: string,
-    tooltip?: boolean, // hover toast
-    menuIcon?: ReactElement<SVGProps<SVGElement>> | string | null, // string=img url
-    menuProps?: {
-        width?: number,
-        blur?: number,
-        bgimage?: string,
-        bgcolor?: string
-    },
-    menuItems?: DropdownArrayType[],
-    notificationButton?: Boolean,
+    fullHeight?: boolean;
+    appsType?: string;
+    appsBottomType?: string;
+    active?: appId;
+    placement?: 'left' | 'right' | 'top' | 'bottom';
+    size?: "medium" | "large"
+    blur?: number;
+    bgimage?: string;
+    bgcolor?: string;
+    tooltip?: boolean; // hover toast
+    menuIcon?: ReactElement<SVGProps<SVGElement>> | string | null; // string=img url
+    menuProps?: DockMenuProps;
+    menuItems?: DropdownArrayType[];
+    notification?: Boolean;
+    iconProps?: StackProps,
 
-    onAppClick?: (appId: appId) => void,
-    onMenuShow?: () => void,
-    onAppContextMenu?: (appId: appId) => false | DropdownArrayType[]
+    onAppClick?: (appId: appId) => void;
+    onMenuShow?: () => void;
+    onAppContextMenu?: (appId: appId) => false | DropdownArrayType[];
 };
 
 <DockView {...DockProps} />;

@@ -35,9 +35,9 @@ demoApps()
 
 const Root = () => {
    return <OSView
-      runnedAppID='white-bord'
+      runnedAppID='Snapchat'
       dockProps={{
-         notificationButton: true
+         notification: true,
       }}
    />
 }

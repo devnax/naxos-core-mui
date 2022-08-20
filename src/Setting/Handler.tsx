@@ -25,7 +25,7 @@ class NaxOSCoreSetting extends Store<SettingRowProps> {
             });
         }
 
-        if (catList.length <= 1) {
+        if (catList.length && catList.length <= 1) {
             this.viewCategory(catList[0].category);
             return;
         }

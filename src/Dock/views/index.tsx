@@ -6,10 +6,10 @@ import BlurBox from '../../BlurBox';
 import { DockProps } from '../types';
 import AppsRender from './RenderApps';
 import DockFooter from './Footer';
-import { isServer } from '../../utils';
 
 const DockPanel: FC<DockProps> = (props) => {
-    let { placement, bgimage, bgcolor, blur, fullHeight, ...boxProps } = props;
+    let { appsType, appsBottomType, active, tooltip, menuIcon, menuProps, menuItems, onAppClick, onMenuShow, onAppContextMenu, size, iconProps, placement, bgimage, bgcolor, blur, fullHeight, notification, ...boxProps } = props;
+
     const isHorigental = placement === 'bottom' || placement === 'top';
 
     let _placement: any = 'right';
@@ -28,13 +28,20 @@ const DockPanel: FC<DockProps> = (props) => {
     fullHeight = fullHeight === undefined || fullHeight === true;
     let height: any = '100%';
     if (fullHeight) {
-        height = isServer ? '100%' : window.innerHeight;
+        height = window.innerHeight;
+    }
+
+    let _size = 50
+    if (size === 'medium') {
+        _size = 55
+    } else if (size === 'large') {
+        _size = 60
     }
 
     return (
         <Box
-            height={isHorigental ? 50 : height}
-            width={isHorigental ? '100%' : 50}
+            height={isHorigental ? _size : height}
+            width={isHorigental ? '100%' : _size}
             bgcolor={bgcolor || 'background.paper'}
             onContextMenu={(e: any) => {
                 e.preventDefault();
@@ -51,10 +58,23 @@ const DockPanel: FC<DockProps> = (props) => {
                         }}
                     >
                         <Box display="inline-flex" flexDirection={isHorigental ? 'row' : 'column'} bgcolor="background.paper" borderRadius={isHorigental ? '0 24px 24px 0' : '0 0 24px 24px'}>
-                            <AppsRender {...props} />
+                            <AppsRender
+                                appsType={appsType}
+                                active={active}
+                                tooltip={tooltip}
+                                menuIcon={menuIcon}
+                                menuProps={menuProps}
+                                menuItems={menuItems}
+                                iconProps={iconProps}
+                                onAppClick={onAppClick}
+                                onMenuShow={onMenuShow}
+                                size={size}
+                                onAppContextMenu={onAppContextMenu}
+                                {...props}
+                            />
                         </Box>
                     </Scrollbar>
-                    <DockFooter {...props} placement={_placement} />
+                    <DockFooter {...props} appsBottomType={appsBottomType} notification={notification} placement={_placement} />
                 </Stack>
             </BlurBox>
         </Box>

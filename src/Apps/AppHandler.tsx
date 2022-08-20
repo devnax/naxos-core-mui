@@ -3,6 +3,8 @@ import { AppProps, AppPropsStore } from './types';
 import { Command } from '../System';
 
 class NaxOSApp extends Store<AppPropsStore> {
+    default_type = "os"
+
     create(options: AppProps) {
         if (!this.getById(options.id)) {
             if (options.commands) {
@@ -12,7 +14,7 @@ class NaxOSApp extends Store<AppPropsStore> {
             }
 
             this.insert({
-                type: 'os',
+                type: this.default_type,
                 ...options
             });
         }
@@ -26,11 +28,11 @@ class NaxOSApp extends Store<AppPropsStore> {
         return this.findFirst({ id });
     }
 
-    getApps(type = 'os') {
+    getApps(type = this.default_type) {
         return this.find({ type });
     }
 
-    searchApp(name: string, type = 'os') {
+    searchApp(name: string, type = this.default_type) {
         return this.find(`@where type='${type}' && name like ^${name}`);
     }
 }

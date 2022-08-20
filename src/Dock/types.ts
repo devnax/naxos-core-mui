@@ -16,10 +16,11 @@ type appId = AppProps['id'];
 
 export type DockProps = BoxProps & {
     fullHeight?: boolean;
-    apps?: appId[];
-    appsBottom?: appId[];
+    appsType?: string;
+    appsBottomType?: string;
     active?: appId;
     placement?: 'left' | 'right' | 'top' | 'bottom';
+    size?: "medium" | "large"
     blur?: number;
     bgimage?: string;
     bgcolor?: string;
@@ -27,7 +28,8 @@ export type DockProps = BoxProps & {
     menuIcon?: ReactElement<SVGProps<SVGElement>> | string | null; // string=img url
     menuProps?: DockMenuProps;
     menuItems?: DropdownArrayType[];
-    notificationButton?: Boolean;
+    notification?: Boolean;
+    iconProps?: StackProps,
 
     onAppClick?: (appId: appId) => void;
     onMenuShow?: () => void;
@@ -38,5 +40,6 @@ export interface DockIconProps extends AppProps {
     active?: boolean;
     placement?: DockProps['placement'];
     buttonProps?: ButtonProps;
-    boxProps?: StackProps;
+    iconProps?: StackProps;
+    size?: number
 }

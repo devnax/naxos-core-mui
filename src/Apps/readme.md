@@ -4,21 +4,21 @@
 import Apps from 'naxos-core'
 
 Apps.create({
-   id: string,
-   name: string,
-   icon: ReactElement<SVGProps<SVGElement>>,
-   render: ReactElement,
-   contextMenu?: DropdownArrayType[],
-   requiredApps?: string[], // others App Id
-   permissions?: {key: val, ...},
-   onOpen?: (id) => void,
-   onClose?: (id) => void,
+   id: string;
+   type?: 'os' | string;
+   name: string;
+   icon: ReactElement<SVGProps<SVGElement>>;
+   render: RenderType; //string url
+   contextMenu?: DropdownArrayType[];
+   requiredApps?: string[]; // others App Id
+   permissions?: AppPermissionType;
+   onOpen?: (id: string) => void;
+   onClose?: (id: string) => void;
+   childApps?: AppProps[]; // Main app has multiple child app. it jus groupping
 
-   shortcutKeys: [
-      {key: "isHotkey npm", cvallback: () => void}
-   ];
+   shorcutKeys?: ShorcutKeys[]; // this shortcut key will work when the app is running
 
-   commands?: CommandType[]
+   commands?: CommandType[];
 })
 
 

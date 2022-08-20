@@ -7,7 +7,7 @@ export type CardProps = StackProps & {
     image?: string | ReactElement;
     imageEffect?: 'zoom' | 'rotate' | false;
     imagePadded?: true;
-    imageHeight?: string | number;
+    imageSize?: string | number;
 
     title?: string | ReactElement;
     content?: string | ReactElement;
@@ -19,6 +19,7 @@ export type CardProps = StackProps & {
     titleProps?: Partial<TypographyProps>;
     contentProps?: Partial<TypographyProps>;
 
+    inline?: boolean;
     footer?: ReactElement;
     hoverShadow?: boolean;
     bordered?: boolean;

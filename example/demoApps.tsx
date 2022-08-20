@@ -108,6 +108,54 @@ export default async () => {
                            content="বুঝে পড়লে গ্রামার অথবা বাক্য গঠনে আর কখনও ভুল হবেনা। অ্যানিমেটেড ভিডিও লেসনে খুব সহজেই বুঝে নাও ইংরেজিতে তোমার সমস্যার জায়গাগুলো।"
                         />
                      </Grid>
+
+
+
+                     <Grid item md={6}>
+                        <Card
+                           inline
+                           hoverShadow
+                           imageEffect="rotate"
+                           imagePadded
+                           footer={<>
+                              <Button>Read More</Button>
+                           </>}
+                           contentMaxLength={30}
+                           image="https://cdn.10minuteschool.com/md/images/skills/Updated_Thumbnail_v3/Kids-English-Course-Thumbnail.jpg"
+                           title="SSC পদার্থবিজ্ঞান Animated Lessons"
+                        //content="পদার্থ বিজ্ঞানের সকল থিওরি এখন থাকবে তোমার হাতের মুঠোয়। অ্যানিমেটেড ভিডিও লেসনে থিওরির খুঁটিনাটি সব বিষয় হয়ে যাবে একদম পরিষ্কার।"
+                        />
+                     </Grid>
+                     <Grid item md={6}>
+                        <Card
+                           inline
+                           hoverShadow
+                           imageEffect="rotate"
+                           imagePadded
+                           footer={<>
+                              <Button>Read More</Button>
+                           </>}
+                           contentMaxLength={30}
+                           image="https://cdn.10minuteschool.com/md/images/skills/Updated_Thumbnail_v3/Programming-for-Kids-Course-Thumbnail.jpg"
+                           title="Programming for kids"
+                        //content="অ্যানিমেটেড ভিডিও লেসন, কুইজ, স্মার্ট নোট ও এক্সাম মডিউলে উচ্চতর গণিত ১ম পত্রের পুরো বছরের সিলেবাসের সল্যুশন এখন এক কোর্সে।"
+                        />
+                     </Grid>
+                     <Grid item md={6}>
+                        <Card
+                           inline
+                           hoverShadow
+                           imageEffect="rotate"
+                           imagePadded
+                           footer={<>
+                              <Button>Read More</Button>
+                           </>}
+                           contentMaxLength={30}
+                           image="https://cdn.10minuteschool.com/md/images/skills/Updated_Thumbnail_v3/fb_marketing_update2_thumbnail.jpg"
+                           title="HSC ইংরেজি Animated Lessons"
+                        //content="বুঝে পড়লে গ্রামার অথবা বাক্য গঠনে আর কখনও ভুল হবেনা। অ্যানিমেটেড ভিডিও লেসনে খুব সহজেই বুঝে নাও ইংরেজিতে তোমার সমস্যার জায়গাগুলো।"
+                        />
+                     </Grid>
                   </Grid>
                </Box>
             </Stack>

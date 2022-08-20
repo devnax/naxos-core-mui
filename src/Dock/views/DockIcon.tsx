@@ -3,9 +3,13 @@ import { DockIconProps } from '../types';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-const DockIcon: FC<DockIconProps> = ({ id, active, icon, placement, buttonProps, boxProps }) => {
+const DockIcon: FC<DockIconProps> = ({ active, icon, placement, buttonProps, iconProps, size }) => {
+
+    size = size || 50
+    let bar_size = (size - 18) / 2
+
     let activeStyle: any = {
-        top: 16,
+        top: bar_size,
         left: 0,
         width: 3,
         height: 18
@@ -15,7 +19,7 @@ const DockIcon: FC<DockIconProps> = ({ id, active, icon, placement, buttonProps,
     switch (placement) {
         case 'right':
             activeStyle = {
-                top: 16,
+                top: bar_size,
                 right: 0,
                 width: 3,
                 height: 18
@@ -24,7 +28,7 @@ const DockIcon: FC<DockIconProps> = ({ id, active, icon, placement, buttonProps,
         case 'top':
             activeStyle = {
                 top: 0,
-                left: 16,
+                left: bar_size,
                 width: 18,
                 height: 3
             };
@@ -32,7 +36,7 @@ const DockIcon: FC<DockIconProps> = ({ id, active, icon, placement, buttonProps,
         case 'bottom':
             activeStyle = {
                 bottom: 0,
-                left: 16,
+                left: bar_size,
                 width: 18,
                 height: 3
             };
@@ -41,11 +45,11 @@ const DockIcon: FC<DockIconProps> = ({ id, active, icon, placement, buttonProps,
 
     return (
         <Stack
-            {...boxProps}
+            {...iconProps}
             alignItems="center"
             justifyContent="center"
-            height={50}
-            width={50}
+            height={size}
+            width={size}
             sx={{
                 cursor: 'pointer',
                 transition: 'all .2s',
@@ -71,8 +75,8 @@ const DockIcon: FC<DockIconProps> = ({ id, active, icon, placement, buttonProps,
                     p: 0,
                     borderRadius: 0,
                     m: 0,
-                    width: 50,
-                    height: isHorigental ? 50 : 45,
+                    width: size,
+                    height: isHorigental ? size : size,
                     '& svg': {
                         fontSize: 35,
                         width: 28

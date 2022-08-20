@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -12,7 +11,7 @@ const CardView: React.FC<CardProps> = (props) => {
         image,
         imageEffect,
         imagePadded,
-        imageHeight,
+        imageSize,
         title,
         content,
         contentMaxLength,
@@ -24,6 +23,7 @@ const CardView: React.FC<CardProps> = (props) => {
         titleProps,
         contentProps,
         bordered,
+        inline,
         ...CardProps
     } = props;
 
@@ -45,10 +45,20 @@ const CardView: React.FC<CardProps> = (props) => {
         CardProps.borderColor = "divider"
     }
 
+    let size = imageSize || 180
+
+    let imgSize: any = {}
+    if (inline) {
+        imgSize = { width: size, borderRadius: "10px 0 0 10px" }
+    } else {
+        imgSize = { height: size }
+    }
     return (
         <Stack
             {...CardProps}
+            direction={inline ? "row" : "column"}
             sx={{
+                width: '100%',
                 bgcolor: "background.paper",
                 borderRadius: '8px',
                 transition: "all .3s",
@@ -67,11 +77,10 @@ const CardView: React.FC<CardProps> = (props) => {
                         <Box sx={{ overflow: 'hidden', borderRadius: imagePadded ? '8px' : 0 }}>
                             <CardMedia
                                 component="img"
-                                height={imageHeight || '180'}
                                 image={image}
                                 alt={title || ''}
                                 {...(imageProps as any)}
-                                sx={{ transition: 'transform .4s', ...(imageProps?.sx || {}) }}
+                                sx={{ ...imgSize, transition: 'transform .4s', ...(imageProps?.sx || {}) }}
                             />
                         </Box>
                     ) : (
@@ -80,9 +89,9 @@ const CardView: React.FC<CardProps> = (props) => {
                 </Box>
             )}
 
-            <CardContent>
+            <Box sx={{ flex: 1, p: inline ? 1 : 2 }}>
                 {title && (
-                    <Typography gutterBottom variant="h5" component="h2" {...(titleProps as any)} sx={{ height: 50, overflow: 'hidden', ...(titleProps?.sx || {}) }}>
+                    <Typography gutterBottom variant="h5" component="h2" {...(titleProps as any)} sx={{ height: inline ? 'auto' : 50, overflow: 'hidden', ...(titleProps?.sx || {}) }}>
                         {title}
                     </Typography>
                 )}
@@ -102,8 +111,8 @@ const CardView: React.FC<CardProps> = (props) => {
                         {content}
                     </Typography>
                 )}
-            </CardContent>
-            <CardActions sx={{ alignItems: 'center' }}>{footer}</CardActions>
+                <CardActions sx={{ alignItems: 'center' }}>{footer}</CardActions>
+            </Box>
         </Stack>
     );
 };

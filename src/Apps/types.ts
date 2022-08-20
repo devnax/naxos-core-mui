@@ -42,6 +42,6 @@ export interface AppHandlerPublic {
     // setCloseAlert: (id: string, msg: boolean | Pick<AlertProps, "title" | "content">) => void;
     // getRunnedApp: () => AppPropsStore;
     getById: (id: string) => AppPropsStore | null;
-    getApps: () => AppPropsStore[];
+    getApps: (type?: string) => AppPropsStore[];
     searchApp: (query: string) => AppPropsStore[];
 }

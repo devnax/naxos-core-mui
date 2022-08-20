@@ -5,14 +5,16 @@ import Dropdown from '../../Dropdown';
 import { DockProps } from '../types';
 import Tooltip from '@mui/material/Tooltip';
 import AppHandler from '../../Apps';
+import { withStore } from 'state-range'
 
 interface Props extends DockProps {
     renderFooter?: boolean;
 }
 
 const AppsRender: FC<Props> = (props) => {
-    const { apps, appsBottom, placement, active, tooltip, onAppContextMenu, onAppClick, renderFooter } = props;
-    const isTooltip = tooltip === undefined || tooltip;
+    const { appsType, appsBottomType, placement, active, tooltip, onAppContextMenu, onAppClick, renderFooter, size } = props;
+
+    const isTooltip = tooltip !== false
 
     let _placement: any = 'right';
     switch (placement) {
@@ -27,15 +29,28 @@ const AppsRender: FC<Props> = (props) => {
             break;
     }
 
-    const appItems = renderFooter ? appsBottom : apps;
+    let appItems
+
+    if (renderFooter && appsBottomType) {
+        appItems = AppHandler.getApps(appsBottomType);
+    } else if (!renderFooter) {
+        appItems = AppHandler.getApps(appsType)
+    }
+
+    let _size = 50
+    if (size === 'medium') {
+        _size = 55
+    } else if (size === 'large') {
+        _size = 60
+    }
 
     return (
         <>
-            {appItems?.map((appId) => {
-                const app = AppHandler.getById(appId);
+            {appItems?.map((app) => {
                 if (app) {
                     const Icon = (
                         <DockIcon
+                            size={_size}
                             placement={placement}
                             {...app}
                             active={app.id === active}
@@ -93,4 +108,4 @@ const AppsRender: FC<Props> = (props) => {
     );
 };
 
-export default AppsRender;
+export default withStore(AppsRender);

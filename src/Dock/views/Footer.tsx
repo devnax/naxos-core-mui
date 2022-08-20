@@ -10,7 +10,7 @@ import Avatar from '@mui/material/Avatar';
 import AppsRender from './RenderApps';
 
 const DockFooter: FC<DockProps> = (props) => {
-    const { placement, menuIcon, menuItems, notificationButton, onMenuShow } = props;
+    const { placement, menuIcon, menuItems, notification, onMenuShow } = props;
     const isHorigental = placement === 'bottom' || placement === 'top';
 
     return (
@@ -28,7 +28,7 @@ const DockFooter: FC<DockProps> = (props) => {
             <Box display="inline-flex" flexDirection={isHorigental ? 'row' : 'column'} bgcolor="background.paper" borderRadius={isHorigental ? '0 24px 24px 0' : '0 0 24px 24px'}>
                 <AppsRender renderFooter {...props} />
             </Box>
-            {(notificationButton === undefined || notificationButton) && (
+            {notification && (
                 <IconButton
                     onClick={() => {
                         Notification.open();

@@ -36,9 +36,9 @@ export default (props: ItemRenderProps) => {
                 button={btn}
                 onClick={onClick}
                 sx={{
-                    borderRadius: 2,
+                    borderRadius: "5px",
                     p: 0.4,
-                    px: 1,
+                    px: 1.5,
                     bgcolor: isChild ? 'transparent!important' : 'inherit',
                     color: isChild && active ? 'primary.main' : 'inherit'
                 }}
@@ -47,9 +47,7 @@ export default (props: ItemRenderProps) => {
                 {icon && (
                     <ListItemIcon
                         sx={{
-                            minWidth: 35,
                             '& svg': {
-                                fontSize: 23,
                                 color: active ? 'primary.main' : 'inherit'
                             }
                         }}
@@ -59,7 +57,13 @@ export default (props: ItemRenderProps) => {
                 )}
                 {title && (
                     <ListItemText>
-                        <Typography component="div" variant="body1" fontSize={14.5} fontWeight={500}>
+                        <Typography
+                            component="div"
+                            variant="body1"
+                            fontSize={14}
+                            fontWeight={500}
+                            sx={{ opacity: active ? .9 : .7 }}
+                        >
                             {title} {label && <Chip label={label} size="small" sx={{ m: 0, height: 18, '& span': { p: 0.6, fontSize: 12 } }} />}
                         </Typography>
                     </ListItemText>

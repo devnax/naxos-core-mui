@@ -24,6 +24,9 @@ const CardView: React.FC<CardProps> = (props) => {
         contentProps,
         bordered,
         inline,
+        beforeImage,
+        beforeTitle,
+        beforeContent,
         ...CardProps
     } = props;
 
@@ -73,6 +76,7 @@ const CardView: React.FC<CardProps> = (props) => {
         >
             {image && (
                 <Box p={imagePadded ? 1 : 0}>
+                    {beforeImage}
                     {typeof image === 'string' ? (
                         <Box sx={{ overflow: 'hidden', borderRadius: imagePadded ? '8px' : 0 }}>
                             <CardMedia component="img" image={image} alt={title || ''} {...(imageProps as any)} sx={{ ...imgSize, transition: 'transform .4s', ...(imageProps?.sx || {}) }} />
@@ -84,11 +88,13 @@ const CardView: React.FC<CardProps> = (props) => {
             )}
 
             <Box sx={{ flex: 1, p: inline ? 1 : 2 }}>
+                {beforeTitle}
                 {title && (
                     <Typography gutterBottom variant="h5" component="h2" {...(titleProps as any)} sx={{ height: inline ? 'auto' : 50, overflow: 'hidden', ...(titleProps?.sx || {}) }}>
                         {title}
                     </Typography>
                 )}
+                {beforeContent}
                 {content && (
                     <Typography
                         fontSize={16}

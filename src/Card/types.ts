@@ -23,4 +23,8 @@ export type CardProps = StackProps & {
     footer?: ReactElement;
     hoverShadow?: boolean;
     bordered?: boolean;
+
+    beforeImage?: ReactElement;
+    beforeTitle?: ReactElement;
+    beforeContent?: ReactElement;
 };

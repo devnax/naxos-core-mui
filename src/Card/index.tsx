@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
-import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -62,6 +61,7 @@ const CardView: React.FC<CardProps> = (props) => {
             direction={inline ? 'row' : 'column'}
             sx={{
                 width: '100%',
+                height: '100%',
                 bgcolor: 'background.paper',
                 borderRadius: '8px',
                 transition: 'all .3s',
@@ -75,7 +75,7 @@ const CardView: React.FC<CardProps> = (props) => {
             }}
         >
             {image && (
-                <Box p={imagePadded ? 1 : 0}>
+                <Box p={imagePadded ? 1 : 0} sx={{ overflow: 'hidden', borderRadius: '8px 8px 0 0 ' }}>
                     {beforeImage}
                     {typeof image === 'string' ? (
                         <Box sx={{ overflow: 'hidden', borderRadius: imagePadded ? '8px' : 0 }}>
@@ -87,32 +87,35 @@ const CardView: React.FC<CardProps> = (props) => {
                 </Box>
             )}
 
-            <Box sx={{ flex: 1, p: inline ? 1 : 2 }}>
-                {beforeTitle}
-                {title && (
-                    <Typography gutterBottom variant="h5" component="h2" {...(titleProps as any)} sx={{ height: inline ? 'auto' : 50, overflow: 'hidden', ...(titleProps?.sx || {}) }}>
-                        {title}
-                    </Typography>
-                )}
-                {beforeContent}
-                {content && (
-                    <Typography
-                        fontSize={16}
-                        sx={{
-                            opacity: 0.9,
-                            display: {
-                                xs: contentHideOnMobile ? 'none' : 'initial',
-                                md: 'initial'
-                            },
-                            ...(contentProps?.sx || {})
-                        }}
-                        {...contentProps}
-                    >
-                        {content}
-                    </Typography>
-                )}
-                <CardActions sx={{ alignItems: 'center' }}>{footer}</CardActions>
-            </Box>
+            <Stack flex={1} p={inline ? 1 : 2} justifyContent="space-between">
+                <Box flex={1}>
+                    {beforeTitle}
+                    {title && (
+                        <Typography gutterBottom variant="h5" component="h2" {...(titleProps as any)} sx={{ overflow: 'hidden', ...(titleProps?.sx || {}) }}>
+                            {title}
+                        </Typography>
+                    )}
+                    {beforeContent}
+                    {content && (
+                        <Typography
+                            variant="subtitle1"
+                            fontSize={15}
+                            sx={{
+                                lineHeight: 1,
+                                display: {
+                                    xs: contentHideOnMobile ? 'none' : 'initial',
+                                    md: 'initial'
+                                },
+                                ...(contentProps?.sx || {})
+                            }}
+                            {...contentProps}
+                        >
+                            {content}
+                        </Typography>
+                    )}
+                </Box>
+                <Box>{footer}</Box>
+            </Stack>
         </Stack>
     );
 };

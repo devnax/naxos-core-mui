@@ -36,7 +36,7 @@ export default (props: ItemRenderProps) => {
                 button={btn}
                 onClick={onClick}
                 sx={{
-                    borderRadius: "5px",
+                    borderRadius: '5px',
                     p: 0.4,
                     px: 1.5,
                     bgcolor: isChild ? 'transparent!important' : 'inherit',
@@ -57,13 +57,7 @@ export default (props: ItemRenderProps) => {
                 )}
                 {title && (
                     <ListItemText>
-                        <Typography
-                            component="div"
-                            variant="body1"
-                            fontSize={14}
-                            fontWeight={500}
-                            sx={{ opacity: active ? .9 : .7 }}
-                        >
+                        <Typography component="div" variant="body1" fontSize={14} fontWeight={500} sx={{ opacity: active ? 0.9 : 0.7 }}>
                             {title} {label && <Chip label={label} size="small" sx={{ m: 0, height: 18, '& span': { p: 0.6, fontSize: 12 } }} />}
                         </Typography>
                     </ListItemText>

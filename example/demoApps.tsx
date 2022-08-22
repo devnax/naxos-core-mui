@@ -77,7 +77,7 @@ export default async () => {
                            contentMaxLength={100}
                            image="https://cdn.10minuteschool.com/md/images/skills/Updated_Thumbnail_v3/Kids-English-Course-Thumbnail.jpg"
                            title="SSC পদার্থবিজ্ঞান Animated Lessons"
-                           content="পদার্থ বিজ্ঞানের সকল থিওরি এখন থাকবে তোমার হাতের মুঠোয়। অ্যানিমেটেড ভিডিও লেসনে থিওরির খুঁটিনাটি সব বিষয় হয়ে যাবে একদম পরিষ্কার।"
+                           content="The official Discord server, in collaboration with Riot Games. Find the latest news and talk about the game!"
                         />
                      </Grid>
                      <Grid item md={4}>
@@ -123,7 +123,7 @@ export default async () => {
                            contentMaxLength={30}
                            image="https://cdn.10minuteschool.com/md/images/skills/Updated_Thumbnail_v3/Kids-English-Course-Thumbnail.jpg"
                            title="SSC পদার্থবিজ্ঞান Animated Lessons"
-                        //content="পদার্থ বিজ্ঞানের সকল থিওরি এখন থাকবে তোমার হাতের মুঠোয়। অ্যানিমেটেড ভিডিও লেসনে থিওরির খুঁটিনাটি সব বিষয় হয়ে যাবে একদম পরিষ্কার।"
+                        //content="The official VALORANT Discord server, in collaboration with Riot Games. Find the latest news and talk about the game!"
                         />
                      </Grid>
                      <Grid item md={6}>

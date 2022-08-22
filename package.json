@@ -1,6 +1,6 @@
 {
     "name": "naxos-core",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "main": "libs/cjs/index.js",
     "module": "libs/index.js",
     "typings": "libs/index.d.ts",
@@ -43,7 +43,6 @@
         "moment": "^2.29.4",
         "mui-themex": "^1.1.7",
         "react": "^18.1.0",
-        "react-beautiful-dnd": "^13.1.0",
         "react-browser-scrollbar": "^1.1.5",
         "react-dom": "^18.1.0",
         "react-ribbons": "^1.0.6",

@@ -209,8 +209,8 @@ export default async () => {
       icon: <SignalWifi3BarRoundedIcon />,
       render: () => <div>
          <Navbar
-            logo={<Avatar src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-logo-vector-png-clipart-1.png" />}
-            icons={<>
+            logo={'https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-logo-vector-png-clipart-1.png'}
+            rightContent={<>
                <IconButton>
                   <NotificationsIcon />
                </IconButton>
@@ -218,10 +218,16 @@ export default async () => {
                   <AccountCircleIcon />
                </IconButton>
             </>}
+            menuItems={[
+               { label: "Home" },
+               { label: "About" },
+               { label: "Service" },
+               { label: "Contact" },
+            ]}
          >
             <Button
                onClick={() => {
-                  DrawerHandler.open()
+
                }}
             >Home</Button>
             <Button>About</Button>

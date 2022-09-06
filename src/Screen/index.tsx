@@ -11,18 +11,13 @@ import { isServer } from '../utils';
 const ScreenView: React.FC<ScreenProps> = ({ appId, fullHeight, header, footer, ...props }) => {
     const ref = React.useRef();
     const App = AppHandler.getById(appId);
-    if (!App) {
-        return <></>;
-    }
+    React.useEffect(() => {
+        ref.current && (ref.current as any).focus();
+    }, [App?.id]);
 
+    if (!App) return <></>;
     const Render = App.render;
     const shortcutKeys = App.shorcutKeys;
-
-    React.useEffect(() => {
-        if (ref.current) {
-            (ref.current as any).focus();
-        }
-    }, [App.id]);
 
     fullHeight = fullHeight === undefined || fullHeight === true;
     let height: any = '100%';

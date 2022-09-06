@@ -30,7 +30,7 @@ const DockFooter: FC<DockProps> = (props) => {
             </Box>
             {notification && (
                 <IconButton
-                    sx={{ mb: "7px" }}
+                    sx={{ mb: '7px' }}
                     onClick={() => {
                         Notification.open();
                     }}

@@ -3,7 +3,7 @@ import DrawerView, { DrawerProps } from './DrawerView';
 import Layer from '../Layer';
 
 class DrawerHandler {
-    open(props?: DrawerProps) {
+    open(props: DrawerProps) {
         Layer.open('OS_DRAWER', <DrawerView {...props} />, {
             closeButton: false,
             opacity: 0.5,

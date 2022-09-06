@@ -3,10 +3,11 @@ import Screen from '../../Screen';
 import { ScreenProps } from '../../Screen/types';
 import { withMemo } from 'state-range';
 
-const ScreenView = (props: ScreenProps) => {
-    return <Screen {...props} />;
-};
+const ScreenView = withMemo(
+    (props: ScreenProps) => {
+        return <Screen {...props} />;
+    },
+    (props: ScreenProps) => [Object.values(props)]
+);
 
-export default withMemo(ScreenView, (props: ScreenProps) => {
-    return [Object.values(props)];
-});
+export default ScreenView;

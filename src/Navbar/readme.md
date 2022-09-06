@@ -1,12 +1,14 @@
 ```js
 import Nabvar, { NavbarProps } from 'naxos-core/libs/Navbar';
 
-type NavbarProps = GridProps & {
-    logo?: ReactElement,
-    icons?: ReactElement,
-    logoProps?: GridProps,
-    iconsProps?: GridProps,
-    containerProps?: GridProps
+export type NavbarProps = StackProps & {
+    leftContent?: ReactElement,
+    rightContent?: ReactElement,
+    menuItems?: MenuItemProps[],
+    logo?: string | ReactElement,
+    disableMobileMenu?: boolean,
+    mobileMenuContent?: ReactElement,
+    mobileMenuIcon?: ReactElement
 };
 
 <Navbar

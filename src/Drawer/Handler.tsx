@@ -1,5 +1,6 @@
 import * as React from 'react';
-import DrawerView, { DrawerProps } from './DrawerView';
+import DrawerView from './DrawerView';
+import { DrawerProps } from './types';
 import Layer from '../Layer';
 
 class DrawerHandler {
@@ -8,7 +9,7 @@ class DrawerHandler {
             closeButton: false,
             opacity: 0.5,
             blur: 2,
-            animation: 'fadeInLeft'
+            animation: props.placement === 'right' ? 'fadeInRight' : 'fadeInLeft'
         });
     }
 

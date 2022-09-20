@@ -1,5 +1,5 @@
 import { ComponentType, ReactElement, SVGProps } from 'react';
-import { BoxProps, ListProps } from '@mui/material';
+import { ListProps } from '@mui/material/List';
 import Handler from './Handler';
 
 export type ID = string;
@@ -11,7 +11,7 @@ export interface ListItemProps {
     label?: string;
     heading?: string | ReactElement;
     icon?: ReactElement<SVGProps<SVGElement>>;
-    render?: ComponentType<{ id: string }>;
+    render?: ComponentType<StoreProps>;
     divider?: boolean;
     active?: boolean;
 }
@@ -32,6 +32,7 @@ export interface ListViewProps extends ListProps {
     autoChange?: false;
 }
 
-export interface ListPreviewProps extends BoxProps {
+export interface ListPreviewProps {
     handler: Handler<StoreProps, StoreMetaProps>;
+    render?: ComponentType<StoreProps>;
 }

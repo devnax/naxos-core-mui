@@ -1,22 +1,16 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 import { withStore } from 'state-range';
 import { ListPreviewProps } from '../types';
 
-const ListPreview = ({ handler, ...rest }: ListPreviewProps) => {
+const ListPreview = ({ handler, render, ...rest }: ListPreviewProps) => {
     const item = handler.getActiveItem();
+    const Render = item?.render || render;
 
-    if (!item || !item.render) {
+    if (!item || !Render) {
         return <></>;
     }
 
-    const Render = item.render;
-
-    return (
-        <Box {...rest}>
-            <Render id={item.id} />
-        </Box>
-    );
+    return <Render {...item} />;
 };
 
 export default withStore(ListPreview, ({ handler }) => {

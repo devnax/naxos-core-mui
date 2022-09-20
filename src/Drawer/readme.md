@@ -1,8 +1,8 @@
 ```js
 
-import DrawerHandler from 'naxos-core'
+import DrawerHandler, {DrawerProps} from 'naxos-core'
 
-DrawerHandler.open(props: SidebarProps)
+DrawerHandler.open(props: DrawerProps)
 DrawerHandler.close()
 
 ```

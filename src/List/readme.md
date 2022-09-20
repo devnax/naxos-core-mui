@@ -32,6 +32,9 @@ const handler = new Handler
 
 <ListPreview
    handler={handler}
+   render={(item) => {
+      return <>Custom render</>
+   }}
 />
 
 export interface ListItemProps {
@@ -41,7 +44,7 @@ export interface ListItemProps {
     label?: string;
     heading?: string | ReactElement;
     icon?: ReactElement<SVGProps<SVGElement>>;
-    render?: ComponentType<{ id: string }>;
+    render?: ComponentType<item>;
     divider?: boolean;
     active?: boolean;
 }

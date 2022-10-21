@@ -103,7 +103,7 @@ const Select = ({ form, label, require, name, defaultValue, placeholder, schema,
                 }}
                 options={options}
                 {...props}
-                renderInput={(params) => <TextField {...params} placeholder={placeholder} size="small" {...inpProps} />}
+                renderInput={(params) => <TextField {...params} size="small" {...inpProps} placeholder={(props.value || value)?.length ? '' : placeholder} />}
             />
         </Box>
     );

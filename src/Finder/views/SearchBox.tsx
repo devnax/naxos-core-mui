@@ -27,7 +27,7 @@ const SearchBox = () => {
     return (
         <Box p={1}>
             <TextField
-                focused
+                autoFocus
                 value={searchText || ''}
                 onChange={(e: any) => {
                     FinderHandler.searchText(e.target.value);

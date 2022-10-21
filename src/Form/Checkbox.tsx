@@ -13,7 +13,7 @@ interface Item {
     value: Value;
 }
 
-type Props = Omit<CheckboxProps, 'form'> & {
+type Props = Omit<CheckboxProps, 'form' | 'defaultValue'> & {
     form?: FormTypes<any>;
     schema?: (s: any) => typeof SchemaFactory;
     label?: string;
@@ -28,7 +28,7 @@ type Props = Omit<CheckboxProps, 'form'> & {
     require?: boolean;
 };
 
-const Item = ({ form, name, value, label, items, ...props }: Props) => {
+const Item = ({ form, name, value, label, items, defaultValue, ...props }: Props) => {
     const state = form?.get(name, items ? [] : null);
 
     const checked = items ? state.includes(value) : state === value;

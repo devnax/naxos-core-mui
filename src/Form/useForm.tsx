@@ -84,10 +84,7 @@ export const useForm = <Fields extends {}>(configs?: ConfigsState<Fields>) => {
                     data: 0,
                     schema: 0
                 },
-                dispatch: () => {
-                    const r = Math.random();
-                    dispatch(r);
-                }
+                dispatch: () => dispatch(Math.random())
             };
         }
         return RootState[id];
@@ -112,7 +109,7 @@ export const useForm = <Fields extends {}>(configs?: ConfigsState<Fields>) => {
         errors: Factory.errors,
         observe: () => Factory.observe,
         setState: (state: { [key: string]: any }) => {
-            Factory.state = state;
+            Factory.state = { ...Factory.state, ...state };
             Factory.observe.state = Math.random();
             Factory.dispatch();
         },
@@ -146,6 +143,9 @@ export const useForm = <Fields extends {}>(configs?: ConfigsState<Fields>) => {
         },
         deleteAll: () => {
             Factory.data = {} as any;
+            Factory.state = {} as any;
+            Factory.schema = {} as any;
+            Factory.errors = {} as any;
             Factory.observe.data = Math.random();
             Factory.dispatch();
         },

@@ -57,7 +57,7 @@ const Thumbnail = (props: ThumbnailProps) => {
                                 <RefreshIcon sx={{ fontSize: 20 }} />
                             </IconButton>
                         )}
-                        <IconButton onClick={() => form.set(name, '')} size="small" sx={{ boxShadow: 2, bgcolor: 'rgba(0,0,0,.3)!important', m: 0.3 }}>
+                        <IconButton onClick={() => form.delete(name)} size="small" sx={{ boxShadow: 2, bgcolor: 'rgba(0,0,0,.3)!important', m: 0.3 }}>
                             <ClearRoundedIcon sx={{ fontSize: 20 }} />
                         </IconButton>
                     </Box>

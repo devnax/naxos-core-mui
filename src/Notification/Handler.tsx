@@ -19,7 +19,7 @@ class NaxOSCoreNotification extends Store<NotificationProps> {
                     content: options.content,
                     icon: <NotificationsActiveIcon />,
                     onClick: ({ _id }) => {
-                        this.open();
+                        options.onClick && options.onClick();
                         Notify.hide(_id);
                     }
                 });

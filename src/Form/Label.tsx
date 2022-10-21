@@ -17,7 +17,7 @@ const Label = ({ children, require, error, ...props }: Props) => {
             fontWeight={500}
             sx={{
                 color: error ? 'error.main' : 'inherit',
-                display: 'inline-block',
+                display: 'block',
                 userSelect: 'none',
                 ...(props.sx || {})
             }}

@@ -14,7 +14,7 @@ abstract class System<P = {}> extends Store<any, SystemProps & P> {
             const style = document.createElement('style');
             style.id = id;
             style.innerHTML = `
-            body [data-fullheight] {
+            [data-fullheight] {
                 height: ${window.innerHeight}px;
             }
         `;
@@ -23,7 +23,7 @@ abstract class System<P = {}> extends Store<any, SystemProps & P> {
             }
             window.addEventListener('resize', () => {
                 style.innerHTML = `
-                body [data-fullheight] {
+                [data-fullheight] {
                     height: ${window.innerHeight}px;
                 }
             `;

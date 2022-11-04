@@ -26,8 +26,9 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DrawerHandler from '../src/Drawer'
 import Card from '../src/Card'
-import ListBuilder from '../src/ListBuilder'
+// import ListBuilder from '../src/ListBuilder'
 import { useForm } from '../src/Form/useForm'
+import FileSystem from '../src/FileSystem'
 
 const BuilderTemplate = () => {
    return <Box>
@@ -35,7 +36,9 @@ const BuilderTemplate = () => {
    </Box>
 }
 
+
 export default async () => {
+
 
 
    AppHandler.create({
@@ -162,29 +165,29 @@ export default async () => {
          )
       }
    })
-   AppHandler.create({
-      id: "white-bord",
-      name: "White Board",
-      icon: <BoardIcon />,
-      render: () => {
-         const form = useForm<any>()
-         return (
-            <Box height="100%" p={1} >
-               <Container maxWidth="sm">
-                  <ListBuilder
-                     name="course_builder"
-                     form={form}
-                     template={BuilderTemplate}
-                     onAddItem={async () => {
-                        return { title: "New Item", id: "nice" }
-                     }}
-                  />
-               </Container>
+   // AppHandler.create({
+   //    id: "white-bord",
+   //    name: "White Board",
+   //    icon: <BoardIcon />,
+   //    render: () => {
+   //       const form = useForm<any>()
+   //       return (
+   //          <Box height="100%" p={1} >
+   //             <Container maxWidth="sm">
+   //                <ListBuilder
+   //                   name="course_builder"
+   //                   form={form}
+   //                   template={BuilderTemplate}
+   //                   onAddItem={async () => {
+   //                      return { title: "New Item", id: "nice" }
+   //                   }}
+   //                />
+   //             </Container>
 
-            </Box>
-         )
-      }
-   })
+   //          </Box>
+   //       )
+   //    }
+   // })
    AppHandler.create({
       id: "chat",
       name: "Chat",
@@ -236,5 +239,11 @@ export default async () => {
             <Button>Contact</Button>
          </Navbar>
       </div>
+   })
+   AppHandler.create({
+      id: "file",
+      name: "File",
+      icon: <VimeoIcon />,
+      render: () => <FileSystem />
    })
 }

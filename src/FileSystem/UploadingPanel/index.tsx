@@ -2,11 +2,11 @@ import React from 'react'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import { Dropdown } from '..';
-import UploadingDropdown from './components/Dropdown';
+import { Dropdown } from '../..';
+import UploadingDropdown from './Dropdown';
 
 
-const UploadingProgress = () => {
+const UploadingPanel = () => {
    return (
       <Stack direction="row">
          <Button
@@ -14,7 +14,7 @@ const UploadingProgress = () => {
             color="primary"
             variant='contained'
             sx={{
-               borderRadius: 50,
+               borderRadius: '100%',
                p: 0,
                width: 60,
                height: 60,
@@ -31,4 +31,4 @@ const UploadingProgress = () => {
    )
 }
 
-export default UploadingProgress
+export default UploadingPanel

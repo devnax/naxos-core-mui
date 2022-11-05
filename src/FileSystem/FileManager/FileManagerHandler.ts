@@ -1,4 +1,4 @@
-import DataTable from "../DataTable"
+import DataTable from "../../DataTable"
 
 class ListFileHandler extends DataTable {
 
@@ -20,8 +20,9 @@ class ListFileHandler extends DataTable {
       ])
 
       this.rows([
-         { id: 1, name: "12.png", size: '12MB', date: '12, Nov 20022', },
-         { id: 1, name: "40.pdf", size: "90KB", date: '12, Nov 20022', }
+         { id: 1, name: "index.html", size: '20MB', date: '20, Nov 2022', },
+         { id: 1, name: "style.css", size: "2MB", date: '12, Nov 2022', },
+         { id: 1, name: "script.ts", size: "10MB", date: '02, Nov 2022', }
       ])
 
       this.setMeta("checkbox", true)

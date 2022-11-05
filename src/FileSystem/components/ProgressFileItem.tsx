@@ -5,24 +5,13 @@ import { FileIcon, defaultStyles } from 'react-file-icon';
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/CloseOutlined';
 import LinearProgress from '@mui/material/LinearProgress';
+import { byteToSize } from '../utils'
+import { FileRowProps } from '../types'
+import { alpha } from '@mui/material/styles'
+import Handler from '../Handler'
 
 
-function byteToSize(bytes: any) {
-   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-   if (bytes === 0) return 'n/a';
-   var i = parseInt(JSON.stringify(Math.floor(Math.log(bytes) / Math.log(1024))));
-   if (i === 0) return bytes + ' ' + sizes[i];
-   return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
-}
-
-interface FileListItemProps {
-   name: string;
-   progress: number
-   size: number
-}
-
-
-const FileListItem = ({ name, progress, size }: FileListItemProps) => {
+const FileListItem = ({ name, progress, size, error, _id }: FileRowProps) => {
 
    const t: any = name.split('.').pop()
    const def: any = defaultStyles
@@ -30,9 +19,13 @@ const FileListItem = ({ name, progress, size }: FileListItemProps) => {
    return (
       <Stack
          direction="row"
-         spacing={1.2}
          alignItems="center"
          width="100%"
+         bgcolor={(theme) => error ? alpha(theme.palette.error.main, .04) : "background.default"}
+         px={1}
+         py={1}
+         borderRadius={2}
+         mb={.5}
       >
          <Stack width={45}>
             <FileIcon {...def[t as any]} />
@@ -41,24 +34,36 @@ const FileListItem = ({ name, progress, size }: FileListItemProps) => {
             direction="row"
             width="100%"
             alignItems="center"
+            pl={1.5}
          >
             <Stack flex={1} >
-               <Typography variant="body1" fontSize={15}>
-                  {name}
+               <Typography variant="body1" fontSize={14} color={error ? "error" : "inherit"}>
+                  {name.slice(-30)}
                </Typography>
-               <Typography variant="subtitle1" fontSize={12}>
-                  SIZE: {byteToSize(size)}
+               <Typography
+                  variant="subtitle1"
+                  fontSize={12}
+                  color={error ? "error.light" : "inherit"}
+               >
+                  {error ? error.message : <>SIZE: {byteToSize(size)}</>}
                </Typography>
-               <LinearProgress
-                  variant="determinate"
-                  value={progress}
-                  sx={{
-                     mt: 1
-                  }}
-               />
+               {
+                  !error && <LinearProgress
+                     variant="determinate"
+                     value={progress}
+                     sx={{
+                        mt: 1,
+                        '& span': {
+                           height: 5
+                        }
+                     }}
+                  />
+               }
             </Stack>
          </Stack>
-         <IconButton size="small" >
+         <IconButton size="small"
+            onClick={() => Handler.delete(_id)}
+         >
             <DeleteIcon fontSize="small" />
          </IconButton>
       </Stack>

@@ -1,15 +1,21 @@
 import React from 'react'
-import UploadingProgress from './UploadingProgress'
+import UploadingProgress from './UploadingPanel'
 import Uploader from './Uploader'
-import FileBucket from './FileManager'
+import FileManager from './FileManager'
+import Stack from '@mui/material/Stack'
 
 const FileSystem = () => {
    return (
-      <div>
-         {/* <UploadingProgress /> */}
-         {/* <Uploader placeholderIconType="css" title="Uploader" desc='Upload your file' placeholder='Drag & drop your file' /> */}
-         <FileBucket />
-      </div>
+      <Stack p={3}>
+         <Uploader
+            placeholderIconType="js"
+            title="Uploader"
+            desc='Upload your file'
+            placeholder='Drag & drop your file'
+         />
+         <UploadingProgress />
+         {/* <FileManager /> */}
+      </Stack>
    )
 }
 

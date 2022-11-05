@@ -1,6 +1,6 @@
 import React from 'react'
 import Stack from '@mui/material/Stack'
-import ProgressFileItem from './ProgressFileItem';
+import ProgressFileItem from '../components/ProgressFileItem';
 
 const Dropdown = () => {
    return (

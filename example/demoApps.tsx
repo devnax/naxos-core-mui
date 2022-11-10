@@ -29,6 +29,7 @@ import Card from '../src/Card'
 // import ListBuilder from '../src/ListBuilder'
 import { useForm } from '../src/Form/useForm'
 import FileSystem from '../src/FileSystem'
+import Auth from '../src/Auth'
 
 const BuilderTemplate = () => {
    return <Box>
@@ -245,5 +246,11 @@ export default async () => {
       name: "File",
       icon: <VimeoIcon />,
       render: () => <FileSystem />
+   })
+   AppHandler.create({
+      id: "auth",
+      name: "Auth",
+      icon: <AccountCircleIcon />,
+      render: () => <Auth />
    })
 }

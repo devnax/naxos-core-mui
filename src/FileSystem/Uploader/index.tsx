@@ -1,43 +1,26 @@
 import React from 'react'
+import Alert from '@mui/material/Alert'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import { DropzoneOptions } from 'react-dropzone'
-import ProressFileItem from '../components/ProgressFileItem'
 import { withStore } from 'state-range'
-import Handler from '../Handler'
 import Scrollbar from '../../Scrollbar'
-import UploadBox from '../UploadBox'
+import UploadBox, { FileUploadBoxProps } from '../UploadBox'
+import ProgressList from '../ProgressList'
+import Handler from '../Handler'
 
-
-interface FileUploaderProps extends DropzoneOptions {
+export interface FileUploaderProps {
+   id: string;
    title: string;
    desc: string;
-   placeholder: string;
-   placeholderIconType: string,
-   onDrop?: (files: File[]) => void;
-   onUploadFinished?: (file: File) => void;
+   dropboxProps?: Partial<FileUploadBoxProps>
 }
 
 
-
-const List = withStore(() => {
-   const pandingFiles = Handler.find({ uploading: true })
-
-   return (
-      <>
-         {
-            pandingFiles.map((file, idx) => <ProressFileItem
-               key={idx}
-               {...file}
-            />)
-         }
-      </>
-   )
-})
-
-
 const FileUploader = (props: FileUploaderProps) => {
-   const { title, desc } = props
+   const { id, title, desc, dropboxProps } = props
+
+   const rejectedFirst = Handler.findFirst({ typeid: id, rejected: true })
+
    return (
       <Stack
          bgcolor="background.paper"
@@ -55,13 +38,23 @@ const FileUploader = (props: FileUploaderProps) => {
          </Stack>
 
          <Stack width="100%" p={2}>
-            <UploadBox {...props} />
+            <UploadBox  {...dropboxProps} id={id} />
          </Stack>
+
          <Stack
             maxHeight={350}
          >
+            {
+               rejectedFirst && <Stack p={1.2}>
+                  <Alert variant="filled" severity="error" onClose={() => Handler.delete(rejectedFirst._id)}>
+                     {rejectedFirst.error}
+                  </Alert>
+               </Stack>
+            }
+
             <Scrollbar style={{ padding: 10 }} thumbSize={2}>
-               <List />
+
+               <ProgressList id={id} />
             </Scrollbar>
          </Stack>
       </Stack>

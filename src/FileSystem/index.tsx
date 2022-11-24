@@ -7,14 +7,15 @@ import Stack from '@mui/material/Stack'
 const FileSystem = () => {
    return (
       <Stack p={3}>
-         <Uploader
+         {/* <Uploader
+            id="uploader"
             placeholderIconType="js"
             title="Uploader"
             desc='Upload your file'
             placeholder='Drag & drop your file'
-         />
-         <UploadingProgress />
-         {/* <FileManager /> */}
+         /> */}
+         {/* <UploadingProgress id="uploader" /> */}
+         <FileManager />
       </Stack>
    )
 }

@@ -37,6 +37,7 @@
         "@mui/x-date-pickers": "^5.0.0-beta.4",
         "@types/react": "^18.0.9",
         "@types/react-dom": "^18.0.3",
+        "axios": "^1.2.0",
         "fmotion-variants": "^0.1.2",
         "framer-motion": "^6.2.8",
         "is-hotkey": "^0.2.0",

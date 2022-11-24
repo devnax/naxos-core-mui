@@ -7,7 +7,8 @@ class OSFileManagerHandler extends Store<FileProps> {
    }
 
    createFile(props: Partial<FileProps>) {
-      this.insert({
+      return this.insert({
+         typeid: "normal",
          file: null,
          progress: 0,
          uploading: false,
@@ -17,6 +18,8 @@ class OSFileManagerHandler extends Store<FileProps> {
          size: 0,
          url: null,
          date: "",
+         rejected: false,
+         signal: null,
          ...props
       })
    }

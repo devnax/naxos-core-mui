@@ -17,7 +17,6 @@ import { Typography } from "@mui/material"
 import { ListView, ListPreview } from '../src/List'
 import DataTable from './DataTable'
 import ListHandler from './List'
-import PostPublisher from './Post'
 import Navbar from '../src/Navbar'
 
 
@@ -247,10 +246,10 @@ export default async () => {
       icon: <VimeoIcon />,
       render: () => <FileSystem />
    })
-   // AppHandler.create({
-   //    id: "auth",
-   //    name: "Auth",
-   //    icon: <AccountCircleIcon />,
-   //    render: () => <Auth />
-   // })
+   AppHandler.create({
+      id: "auth",
+      name: "Auth",
+      icon: <AccountCircleIcon />,
+      render: () => <Auth />
+   })
 }

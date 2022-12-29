@@ -10,7 +10,6 @@ const Auth = () => {
          alignItems="center"
          justifyContent="center"
       >
-
          {/* <Card /> */}
          <Login />
       </Stack>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { LayerView } from '../../Layer';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -15,9 +15,10 @@ interface Props {
     dockProps?: DockProps;
     screenProps?: ScreenProps;
     hideDock?: boolean;
+    globalView?: ReactElement;
 }
 
-const OSView = ({ dockProps, screenProps, runnedAppID, hideDock }: Props) => {
+const OSView = ({ dockProps, screenProps, runnedAppID, hideDock, globalView }: Props) => {
     const isHor = dockProps?.placement === 'top' || dockProps?.placement === 'bottom';
     return (
         <Themex>
@@ -37,6 +38,7 @@ const OSView = ({ dockProps, screenProps, runnedAppID, hideDock }: Props) => {
             <LayerView />
             <DropdownView />
             <NotifyView />
+            {globalView}
         </Themex>
     );
 };

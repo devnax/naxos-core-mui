@@ -54,7 +54,7 @@ const Item: React.FC<LayerItemProps> = ({ layer, index }) => {
                     left={0}
                     bottom={0}
                     right={0}
-                    zIndex={(zIndex || 1501) + index}
+                    zIndex={(zIndex || 1301) + index}
                     overflow="hidden"
                     bgImage={bgImage}
                     sx={{ opacity: opacity !== undefined ? opacity : 1 }}

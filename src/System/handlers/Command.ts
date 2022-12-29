@@ -4,9 +4,12 @@ export interface CommandType {
     callback: Function;
 }
 
+type excuteArgs = { [k: string]: any }
+type commandCallback = (args?: excuteArgs) => void;
+
 class NAXOSCommands extends Store<CommandType> {
-    create(key: string, callback: Function) {
-        if (this.exists(key)) {
+    create(key: string, callback: commandCallback) {
+        if (this.has(key)) {
             console.error(`${key} command already Exists!`);
             return;
         }
@@ -16,40 +19,40 @@ class NAXOSCommands extends Store<CommandType> {
         });
     }
 
-    remove(key: string) {
-        this.delete({ key });
-    }
-
-    exists(key: string) {
-        return this.findFirst({ key }) ? true : false;
-    }
-
-    excute(key: string) {
+    excute(key: string, args?: excuteArgs) {
         const cmd = this.findFirst({ key });
         if (!cmd) {
             console.error(`${key} command not found`);
             return;
         }
         if (typeof cmd.callback === 'function') {
-            cmd.callback();
+            cmd.callback(args);
         }
+    }
+
+    remove(key: string) {
+        this.delete({ key });
+    }
+
+    has(key: string) {
+        return this.findFirst({ key }) ? true : false;
     }
 }
 
 const handler = new NAXOSCommands();
 
 interface Pub {
-    create: (key: string, callback: Function) => void;
-    excute: (key: string) => void;
+    create: (key: string, callback: commandCallback) => void;
+    excute: (key: string, args?: excuteArgs) => void;
     remove: (key: string) => void;
-    exists: (key: string) => void;
+    has: (key: string) => void;
 }
 
-const PublicHandler: Pub = {
+const Command: Pub = {
     create: handler.create.bind(handler),
     excute: handler.excute.bind(handler),
     remove: handler.remove.bind(handler),
-    exists: handler.exists.bind(handler)
+    has: handler.has.bind(handler)
 };
 
-export default PublicHandler;
+export default Command;

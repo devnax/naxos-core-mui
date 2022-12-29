@@ -1,6 +1,6 @@
 import BrowserScrollbar from 'react-browser-scrollbar';
-import { isDarkMode } from 'mui-themex';
 import React, { ReactElement, ReactNode, UIEvent, HTMLAttributes } from 'react';
+import { useTheme } from '@mui/material/styles';
 
 type DivProps = HTMLAttributes<HTMLDivElement>;
 export interface Props extends DivProps {
@@ -13,8 +13,9 @@ export interface Props extends DivProps {
 }
 
 const Scrollbar = ({ children, ...props }: Props) => {
+    const theme = useTheme()
     return (
-        <BrowserScrollbar darkMode={isDarkMode()} {...props}>
+        <BrowserScrollbar darkMode={theme.palette.mode === 'dark'} {...props}>
             {children}
         </BrowserScrollbar>
     );

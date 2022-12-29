@@ -1,6 +1,6 @@
 import React from 'react'
 import Stack from '@mui/material/Stack'
-import InputBase from '@mui/material/InputBase'
+import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import { alpha, useTheme } from '@mui/material/styles'
 
@@ -21,24 +21,17 @@ const InputBox = () => {
             size="small"
             sx={{
                bgcolor: 'rgba(255, 255, 255, 0.04)',
+               visibility: "hidden"
             }}
          >
             <ArrowLeftIcon />
          </IconButton>
-         <InputBase
+         <TextField
             placeholder='email or phone'
+            size="small"
             sx={{
-               bgcolor: alpha(theme.palette.common.white, 0.04),
-               border: '0px!important',
-               borderRadius: '4px!important',
-               outline: 0,
-               p: 1,
-               py: .1,
-               fontSize: 15,
-               boxShadow: 'none!important',
 
                '&: hover': {
-                  bgcolor: alpha(theme.palette.common.white, 0.08)
                }
             }}
          />

@@ -8,6 +8,7 @@ import {OSView, ThemexView, System, Command} from 'system'
    dockProps={DockProps}
    screenProps={ScreenProps}
    runnedAppID=""
+   globalView={<></>}
 />
 
 // system theme setup with mui-themex
@@ -49,5 +50,5 @@ command is just a global scope. if you add a commad with a key and callback then
 Command.create(unique_key, calback);
 Command.remove(key);
 Command.excute(key);
-Command.exists(key);
+Command.has(key);
 ```

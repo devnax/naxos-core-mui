@@ -1,11 +1,12 @@
 import { Store } from 'state-range';
+
 export interface CommandType {
     key: string;
-    callback: Function;
+    callback: commandCallback;
 }
 
-type excuteArgs = { [k: string]: any }
-type commandCallback = (args?: excuteArgs) => void;
+export type excuteArgs = { [k: string]: any };
+export type commandCallback = (args?: excuteArgs) => void;
 
 class NAXOSCommands extends Store<CommandType> {
     create(key: string, callback: commandCallback) {

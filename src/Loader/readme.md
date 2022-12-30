@@ -3,7 +3,13 @@
 ```js
 import Loader from 'naxos/Loader';
 
-<Loader loading={true} {...stackProps}>
+export type LoaderProps = StackProps & {
+    loading?: boolean;
+    children: ReactElement | ReactNode;
+    progressProps?: CircularProgressProps
+};
+
+<Loader loading={true} {...LoaderProps}>
     ...
 </Loader>;
 ```

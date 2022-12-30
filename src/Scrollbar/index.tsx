@@ -13,7 +13,7 @@ export interface Props extends DivProps {
 }
 
 const Scrollbar = ({ children, ...props }: Props) => {
-    const theme = useTheme()
+    const theme = useTheme();
     return (
         <BrowserScrollbar darkMode={theme.palette.mode === 'dark'} {...props}>
             {children}

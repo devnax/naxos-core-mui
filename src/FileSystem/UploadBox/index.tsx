@@ -9,7 +9,7 @@ import Handler from '../Handler';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export interface FileUploadBoxProps {
-    id: string;
+    bucketId: string;
     title?: string;
     desc?: string;
     placeholder?: string;
@@ -70,17 +70,17 @@ const Template = (props: FileUploadBoxProps & { dropzone: DropzoneState }) => {
 };
 
 const FileUploadBox = (props: FileUploadBoxProps) => {
-    const { id, requestUrl, requestProps, onUploadFinished, onUploadError, dropzoneProps, onDrop, containerProps, renderTemplate: CustomTemplate } = props;
+    const { bucketId, requestUrl, requestProps, onUploadFinished, onUploadError, dropzoneProps, onDrop, containerProps, renderTemplate: CustomTemplate } = props;
 
     const dropzone = useDropzone({
         ...dropzoneProps,
         onDrop: (files, rejectedFiles) => {
-            Handler.delete({ typeid: id, rejected: true });
+            Handler.delete({ bucketId, rejected: true });
 
             if (!rejectedFiles.length) {
                 files.forEach((file) => {
                     const created = Handler.createFile({
-                        typeid: id,
+                        bucketId,
                         file: file,
                         name: file.name,
                         size: file.size,
@@ -126,7 +126,7 @@ const FileUploadBox = (props: FileUploadBoxProps) => {
             } else {
                 const { errors } = rejectedFiles[0];
                 Handler.createFile({
-                    typeid: id,
+                    bucketId,
                     rejected: true,
                     error: errors[0].message
                 });

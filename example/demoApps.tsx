@@ -30,12 +30,6 @@ import { useForm } from '../src/Form/useForm'
 import FileSystem from '../src/FileSystem'
 import Auth from '../src/Auth'
 
-const BuilderTemplate = () => {
-   return <Box>
-      Nice
-   </Box>
-}
-
 
 export default async () => {
 

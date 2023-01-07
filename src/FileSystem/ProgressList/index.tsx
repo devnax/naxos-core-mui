@@ -59,12 +59,12 @@ export const ProgressListItem = ({ name, progress, size, error, _id }: FileRowPr
 };
 
 interface ProgressListProps {
-    id: string;
+    bucketId: string;
     rejected?: boolean;
 }
 
-const ProgressList = ({ id, rejected }: ProgressListProps) => {
-    const files = Handler.find({ typeid: id, uploading: true, rejected: rejected || false });
+const ProgressList = ({ bucketId, rejected }: ProgressListProps) => {
+    const files = Handler.find({ bucketId, uploading: true, rejected: rejected || false });
 
     return (
         <>
@@ -75,7 +75,7 @@ const ProgressList = ({ id, rejected }: ProgressListProps) => {
     );
 };
 
-export default withStore(ProgressList, ({ id, rejected }: ProgressListProps) => {
-    const files = Handler.find({ typeid: id, rejected: rejected || false });
+export default withStore(ProgressList, ({ bucketId, rejected }: ProgressListProps) => {
+    const files = Handler.find({ bucketId, rejected: rejected || false });
     return [files];
 });

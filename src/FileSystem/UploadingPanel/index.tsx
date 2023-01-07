@@ -11,12 +11,12 @@ import Scrollbar from 'react-browser-scrollbar';
 import { isDarkMode } from 'mui-themex';
 
 export interface FileUploadingProps {
-    id: string;
+    bucketId: string;
 }
 
 const UploadingPanel = (props: FileUploadingProps) => {
-    const { id } = props;
-    const files = Handler.find({ typeid: id, rejected: false, uploading: true });
+    const { bucketId } = props;
+    const files = Handler.find({ bucketId, rejected: false, uploading: true });
     const isDark = isDarkMode();
     return (
         <Stack direction="row">
@@ -41,7 +41,7 @@ const UploadingPanel = (props: FileUploadingProps) => {
                                 </Typography>
                             </Stack>
                             <Scrollbar thumbSize={3} style={{ maxHeight: 400, padding: 12 }} darkMode={isDark}>
-                                <ProgressList id={id} />
+                                <ProgressList bucketId={bucketId} />
                             </Scrollbar>
                         </Stack>,
                         {

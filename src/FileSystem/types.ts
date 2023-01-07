@@ -1,7 +1,10 @@
 import { Row } from 'state-range';
+import { DropdownArrayType } from '../Dropdown/types';
+
+export type BucketId = string
 
 export interface FileProps {
-    typeid: string;
+    bucketId: BucketId;
     file: File | null;
     progress: number;
     selected: boolean;
@@ -16,3 +19,14 @@ export interface FileProps {
 }
 
 export type FileRowProps = Row<FileProps>;
+
+
+
+export interface FileGridProps {
+    bucketId?: BucketId;
+    onContextMenu?: (file: FileRowProps) => DropdownArrayType[];
+    onClick?: (file: FileRowProps) => void;
+    fileWidth?: number;
+    fileHeight?: number;
+    fileNameLength?: number;
+}

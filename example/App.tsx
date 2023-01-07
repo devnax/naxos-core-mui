@@ -35,7 +35,7 @@ demoApps()
 
 const Root = () => {
    return <OSView
-      runnedAppID='auth'
+      runnedAppID='file'
       dockProps={{
          notification: true,
       }}

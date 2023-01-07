@@ -9,16 +9,16 @@ import ProgressList from '../ProgressList';
 import Handler from '../Handler';
 
 export interface FileUploaderProps {
-    id: string;
+    bucketId: string;
     title: string;
     desc: string;
     dropboxProps?: Partial<FileUploadBoxProps>;
 }
 
 const FileUploader = (props: FileUploaderProps) => {
-    const { id, title, desc, dropboxProps } = props;
+    const { bucketId, title, desc, dropboxProps } = props;
 
-    const rejectedFirst = Handler.findFirst({ typeid: id, rejected: true });
+    const rejectedFirst = Handler.findFirst({ bucketId, rejected: true });
 
     return (
         <Stack bgcolor="background.paper" borderRadius={3} width={400} py={2}>
@@ -32,7 +32,7 @@ const FileUploader = (props: FileUploaderProps) => {
             </Stack>
 
             <Stack width="100%" p={2}>
-                <UploadBox {...dropboxProps} id={id} />
+                <UploadBox {...dropboxProps} bucketId={bucketId} />
             </Stack>
 
             <Stack maxHeight={350}>
@@ -45,7 +45,7 @@ const FileUploader = (props: FileUploaderProps) => {
                 )}
 
                 <Scrollbar style={{ padding: 10 }} thumbSize={2}>
-                    <ProgressList id={id} />
+                    <ProgressList bucketId={bucketId} />
                 </Scrollbar>
             </Stack>
         </Stack>

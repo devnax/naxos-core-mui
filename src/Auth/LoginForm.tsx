@@ -8,9 +8,8 @@ import ArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import IconButton from '@mui/material/IconButton';
 import TextField, { TextFieldProps } from '../Form/TextField';
 import { alpha } from '@mui/material/styles';
-import Slide from '@mui/material/Slide';
+import Zoom from '@mui/material/Zoom';
 import Loader from "../Loader"
-
 
 
 interface FormData {
@@ -37,7 +36,7 @@ export interface LoginFormProps {
 
 const Login = (props: LoginFormProps) => {
     const form = useForm<FormData>();
-    const { step, animate } = form.getState()
+    const { step } = form.getState()
     const { username, password } = form.getData()
     const containerRef = useRef<any>()
     const isLoading = form.isLoading()
@@ -81,55 +80,6 @@ const Login = (props: LoginFormProps) => {
     }
 
 
-    const fields = <Box>
-        <Loader loading={isLoading} progressProps={{ size: 20 }}>
-            {
-                step !== 'password' && <TextField
-                    autoFocus
-                    name="username"
-                    form={form}
-                    placeholder="Username"
-                    disabled={isLoading}
-                    schema={s => s.required().max(100)}
-                    helperText=""
-                    {...usernameInputProps}
-                    inputProps={{
-                        sx: { height: 40, py: 0, textAlign: "center", }
-                    }}
-                    onKeyDown={async (e) => {
-                        if (e.keyCode === 13) {
-                            username && form.setState({ step: "password", animate: "left" })
-                            await submit()
-                        }
-                        usernameInputProps?.onKeyDown && usernameInputProps.onKeyDown(e)
-                    }}
-                />
-            }
-            {
-                step === 'password' && <TextField
-                    autoFocus
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    disabled={isLoading}
-                    form={form}
-                    schema={s => s.required().max(100)}
-                    helperText=""
-                    {...passwordInputProps}
-                    inputProps={{
-                        sx: { textAlign: "center", fontSize: password ? 25 : 15, height: 40, py: 0 }
-                    }}
-                    onKeyDown={async (e) => {
-                        if (e.keyCode === 13) {
-                            await submit()
-                        }
-                        passwordInputProps?.onKeyDown && passwordInputProps.onKeyDown(e)
-                    }}
-                />
-            }
-        </Loader>
-    </Box>
-
     return (
         <Stack spacing={5} width={350} >
             <Card
@@ -138,38 +88,84 @@ const Login = (props: LoginFormProps) => {
             />
             <Stack direction="row" spacing={1}>
                 <Box py={1}>
-                    <IconButton
-                        disabled={isLoading}
-                        sx={{
-                            bgcolor: (theme) => alpha(theme.palette.common.white, 0.04),
-                            visibility: step === 'password' ? "visible" : "hidden",
-                        }}
-                        onClick={() => {
-                            form.setState({ step: "", animate: "right" })
-                        }}
-                    >
-                        <ArrowLeftIcon />
-                    </IconButton>
+                    <Zoom in={step === 'password'}>
+                        <IconButton
+                            disabled={isLoading}
+                            sx={{
+                                bgcolor: (theme) => alpha(theme.palette.common.white, 0.04),
+                            }}
+                            onClick={() => form.setState({ step: "" })}
+                        >
+                            <ArrowLeftIcon />
+                        </IconButton>
+                    </Zoom>
                 </Box>
                 <Stack flex={1} p={1} overflow="hidden" ref={containerRef}>
-                    {animate ? <Slide direction={animate} key={step} in={true} container={containerRef.current}>
-                        {fields}
-                    </Slide> : fields}
-
+                    <Box>
+                        <Loader loading={isLoading} progressProps={{ size: 20 }}>
+                            {
+                                step !== 'password' && <TextField
+                                    autoFocus
+                                    name="username"
+                                    form={form}
+                                    placeholder="Username"
+                                    disabled={isLoading}
+                                    schema={s => s.required().max(100)}
+                                    helperText=""
+                                    {...usernameInputProps}
+                                    inputProps={{
+                                        sx: { height: 40, py: 0, textAlign: "center", }
+                                    }}
+                                    onKeyDown={async (e) => {
+                                        if (e.keyCode === 13) {
+                                            username && form.setState({ step: "password" })
+                                            await submit()
+                                        }
+                                        usernameInputProps?.onKeyDown && usernameInputProps.onKeyDown(e)
+                                    }}
+                                />
+                            }
+                            {
+                                step === 'password' && <TextField
+                                    autoFocus
+                                    name="password"
+                                    type="password"
+                                    placeholder="Password"
+                                    disabled={isLoading}
+                                    form={form}
+                                    schema={s => s.required().max(100)}
+                                    helperText=""
+                                    {...passwordInputProps}
+                                    inputProps={{
+                                        sx: { textAlign: "center", fontSize: password ? 25 : 15, height: 40, py: 0 }
+                                    }}
+                                    onKeyDown={async (e) => {
+                                        if (e.keyCode === 13) {
+                                            await submit()
+                                        }
+                                        passwordInputProps?.onKeyDown && passwordInputProps.onKeyDown(e)
+                                    }}
+                                />
+                            }
+                        </Loader>
+                    </Box>
                 </Stack>
                 <Box py={1}>
-                    <IconButton
-                        disabled={isLoading}
-                        sx={{
-                            bgcolor: (theme) => alpha(theme.palette.common.white, 0.04),
-                        }}
-                        onClick={async () => {
-                            username && form.setState({ step: "password", animate: "left" })
-                            await submit()
-                        }}
-                    >
-                        <ArrowRightIcon />
-                    </IconButton>
+                    <Zoom in={!!username}>
+                        <IconButton
+                            disabled={isLoading}
+                            sx={{
+                                bgcolor: (theme) => alpha(theme.palette.common.white, 0.04),
+                            }}
+                            onClick={async () => {
+                                username && form.setState({ step: "password" })
+                                await submit()
+                            }}
+                        >
+                            <ArrowRightIcon />
+                        </IconButton>
+                    </Zoom>
+
                 </Box>
             </Stack>
         </Stack >

@@ -19,8 +19,8 @@ const FileSystem = () => {
             <UploadingProgress bucketId="uploader" /> */}
             <FileGrid
 
-                fileWidth={250}
-                fileHeight={270}
+                // fileWidth={250}
+                // fileHeight={270}
 
                 onClick={({ _id, selected }) => {
                     console.log(selected);

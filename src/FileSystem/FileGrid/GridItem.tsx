@@ -73,19 +73,19 @@ const GridItem = ({ file, ...props }: Props) => {
             }}
         >
             <Stack height={height - 60} justifyContent="center" alignItems="center" >
-                <Stack height={preview ? (height - 100) : 100} justifyContent="center" alignItems="center">
+                <Stack height={preview ? (width / 2) : width / 2} justifyContent="center" alignItems="center">
                     {
                         preview ? <img width={height - 100} src={preview} alt={file.name} /> : <FileIcon extension={ext} {...defIconStyle[ext] || {}} />
                     }
                 </Stack>
             </Stack>
-            <Stack spacing={0.3} alignItems="center" height={60} >
+            <Stack spacing={0.3} alignItems="center" height={30} >
                 <Typography variant="body1" fontSize={15}>
                     {name.substring(0, nameLength) + (nameLength < name.length ? ".." : "")}
                 </Typography>
-                <Typography variant="subtitle1" fontSize={12}>
+                {/* <Typography variant="subtitle1" fontSize={12}>
                     {byteToSize(size)}
-                </Typography>
+                </Typography> */}
             </Stack>
         </Stack>
     );

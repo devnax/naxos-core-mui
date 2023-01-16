@@ -1,10 +1,20 @@
 import React from 'react'
 import { withStore } from 'state-range';
 import Handler from '../FileSystem';
-import GridItem from './GridItem';
+import GridItem from './ListItem';
 import Stack from '@mui/material/Stack'
 import { FileItemProps } from '../types'
 import { DropdownArrayType } from '../../Dropdown/types';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import IconButton from '@mui/material/IconButton';
+import CheckBoxIcon from '@mui/icons-material/CheckBoxOutlined';
+import { DataTableView } from '../../DataTable';
+import FileListDatableHandler from './ListHandler'
+
 
 export interface FileGridProps {
    bucketId?: string;
@@ -24,23 +34,11 @@ const FileGrid = (props: FileGridProps) => {
 
    return (
       <div>
-         <Stack direction="row" p={2} flexWrap="wrap">
-            {
-               files.map(file => {
-                  if (onFileRender) {
-                     const is = onFileRender(file)
-                     if (!is) {
-                        return ''
-                     }
-                  }
+         <Stack >
+            <DataTableView
+               handler={FileListDatableHandler}
+            />
 
-                  return <GridItem
-                     key={file._id}
-                     {...props}
-                     file={file}
-                  />
-               })
-            }
          </Stack>
       </div>
    )

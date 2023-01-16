@@ -5,16 +5,16 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { Dropdown } from '../..';
 import ProgressList from '../ProgressList';
 import { withStore } from 'state-range';
-import Handler from '../Handler';
+import Handler from '../FileSystem';
 import Typography from '@mui/material/Typography';
 import Scrollbar from 'react-browser-scrollbar';
 import { isDarkMode } from 'mui-themex';
 
-export interface FileUploadingProps {
+export interface UploadingPanelProps {
     bucketId: string;
 }
 
-const UploadingPanel = (props: FileUploadingProps) => {
+const UploadingPanel = (props: UploadingPanelProps) => {
     const { bucketId } = props;
     const files = Handler.find({ bucketId, rejected: false, uploading: true });
     const isDark = isDarkMode();

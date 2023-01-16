@@ -1,55 +1,147 @@
-import React from 'react';
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
+import React, { ComponentType } from 'react';
+import Stack, { StackProps } from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
+import { useDropzone, DropzoneState, DropzoneOptions, FileRejection } from 'react-dropzone';
+import { FileIcon, defaultStyles } from 'react-file-icon';
 import { withStore } from 'state-range';
-import Scrollbar from '../../Scrollbar';
-import UploadBox, { FileUploadBoxProps } from '../UploadBox';
-import ProgressList from '../ProgressList';
-import Handler from '../Handler';
+import Handler from '../FileSystem';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-export interface FileUploaderProps {
+export interface UploaderProps {
     bucketId: string;
-    title: string;
-    desc: string;
-    dropboxProps?: Partial<FileUploadBoxProps>;
+    title?: string;
+    desc?: string;
+    placeholder?: string;
+    placeholderIconExtention?: string;
+    onDrop?: (files: File[], rejectedFiles: FileRejection[]) => void;
+    dropzoneProps?: DropzoneOptions;
+    requestUrl?: string;
+    requestProps?: AxiosRequestConfig;
+    onUploadFinished?: (res: AxiosResponse) => void;
+    onUploadError?: (err: any) => void;
+    containerProps?: StackProps;
+    renderTemplate?: ComponentType<{ dropzone: DropzoneState }>;
 }
 
-const FileUploader = (props: FileUploaderProps) => {
-    const { bucketId, title, desc, dropboxProps } = props;
+const Template = (props: UploaderProps & { dropzone: DropzoneState }) => {
+    const theme = useTheme();
 
-    const rejectedFirst = Handler.findFirst({ bucketId, rejected: true });
+    const { title, desc, placeholder, placeholderIconExtention, dropzone } = props;
+    const def: any = defaultStyles;
 
     return (
-        <Stack bgcolor="background.paper" borderRadius={3} width={400} py={2}>
-            <Stack alignItems="center" spacing={0.5}>
-                <Typography variant="h6" fontSize={18}>
-                    {title}
-                </Typography>
-                <Typography variant="body1" fontSize={12} fontWeight={600}>
-                    {desc}
-                </Typography>
-            </Stack>
+        <Stack border="2px dashed" borderColor={dropzone.isDragActive ? theme.palette.primary.main : theme.palette.divider} borderRadius={2} p={3.5} sx={{ cursor: 'pointer' }}>
+            {dropzone.isDragActive ? (
+                <Stack spacing={2} alignItems="center">
+                    {placeholderIconExtention && (
+                        <Stack width={50}>
+                            <FileIcon extension={placeholderIconExtention} {...def[placeholderIconExtention]} />
+                        </Stack>
+                    )}
+                    {placeholder && (
+                        <Typography variant="body1" fontSize={13.5} fontWeight={600} color="primary">
+                            {placeholder}
+                        </Typography>
+                    )}
+                </Stack>
+            ) : (
+                <Stack alignItems="center" width="100%">
+                    {placeholderIconExtention && (
+                        <Stack width={50} mb={2}>
+                            <FileIcon extension={placeholderIconExtention} {...def[placeholderIconExtention]} />
+                        </Stack>
+                    )}
 
-            <Stack width="100%" p={2}>
-                <UploadBox {...dropboxProps} bucketId={bucketId} />
-            </Stack>
-
-            <Stack maxHeight={350}>
-                {rejectedFirst && (
-                    <Stack p={1.2}>
-                        <Alert variant="filled" severity="error" onClose={() => Handler.delete(rejectedFirst._id)}>
-                            {rejectedFirst.error}
-                        </Alert>
-                    </Stack>
-                )}
-
-                <Scrollbar style={{ padding: 10 }} thumbSize={2}>
-                    <ProgressList bucketId={bucketId} />
-                </Scrollbar>
-            </Stack>
+                    {title && (
+                        <Typography variant="body1" fontSize={14} fontWeight={600}>
+                            {title}
+                        </Typography>
+                    )}
+                    {desc && (
+                        <Typography variant="subtitle1" fontSize={14} fontWeight={500} sx={{ opacity: 0.5 }}>
+                            {desc}
+                        </Typography>
+                    )}
+                </Stack>
+            )}
         </Stack>
     );
 };
 
-export default withStore(FileUploader);
+const Uploader = (props: UploaderProps) => {
+    const { bucketId, requestUrl, requestProps, onUploadFinished, onUploadError, dropzoneProps, onDrop, containerProps, renderTemplate: CustomTemplate } = props;
+
+    const dropzone = useDropzone({
+        ...dropzoneProps,
+        onDrop: (files, rejectedFiles) => {
+            Handler.delete({ bucketId, rejected: true });
+
+            if (!rejectedFiles.length) {
+                files.forEach((file) => {
+                    const created = Handler.createFile({
+                        bucketId,
+                        file: file,
+                        name: file.name,
+                        size: file.size,
+                        uploading: true
+                    });
+
+                    if (requestUrl) {
+                        const controller = new AbortController();
+                        Handler.update({ signal: controller }, created._id);
+                        axios
+                            .postForm(
+                                requestUrl,
+                                { file },
+                                {
+                                    onUploadProgress: (progressEvent) => {
+                                        let progress = (progressEvent.loaded / (progressEvent.total || file.size)) * 100;
+                                        if (progress >= 100) {
+                                            Handler.update(
+                                                {
+                                                    progress: 0,
+                                                    uploading: false,
+                                                    file: null,
+                                                    signal: null
+                                                },
+                                                created._id
+                                            );
+                                        } else {
+                                            Handler.update({ progress: Math.floor(progress) }, created._id);
+                                        }
+                                    },
+                                    signal: controller.signal,
+                                    ...requestProps
+                                }
+                            )
+                            .then((response) => {
+                                onUploadFinished && onUploadFinished(response);
+                            })
+                            .catch((error) => {
+                                onUploadError && onUploadError(error);
+                            });
+                    }
+                });
+            } else {
+                const { errors } = rejectedFiles[0];
+                Handler.createFile({
+                    bucketId,
+                    rejected: true,
+                    error: errors[0].message
+                });
+            }
+
+            onDrop && onDrop(files, rejectedFiles);
+        }
+    });
+
+    return (
+        <Stack {...dropzone.getRootProps()} display="inline-block" {...containerProps}>
+            <input {...dropzone.getInputProps()} />
+            {CustomTemplate ? <CustomTemplate dropzone={dropzone} /> : <Template dropzone={dropzone} {...props} />}
+        </Stack>
+    );
+};
+
+export default withStore(Uploader);

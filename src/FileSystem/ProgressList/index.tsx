@@ -8,7 +8,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { byteToSize } from '../utils';
 import { FileRowProps } from '../types';
 import { alpha } from '@mui/material/styles';
-import Handler from '../Handler';
+import Handler from '../FileSystem';
 import { withStore } from 'state-range';
 
 export const ProgressListItem = ({ name, progress, size, error, _id }: FileRowProps) => {

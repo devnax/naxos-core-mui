@@ -22,6 +22,15 @@ class OSFileManagerHandler extends Store<FileProps> {
     }
 
     createFile(props: Partial<FileProps>) {
+        let extention = null
+
+        if (props.url && !props.extention) {
+            const split = props.url.split('.')
+            if (split.length > 1) {
+                extention = split.pop()
+            }
+        }
+
         return this.insert({
             bucketId: this.bucketId,
             file: null,
@@ -32,6 +41,7 @@ class OSFileManagerHandler extends Store<FileProps> {
             name: '',
             size: 0,
             url: null,
+            extention,
             date: '',
             rejected: false,
             signal: null,
